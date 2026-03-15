@@ -43,8 +43,8 @@ const About = () => {
         >
           {/* Section label */}
           <motion.div variants={itemVariants} className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-[1px] bg-gradient-primary" />
-            <span className="text-primary text-sm font-mono tracking-widest uppercase">About Me</span>
+            <div className="w-12 h-[2px] bg-primary glow-primary" />
+            <span className="text-primary text-xs font-mono tracking-widest uppercase">01 // Identity_Matrix</span>
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-16 items-start">
@@ -52,41 +52,42 @@ const About = () => {
             <div className="space-y-8">
               <motion.h2
                 variants={itemVariants}
-                className="font-display text-4xl md:text-5xl font-bold leading-[1.1] tracking-tight"
+                className="font-display text-4xl md:text-5xl font-bold leading-[1.1] tracking-tight uppercase"
               >
-                Building digital products that{' '}
-                <span className="text-gradient-primary">matter</span>
+                Building Conceptual <span className="text-primary text-shadow-glow">UI Matrices</span>
               </motion.h2>
 
-              <motion.div variants={itemVariants} className="space-y-5 text-muted-foreground leading-relaxed">
+              <motion.div variants={itemVariants} className="space-y-5 text-muted-foreground leading-relaxed font-mono text-sm border-l-2 border-primary/20 pl-6 py-2">
                 <p>
-                  I'm Anurag Dubey, a full-stack developer passionate about building modern,
-                  scalable web applications and interactive digital experiences. I enjoy
-                  turning complex ideas into clean, efficient, and user-friendly solutions.
+                  &gt; Initializing bio_protocol...<br/>
+                  I'm Anurag Dubey, a full-stack architect specializing in ultra-futuristic 
+                  digital interfaces and scalable neural-web topologies. I transform complex 
+                  logic into immersive, interactive, and high-performance digital environments.
                 </p>
 
                 <p>
-                  My work focuses on developing robust backend systems and dynamic frontend
-                  interfaces using modern technologies. I have built projects ranging from
-                  secure authentication systems and blockchain-based applications to advanced
-                  animated web interfaces and full-stack platforms.
+                  &gt; Technical_Focus_Log:<br/>
+                  My engineering methodology prioritizes robust backend mainframes and dynamic, 
+                  GPU-accelerated frontend experiences. From secure cryptographic layers to 
+                  blockchain-integrated systems, I build for the next generation of the web.
                 </p>
 
                 <p>
-                  When I'm not coding, I explore new technologies, experiment with creative
-                  web animations, and work on projects that push my skills in software
-                  engineering and problem solving.
+                  &gt; Operational_Status:<br/>
+                  Currently augmenting skills in AI subsystems and decentralized protocols. 
+                  Committed to pushing the boundaries of software engineering and 
+                  high-fidelity visual storytelling.
                 </p>
               </motion.div>
 
               {/* Skill badges */}
-              <motion.div variants={itemVariants} className="flex flex-wrap gap-2">
+              <motion.div variants={itemVariants} className="flex flex-wrap gap-3">
                 {['TypeScript', 'React', 'Javascript', 'python', 'Node.js', 'Express.js', 'AI Tools', 'Micrsoft Tools', 'Postman', 'Supabase', 'Firebase', 'Git & Github', 'Canva'].map((skill) => (
                   <span
                     key={skill}
-                    className="px-3 py-1 rounded-full text-xs font-medium glass border border-border/60 text-foreground/70 hover:border-primary/30 hover:text-primary transition-all duration-300"
+                    className="px-3 py-1 border border-primary/20 bg-primary/5 text-[10px] font-mono uppercase tracking-widest text-primary hover:border-primary hover:glow-primary transition-all duration-300"
                   >
-                    {skill}
+                    [{skill}]
                   </span>
                 ))}
               </motion.div>
@@ -96,10 +97,11 @@ const About = () => {
                 <a
                   href="/certificate/Anurag Dubey CV.pdf"
                   download
-                  className="group flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className="group flex items-center gap-4 text-[10px] font-mono uppercase tracking-[0.2em] text-primary/60 hover:text-primary transition-all duration-300"
                 >
-                  <span className="w-10 h-10 rounded-lg glass border border-border flex items-center justify-center group-hover:border-primary/30 transition-colors">
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <span className="w-12 h-12 border border-primary/20 flex items-center justify-center group-hover:border-primary group-hover:glow-primary transition-all relative">
+                    <div className="absolute top-0 right-0 w-1 h-1 bg-primary" />
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -109,10 +111,10 @@ const About = () => {
                     </svg>
                   </span>
 
-                  <span>Download Resume</span>
+                  <span className="border-b border-transparent group-hover:border-primary pb-1">[ DOWNLOAD_ARCHIVE ]</span>
 
-                  <span className="opacity-0 group-hover:opacity-100 transition-opacity">
-                    ↗
+                  <span className="opacity-0 group-hover:opacity-100 transition-all translate-x-[-10px] group-hover:translate-x-0">
+                    &gt;&gt;
                   </span>
                 </a>
               </motion.div>
@@ -157,16 +159,18 @@ const About = () => {
                     key={stat.label}
                     variants={itemVariants}
                     custom={i}
-                    className="glass rounded-xl p-5 border border-border/50 hover:border-primary/20 transition-all duration-300 group"
+                    className="cyber-panel p-6 border border-primary/20 hover:border-primary transition-all duration-300 group relative overflow-hidden"
                   >
-                    <div className="font-display text-3xl font-bold text-gradient-primary">
+                    <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
+                    <div className="font-display text-4xl font-bold text-gradient-primary text-shadow-glow relative z-10">
                       {counterInView ? (
                         <CountUp end={stat.value} duration={2} delay={i * 0.2} suffix={stat.suffix} />
                       ) : (
                         `0${stat.suffix}`
                       )}
                     </div>
-                    <div className="text-xs text-muted-foreground mt-1">{stat.label}</div>
+                    <div className="text-[10px] uppercase font-mono tracking-widest text-muted-foreground mt-2 group-hover:text-primary transition-colors relative z-10">{stat.label}</div>
+                    <div className="absolute bottom-0 left-0 h-[1px] bg-primary w-0 group-hover:w-full transition-all duration-500" />
                   </motion.div>
                 ))}
               </div>

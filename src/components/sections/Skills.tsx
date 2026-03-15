@@ -74,23 +74,35 @@ const techIcons = [
 const SkillBar = ({ name, level, color, delay }: { name: string; level: number; color: string; delay: number }) => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
+  const [hovered, setHovered] = useState(false);
 
   return (
-    <div ref={ref} className="space-y-1.5">
-      <div className="flex justify-between items-center text-sm">
-        <span className="text-foreground/80 font-medium">{name}</span>
+    <div 
+      ref={ref} 
+      className="relative pl-6 py-2 border-l border-primary/20 group"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Node & connecting line */}
+      <div className={`absolute top-1/2 -left-[5px] w-[9px] h-[9px] -translate-y-1/2 rotate-45 border border-primary transition-all duration-300 ${hovered ? 'bg-primary glow-primary scale-125' : 'bg-background'}`} />
+      <div className={`absolute top-1/2 left-0 w-6 h-[1px] -translate-y-1/2 transition-all duration-300 ${hovered ? 'bg-primary' : 'bg-primary/20'}`} />
+      
+      <div className={`flex justify-between items-center text-sm relative z-10 transition-transform duration-300 ${hovered ? 'translate-x-2' : ''}`}>
+        <span className={`font-mono uppercase tracking-widest ${hovered ? 'text-primary text-shadow-glow' : 'text-muted-foreground'}`}>{name}</span>
         <span className={`font-mono text-xs ${color === 'primary' ? 'text-primary' :
           color === 'accent' ? 'text-accent' : 'text-accent2'
-          }`}>{level}%</span>
+          } ${hovered ? 'glow-primary' : ''}`}>[{level}%]</span>
       </div>
-      <div className="h-1.5 rounded-full bg-secondary overflow-hidden">
+      
+      {/* Small data bar replacement */}
+      <div className={`mt-2 h-[2px] w-full bg-primary/10 overflow-hidden relative transition-transform duration-300 ${hovered ? 'translate-x-2' : ''}`}>
         <motion.div
           initial={{ width: 0 }}
           animate={inView ? { width: `${level}%` } : { width: 0 }}
           transition={{ duration: 1.2, delay, ease: [0.23, 1, 0.32, 1] }}
-          className={`h-full rounded-full ${color === 'primary' ? 'bg-gradient-primary' :
-            color === 'accent' ? 'bg-gradient-accent' :
-              'bg-gradient-to-r from-accent2 to-emerald-400'
+          className={`h-full shadow-[0_0_10px_currentColor] ${color === 'primary' ? 'bg-primary text-primary' :
+            color === 'accent' ? 'bg-accent text-accent' :
+              'bg-accent2 text-accent2'
             }`}
         />
       </div>
@@ -127,35 +139,37 @@ const Skills = () => {
         >
           {/* Header */}
           <motion.div variants={itemVariants} className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-[1px] bg-gradient-primary" />
-            <span className="text-primary text-sm font-mono tracking-widest uppercase">Skills</span>
+            <div className="w-12 h-[2px] bg-primary glow-primary" />
+            <span className="text-primary text-xs font-mono tracking-widest uppercase">03 // Neural_Nodes</span>
           </motion.div>
 
           <motion.h2
             variants={itemVariants}
-            className="font-display text-4xl md:text-5xl font-bold mb-4 tracking-tight"
+            className="font-display text-4xl md:text-5xl font-bold mb-4 tracking-tight uppercase"
           >
-            My <span className="text-gradient-accent">Technical</span> Expertise
+            Core <span className="text-primary text-shadow-glow">Capabilities</span>
           </motion.h2>
           <motion.p
             variants={itemVariants}
-            className="text-muted-foreground max-w-xl mb-16"
+            className="text-muted-foreground max-w-xl mb-16 font-mono text-sm leading-relaxed"
           >
-            A curated toolkit refined through years of real-world engineering challenges
-            and continuous learning.
+            &gt; Syncing neural pathways...<br/>
+            &gt; Evaluating technical expertise...<br/>
+            &gt; Access granted. Displaying active skill nodes.
           </motion.p>
 
           {/* Category tabs */}
-          <motion.div variants={itemVariants} className="flex flex-wrap gap-2 mb-10">
+          <motion.div variants={itemVariants} className="flex flex-wrap gap-3 mb-10">
             {skillCategories.map((cat, i) => (
               <button
                 key={cat.title}
                 onClick={() => setActiveCategory(i)}
-                className={`px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 ${activeCategory === i
-                  ? 'bg-gradient-primary text-primary-foreground shadow-float'
-                  : 'glass border border-border text-muted-foreground hover:text-foreground hover:border-primary/20'
+                className={`px-6 py-2.5 text-xs font-mono uppercase tracking-widest transition-all duration-300 border flex items-center gap-2 ${activeCategory === i
+                  ? 'bg-primary/20 text-primary border-primary glow-primary shadow-float'
+                  : 'bg-background/50 border-border text-muted-foreground hover:text-primary hover:border-primary/50'
                   }`}
               >
+                <span className={`w-2 h-2 ${activeCategory === i ? 'bg-primary shadow-[0_0_8px_currentColor]' : 'bg-transparent border border-muted-foreground'}`}/>
                 {cat.title}
               </button>
             ))}
@@ -187,29 +201,31 @@ const Skills = () => {
               initial={{ opacity: 0, scale: 0.97 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
-              className="glass rounded-2xl p-8 border border-border/50"
+              className="cyber-panel p-8 relative overflow-hidden group"
             >
-              <div className="text-5xl mb-6">
-                {activeCategory === 0 ? '🎨' : activeCategory === 1 ? '⚙️' : activeCategory === 2 ? '☁️' : '🛠️'}
+              <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none" />
+              <div className="text-6xl mb-6 font-mono text-primary/40 group-hover:text-primary transition-colors text-shadow-glow">
+                {activeCategory === 0 ? '01' : activeCategory === 1 ? '02' : activeCategory === 2 ? '03' : '04'}
               </div>
-              <h3 className="font-display text-2xl font-semibold mb-3">
+              <h3 className="font-display text-2xl font-bold mb-4 uppercase tracking-wider text-primary">
                 {skillCategories[activeCategory].title}
               </h3>
-              <p className="text-muted-foreground leading-relaxed mb-6">
-                {activeCategory === 0 && "Building pixel-perfect, performant UIs with modern frameworks. Obsessed with smooth animations, accessibility, and developer experience."}
-                {activeCategory === 1 && "Designing and building robust, scalable APIs and data layers. From REST to GraphQL, monoliths to microservices."}
-                {activeCategory === 2 && "Automating infrastructure and deployment pipelines. Cloud-native by default, always optimizing for reliability and cost."}
-                {activeCategory === 3 && "Versioning, testing, documentation, and system design. The craft behind the code that keeps teams moving fast."}
+              <p className="text-muted-foreground leading-relaxed mb-8 font-mono text-sm relative z-10 border-l-2 border-primary/30 pl-4 py-2">
+                {activeCategory === 0 && "Building conceptual UI matrices. Specialized in real-time interfaces, GPU-accelerated rendering, and neuro-responsive user components."}
+                {activeCategory === 1 && "Designing decentralized data layers and autonomous API networks. Bridging client instances with secure central mainframes."}
+                {activeCategory === 2 && "Configuring deployment drones and automating cloud infrastructures. Maximizing efficiency through containerized virtualization environments."}
+                {activeCategory === 3 && "Integrating AI subsystems and cryptography. Designing advanced logic flows and predictive algorithms."}
               </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 relative z-10">
                 {skillCategories[activeCategory].skills.map((s) => (
                   <span
                     key={s.name}
-                    className={`text-xs px-2 py-1 rounded-md font-mono ${skillCategories[activeCategory].color === 'primary'
-                      ? 'bg-primary/10 text-primary'
+                    className={`text-[10px] px-2 py-1 border font-mono uppercase tracking-widest ${skillCategories[activeCategory].color === 'primary'
+                      ? 'bg-primary/10 text-primary border-primary/30'
                       : skillCategories[activeCategory].color === 'accent'
-                        ? 'bg-accent/10 text-accent'
-                        : 'bg-accent2/10 text-accent2'
+                        ? 'bg-accent/10 text-accent border-accent/30'
+                        : 'bg-accent2/10 text-accent2 border-accent2/30'
                       }`}
                   >
                     {s.name.split(' /')[0].split(' (')[0]}
@@ -220,26 +236,29 @@ const Skills = () => {
           </div>
 
           {/* Tech icons ticker */}
-          <motion.div variants={itemVariants} className="mt-16 overflow-hidden">
-            <p className="text-xs text-muted-foreground text-center mb-6 tracking-widest uppercase">
-              Technologies I work with daily
+          <motion.div variants={itemVariants} className="mt-16 overflow-hidden border-y border-primary/20 py-6 relative">
+            <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+            
+            <p className="text-[10px] text-primary text-center mb-6 tracking-widest uppercase font-mono glow-primary inline-block bg-primary/10 px-4 py-1 border border-primary/30 relative left-1/2 -top-6 -translate-y-1/2 -translate-x-1/2">
+              [ Active_Tech_Feeds ]
             </p>
             <div className="relative flex gap-6 overflow-hidden">
               <motion.div
                 className="flex gap-6 shrink-0"
-                animate={{ x: [0, -50 * techIcons.length] }}
-                transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+                animate={{ x: [0, -70 * techIcons.length] }}
+                transition={{ duration: 35, repeat: Infinity, ease: 'linear' }}
               >
                 {[...techIcons, ...techIcons].map((tech, i) => (
                   <div
                     key={i}
-                    className="flex items-center gap-2 glass rounded-lg px-4 py-2.5 border border-border/40 hover:border-primary/20 transition-colors shrink-0"
+                    className="flex items-center gap-3 px-4 py-2 border border-border bg-background hover:bg-primary/5 hover:border-primary/40 transition-colors shrink-0"
                   >
                     <span
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: tech.color }}
+                      className="w-1.5 h-1.5 animate-pulse"
+                      style={{ backgroundColor: tech.color, boxShadow: `0 0 10px ${tech.color}` }}
                     />
-                    <span className="text-sm text-muted-foreground font-mono whitespace-nowrap">
+                    <span className="text-xs text-foreground uppercase tracking-wider font-mono whitespace-nowrap">
                       {tech.name}
                     </span>
                   </div>

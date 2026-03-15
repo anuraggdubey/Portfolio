@@ -77,43 +77,45 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={inView ? { opacity: 1, scale: 1 } : {}}
       transition={{ duration: 0.7, delay: index * 0.1, ease: [0.23, 1, 0.32, 1] }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className={`group relative glass rounded-2xl border border-border/50 overflow-hidden transition-all duration-500 ${hovered ? 'border-primary/20 shadow-float' : ''
+      className={`group relative cyber-panel overflow-hidden transition-all duration-500 ${hovered ? 'border-primary shadow-float' : ''
         } ${project.featured ? 'md:col-span-2' : ''}`}
       style={{
-        transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
+        transform: hovered ? 'translateY(-4px) scale(1.02)' : 'translateY(0) scale(1)',
       }}
     >
-      {/* Gradient overlay */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+      <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
+      {/* Holographic overlay */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-40 transition-opacity duration-500`} />
+      <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 animate-hologram-shimmer pointer-events-none mix-blend-overlay" />
 
       {/* Featured banner */}
       {project.featured && (
-        <div className="absolute top-4 right-4 z-10 px-3 py-1 rounded-full bg-primary/20 border border-primary/30 text-xs text-primary font-medium">
-          Featured
+        <div className="absolute top-4 right-4 z-10 px-3 py-1 bg-primary/10 border border-primary text-[10px] uppercase tracking-widest text-primary font-mono glow-primary">
+
         </div>
       )}
 
       <div className="relative p-8">
-        <div className="flex items-start justify-between mb-4">
+        <div className="flex flex-col md:flex-row md:items-start justify-between mb-4 gap-4 relative z-10">
           <div>
-            <span className={`text-xs font-mono ${project.accentColor} mb-2 block`}>
-              {project.category}
+            <span className={`text-[10px] font-mono ${project.accentColor} mb-2 block uppercase tracking-widest`}>
+              &gt; {project.category}
             </span>
-            <h3 className="font-display text-2xl font-bold text-foreground group-hover:text-gradient-primary transition-colors">
+            <h3 className="font-display text-2xl font-bold text-foreground group-hover:text-primary transition-colors text-shadow-glow uppercase">
               {project.title}
             </h3>
           </div>
-          <span className="text-xs px-2 py-1 rounded-md bg-secondary text-muted-foreground font-mono">
+          <span className="text-[10px] px-2 py-1 border border-border bg-background/50 text-muted-foreground font-mono uppercase tracking-widest whitespace-nowrap">
             {project.metrics}
           </span>
         </div>
 
-        <p className="text-muted-foreground leading-relaxed mb-4 text-sm">
+        <p className="text-muted-foreground leading-relaxed mb-4 text-sm font-mono relative z-10 block min-h-[60px]">
           {project.description}
         </p>
 
@@ -125,9 +127,9 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.4 }}
-              className="overflow-hidden"
+              className="overflow-hidden relative z-10"
             >
-              <p className="text-muted-foreground/80 text-sm leading-relaxed mb-4 pt-2 border-t border-border/50">
+              <p className="text-primary/80 text-sm leading-relaxed mb-4 pt-4 border-t border-primary/30 font-mono">
                 {project.longDescription}
               </p>
             </motion.div>
@@ -135,11 +137,11 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
         </AnimatePresence>
 
         {/* Tech stack */}
-        <div className="flex flex-wrap gap-1.5 mb-6">
+        <div className="flex flex-wrap gap-2 mb-6 relative z-10">
           {project.tech.map((t) => (
             <span
               key={t}
-              className="text-xs px-2.5 py-1 rounded-md bg-secondary/60 text-muted-foreground font-mono hover:text-foreground transition-colors"
+              className="text-[10px] px-2 py-1 border border-primary/20 bg-primary/5 text-primary font-mono uppercase tracking-widest hover:bg-primary/20 hover:border-primary transition-colors"
             >
               {t}
             </span>
@@ -147,34 +149,34 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
         </div>
 
         {/* Actions */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 relative z-10 font-mono text-xs uppercase tracking-widest mt-6">
           <a
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group/link"
+            className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors group/link"
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
             </svg>
-            Source
+            [ SRC ]
           </a>
           <a
             href={project.live}
             target="_blank"
             rel="noopener noreferrer"
-            className={`flex items-center gap-2 text-sm ${project.accentColor} hover:opacity-80 transition-opacity font-medium`}
+            className={`flex items-center gap-2 ${project.accentColor} hover:opacity-80 transition-opacity font-bold`}
           >
-            Live Demo
+            [ LAUNCH ]
             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
           </a>
           <button
             onClick={() => setExpanded(!expanded)}
-            className="ml-auto text-xs text-muted-foreground hover:text-foreground transition-colors"
+            className="ml-auto text-muted-foreground hover:text-primary transition-colors flex items-center gap-1 opacity-80"
           >
-            {expanded ? 'Less ↑' : 'More ↓'}
+            {expanded ? '[-]' : '[+]'} DATA
           </button>
         </div>
       </div>
@@ -202,26 +204,28 @@ const Projects = () => {
         >
           {/* Header */}
           <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-[1px] bg-gradient-primary" />
-            <span className="text-primary text-sm font-mono tracking-widest uppercase">Work</span>
+            <div className="w-12 h-[2px] bg-primary glow-primary" />
+            <span className="text-primary text-xs font-mono tracking-widest uppercase">02 // Deployments</span>
           </div>
 
-          <h2 className="font-display text-4xl md:text-5xl font-bold mb-4 tracking-tight">
-            Selected <span className="text-gradient-accent">Projects</span>
+          <h2 className="font-display text-4xl md:text-5xl font-bold mb-4 tracking-tight uppercase">
+            Active <span className="text-primary text-shadow-glow">Modules</span>
           </h2>
-          <p className="text-muted-foreground max-w-xl mb-10">
-            A showcase of production applications built with modern architectures and attention to craft.
+          <p className="text-muted-foreground max-w-xl mb-10 font-mono text-sm leading-relaxed">
+            &gt; Querying database...<br />
+            &gt; {projects.length} modules found.<br />
+            &gt; Rendering production applications built with modern architectures.
           </p>
 
           {/* Filter tabs */}
-          <div className="flex flex-wrap gap-2 mb-12">
+          <div className="flex flex-wrap gap-3 mb-12">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setFilter(cat)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${filter === cat
-                  ? 'bg-gradient-primary text-primary-foreground'
-                  : 'glass border border-border text-muted-foreground hover:text-foreground hover:border-primary/20'
+                className={`px-6 py-2 text-xs font-mono uppercase tracking-widest transition-all duration-300 border ${filter === cat
+                  ? 'bg-primary/20 text-primary border-primary glow-primary'
+                  : 'bg-background/50 border-border text-muted-foreground hover:text-primary hover:border-primary/50'
                   }`}
               >
                 {cat}

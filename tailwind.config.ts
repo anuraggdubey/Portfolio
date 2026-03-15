@@ -14,9 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['Syne', 'sans-serif'],
-        body: ['Space Grotesk', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+        display: ['Orbitron', 'sans-serif'],
+        body: ['Exo', 'sans-serif'],
+        mono: ['Space Grotesk', 'monospace'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -102,13 +102,30 @@ export default {
           "100%": { opacity: "1", transform: "scale(1)" },
         },
         glow: {
-          "0%, 100%": { boxShadow: "0 0 20px hsl(195 100% 55% / 0.3)" },
-          "50%": { boxShadow: "0 0 40px hsl(195 100% 55% / 0.6), 0 0 80px hsl(195 100% 55% / 0.2)" },
+          "0%, 100%": { boxShadow: "0 0 20px hsl(182 100% 50% / 0.3)" },
+          "50%": { boxShadow: "0 0 40px hsl(182 100% 50% / 0.6), 0 0 80px hsl(182 100% 50% / 0.2)" },
         },
         "border-spin": {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
         },
+        "glitch": {
+          "0%": { clipPath: "inset(50% 0 30% 0)", transform: "translate(-2px, 2px)" },
+          "20%": { clipPath: "inset(15% 0 65% 0)", transform: "translate(2px, -2px)" },
+          "40%": { clipPath: "inset(80% 0 5% 0)", transform: "translate(-2px, 2px)" },
+          "60%": { clipPath: "inset(40% 0 40% 0)", transform: "translate(2px, 2px)" },
+          "80%": { clipPath: "inset(20% 0 70% 0)", transform: "translate(-2px, -2px)" },
+          "100%": { clipPath: "inset(50% 0 30% 0)", transform: "translate(0)" }
+        },
+        "scanLine": {
+          "0%": { transform: "translateY(-100%)" },
+          "100%": { transform: "translateY(100vh)" }
+        },
+        "hologramShimmer": {
+          "0%": { opacity: "0.8", filter: "brightness(1) hue-rotate(0deg)" },
+          "50%": { opacity: "1", filter: "brightness(1.2) hue-rotate(5deg)" },
+          "100%": { opacity: "0.8", filter: "brightness(1) hue-rotate(0deg)" }
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -120,14 +137,17 @@ export default {
         "scale-in": "scale-in 0.4s ease-out forwards",
         "glow": "glow 3s ease-in-out infinite",
         "border-spin": "border-spin 3s linear infinite",
+        "glitch": "glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite",
+        "scan-line": "scanLine 4s linear infinite",
+        "hologram-shimmer": "hologramShimmer 3s ease-in-out infinite"
       },
       backgroundImage: {
-        "gradient-primary": "linear-gradient(135deg, hsl(var(--primary)), hsl(220 90% 65%))",
-        "gradient-accent": "linear-gradient(135deg, hsl(var(--accent)), hsl(310 80% 65%))",
-        "gradient-hero": "linear-gradient(135deg, hsl(220 20% 5%) 0%, hsl(230 25% 8%) 50%, hsl(220 20% 5%) 100%)",
-        "gradient-card": "linear-gradient(145deg, hsl(220 18% 9%) 0%, hsl(220 18% 7%) 100%)",
-        "dot-pattern": "radial-gradient(hsl(220 15% 25% / 0.5) 1px, transparent 1px)",
-        "grid-pattern": "linear-gradient(hsl(220 15% 25% / 0.1) 1px, transparent 1px), linear-gradient(90deg, hsl(220 15% 25% / 0.1) 1px, transparent 1px)",
+        "gradient-primary": "linear-gradient(135deg, hsl(var(--primary)), hsl(186 100% 70%))",
+        "gradient-accent": "linear-gradient(135deg, hsl(var(--accent)), hsl(280 80% 70%))",
+        "gradient-hero": "linear-gradient(135deg, hsl(216 33% 5%) 0%, hsl(216 33% 8%) 50%, hsl(216 33% 5%) 100%)",
+        "gradient-card": "linear-gradient(145deg, hsl(216 33% 8%) 0%, hsl(216 33% 6%) 100%)",
+        "dot-pattern": "radial-gradient(hsl(182 100% 50% / 0.15) 1px, transparent 1px)",
+        "grid-pattern": "linear-gradient(hsl(182 100% 50% / 0.1) 1px, transparent 1px), linear-gradient(90deg, hsl(182 100% 50% / 0.1) 1px, transparent 1px)",
       },
       backgroundSize: {
         "dot-sm": "20px 20px",
