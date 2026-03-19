@@ -5,7 +5,7 @@ import { useInView as useCounterInView } from 'react-intersection-observer';
 
 const stats = [
   { value: 3, suffix: '+', label: 'Years Experience' },
-  { value: 5, suffix: '+', label: 'Projects Build' },
+  { value: 5, suffix: '+', label: 'Projects Built' },
   { value: 2, suffix: '+', label: 'Happy Clients' },
   { value: 10, suffix: '+', label: 'Technologies' },
 ];
@@ -82,7 +82,7 @@ const About = () => {
 
               {/* Skill badges */}
               <motion.div variants={itemVariants} className="flex flex-wrap gap-3">
-                {['TypeScript', 'React', 'Javascript', 'python', 'Node.js', 'Express.js', 'AI Tools', 'Micrsoft Tools', 'Postman', 'Supabase', 'Firebase', 'Git & Github', 'Canva'].map((skill) => (
+                {['TypeScript', 'React', 'JavaScript', 'Python', 'Node.js', 'Express.js', 'AI Tools', 'Microsoft Tools', 'Postman', 'Supabase', 'Firebase', 'Git & GitHub', 'Canva'].map((skill) => (
                   <span
                     key={skill}
                     className="px-3 py-1 border border-primary/20 bg-primary/5 text-[10px] font-mono uppercase tracking-widest text-primary hover:border-primary hover:glow-primary transition-all duration-300"

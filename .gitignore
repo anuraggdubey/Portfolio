@@ -1,5 +1,22 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+build/
+out/
+.next/
+.vercel/
+.netlify/
+
+# Coverage and test artifacts
+coverage/
+playwright-report/
+test-results/
+
 # Logs
-logs
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -7,45 +24,29 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Node
-node_modules/
-
-# Build
-dist/
-dist-ssr/
-build/
-out/
-.next/
-
-# Environment Variables
+# Environment files and secrets
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
+!.env.example
+!.env.*.example
 *.local
 
-# Editor directories and files
+# Cache / temp files
+.cache/
+.parcel-cache/
+.turbo/
+.vite/
+tmp/
+temp/
+
+# Editor / OS files
 .vscode/*
 !.vscode/extensions.json
-.idea
+.idea/
 .DS_Store
+Thumbs.db
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-
-# Testing
-coverage/
-
-# Documentation
-*.md
-!README.md
-
-# Deploy
-.vercel/
-.netlify/
-
-# OS Files
-Thumbs.db
