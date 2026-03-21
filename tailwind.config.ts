@@ -14,9 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['Orbitron', 'sans-serif'],
-        body: ['Exo', 'sans-serif'],
-        mono: ['Space Grotesk', 'monospace'],
+        display: ['Manrope', 'sans-serif'],
+        body: ['Manrope', 'sans-serif'],
+        mono: ['IBM Plex Mono', 'monospace'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -142,12 +142,12 @@ export default {
         "hologram-shimmer": "hologramShimmer 3s ease-in-out infinite"
       },
       backgroundImage: {
-        "gradient-primary": "linear-gradient(135deg, hsl(var(--primary)), hsl(186 100% 70%))",
-        "gradient-accent": "linear-gradient(135deg, hsl(var(--accent)), hsl(280 80% 70%))",
-        "gradient-hero": "linear-gradient(135deg, hsl(216 33% 5%) 0%, hsl(216 33% 8%) 50%, hsl(216 33% 5%) 100%)",
-        "gradient-card": "linear-gradient(145deg, hsl(216 33% 8%) 0%, hsl(216 33% 6%) 100%)",
-        "dot-pattern": "radial-gradient(hsl(182 100% 50% / 0.15) 1px, transparent 1px)",
-        "grid-pattern": "linear-gradient(hsl(182 100% 50% / 0.1) 1px, transparent 1px), linear-gradient(90deg, hsl(182 100% 50% / 0.1) 1px, transparent 1px)",
+        "gradient-primary": "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)))",
+        "gradient-accent": "linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent2)))",
+        "gradient-hero": "var(--gradient-hero)",
+        "gradient-card": "var(--gradient-card)",
+        "dot-pattern": "radial-gradient(hsl(var(--border) / 0.8) 1px, transparent 1px)",
+        "grid-pattern": "linear-gradient(hsl(var(--border) / 0.55) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--border) / 0.55) 1px, transparent 1px)",
       },
       backgroundSize: {
         "dot-sm": "20px 20px",

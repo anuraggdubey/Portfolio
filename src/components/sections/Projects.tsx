@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
+import { ArrowRight, ExternalLink, Github } from 'lucide-react';
 
 type Project = {
   id: number;
@@ -8,95 +9,134 @@ type Project = {
   longDescription: string;
   tech: string[];
   categories: string[];
-  metrics: string;
-  gradient: string;
-  accentColor: string;
+  status: string;
+  previewTitle: string;
+  previewSubtitle: string;
+  previewTone: string;
+  previewAccent: string;
   github: string;
   live?: string;
-  featured?: boolean;
 };
 
 const projects: Project[] = [
   {
     id: 1,
-    title: 'Merchant Mitra - UPI Sahayak for Local Merchants',
+    title: 'Merchant Mitra',
     description:
-      'A smart assistant for small merchants to track UPI payments, monitor daily transactions, and get simple financial insights.',
+      'A smart merchant dashboard for tracking UPI payments, daily activity, and simple financial insights for local businesses.',
     longDescription:
-      'Merchant Mitra helps local shopkeepers manage digital payments without friction. The product combines transaction history, easy reporting, and approachable analytics so merchants can quickly understand how business is performing day to day.',
-    tech: ['React', 'Node.js', 'Express', 'MongoDB', 'UPI APIs', 'Tailwind CSS'],
+      'Merchant Mitra helps local shopkeepers manage digital payments with less friction. The product combines transaction history, reporting, and lightweight analytics in a clear and approachable interface.',
+    tech: ['React', 'Node.js', 'Express', 'Firebase', 'Tailwind CSS'],
     categories: ['Web App', 'FinTech'],
-    metrics: 'Payments dashboard',
-    gradient: 'from-primary/20 via-primary/5 to-accent/20',
-    accentColor: 'text-primary',
+    status: 'Live project',
+    previewTitle: 'Merchant analytics',
+    previewSubtitle: 'Track payments and daily trends',
+    previewTone: 'from-emerald-200 via-teal-100 to-cyan-200 dark:from-emerald-500/35 dark:via-teal-500/20 dark:to-cyan-500/35',
+    previewAccent: 'bg-emerald-500/85',
     github: 'https://github.com/anuraggdubey/Merchant-Mitra',
     live: 'https://merchant-mitra.vercel.app/',
-    featured: true,
   },
   {
     id: 2,
-    title: 'Voice Forge - Voice Cloning and Detection',
+    title: 'Voice Forge',
     description:
-      'An AI research project for generating voice clones and detecting synthetic or manipulated audio.',
+      'An AI research project for voice cloning workflows and synthetic audio detection experiments in one product space.',
     longDescription:
-      'Voice Forge explores both sides of modern speech AI: generation and verification. It supports synthetic voice output from sample audio while also evaluating whether incoming clips are real or AI-generated through machine learning-based detection.',
-    tech: ['Python', 'TensorFlow', 'Deep Learning', 'Speech Processing', 'Flask'],
+      'Voice Forge explores both sides of modern speech AI: generation and verification. It combines cloning flows with machine-learning-based detection for manipulated audio.',
+    tech: ['Python', 'TensorFlow', 'Speech Processing', 'Flask'],
     categories: ['Web App', 'AI'],
-    metrics: 'Research prototype',
-    gradient: 'from-accent/20 via-accent/5 to-accent2/20',
-    accentColor: 'text-accent',
+    status: 'Experimental build',
+    previewTitle: 'Voice AI workspace',
+    previewSubtitle: 'Generation and detection flows',
+    previewTone: 'from-violet-200 via-fuchsia-100 to-purple-200 dark:from-violet-500/35 dark:via-fuchsia-500/20 dark:to-purple-500/35',
+    previewAccent: 'bg-violet-500/85',
     github: 'https://github.com/anuraggdubey/voice-forge',
-    featured: true,
   },
   {
     id: 3,
-    title: 'Sweet Bites - E-commerce Platform',
+    title: 'Sweet Bites',
     description:
-      'A dessert shop platform with product browsing, user accounts, order management, and custom cake ordering.',
+      'An e-commerce platform for a dessert brand with catalog browsing, account flows, and order management.',
     longDescription:
-      'Sweet Bites was built to support real ordering flows for a bakery business. Customers can explore products, manage accounts, and place orders while admins manage inventory, pricing, and fulfillment from one place.',
-    tech: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'Express', 'Firebase'],
+      'Sweet Bites supports customer ordering and business-side operations in one place, covering browsing, custom requests, and basic management workflows.',
+    tech: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'MongoDB'],
     categories: ['Web App'],
-    metrics: 'Commerce experience',
-    gradient: 'from-accent2/20 via-accent2/5 to-primary/20',
-    accentColor: 'text-accent2',
+    status: 'Case study',
+    previewTitle: 'Dessert storefront',
+    previewSubtitle: 'Shopping and ordering experience',
+    previewTone: 'from-amber-200 via-orange-100 to-rose-200 dark:from-amber-500/35 dark:via-orange-500/20 dark:to-rose-500/35',
+    previewAccent: 'bg-orange-500/85',
     github: 'https://github.com/anuraggdubey/Sweet-Bites',
-    featured: true,
   },
   {
     id: 4,
     title: 'Blockchain Asset Registry',
     description:
-      'A Stellar-based asset registry for secure ownership records and decentralized transfers.',
+      'A Stellar-based asset registry prototype for decentralized ownership records and transfer flows.',
     longDescription:
-      'This project experiments with blockchain-backed ownership tracking. Using the Stellar network, it models how digital assets can be issued, transferred, and verified in a decentralized way without relying on a central registry.',
+      'This project explores blockchain-backed ownership tracking with a focus on issuance, transfer flows, and verifiable records on Stellar.',
     tech: ['Stellar', 'JavaScript', 'Node.js', 'Blockchain APIs'],
     categories: ['Web App', 'Web3'],
-    metrics: 'Decentralized prototype',
-    gradient: 'from-primary/15 via-primary/5 to-accent/15',
-    accentColor: 'text-primary',
+    status: 'Prototype',
+    previewTitle: 'Asset ledger',
+    previewSubtitle: 'Ownership records on Stellar',
+    previewTone: 'from-sky-200 via-blue-100 to-indigo-200 dark:from-sky-500/35 dark:via-blue-500/20 dark:to-indigo-500/35',
+    previewAccent: 'bg-sky-500/85',
     github: 'https://github.com/anuraggdubey/asset-registry',
-    featured: true,
   },
   {
     id: 5,
-    title: 'Agentro AI Trends Analytics',
+    title: 'Agentro',
     description:
-      'A trend intelligence platform that analyzes social, Web3, and news signals to surface actionable insights.',
+      'A trend analytics platform that combines AI summaries with live signals from web and social sources.',
     longDescription:
-      'Agentro combines multiple APIs with AI-powered summarization to spot emerging topics, interpret sentiment, and suggest content or market opportunities. The result is a real-time insight layer built for builders, creators, and teams that move quickly.',
-    tech: ['JavaScript', 'Node.js', 'OpenAI', 'Google Trends API', 'News API', 'Reddit API'],
+      'Agentro brings together multiple APIs to surface emerging topics, sentiment direction, and content opportunities for fast-moving teams and creators.',
+    tech: ['JavaScript', 'Node.js', 'OpenAI', 'News API', 'Google Trends'],
     categories: ['Web App', 'AI', 'Web3'],
-    metrics: 'Real-time intelligence',
-    gradient: 'from-sky-500/20 via-cyan-500/5 to-primary/20',
-    accentColor: 'text-sky-400',
+    status: 'Live project',
+    previewTitle: 'Trend intelligence',
+    previewSubtitle: 'Signals, summaries, and insights',
+    previewTone: 'from-cyan-200 via-slate-100 to-blue-200 dark:from-cyan-500/35 dark:via-slate-500/20 dark:to-blue-500/35',
+    previewAccent: 'bg-cyan-500/85',
     github: 'https://github.com/anuraggdubey/Agentro',
     live: 'https://agentro-ai.vercel.app/',
-    featured: true,
   },
 ];
 
 const categories = ['All', 'Web App', 'AI', 'Web3', 'FinTech'];
+
+const ProjectPreview = ({ project }: { project: Project }) => {
+  return (
+    <div className="relative h-[175px] overflow-hidden rounded-[18px] bg-white shadow-[0_10px_30px_rgba(15,23,42,0.08)] sm:h-[195px] dark:bg-slate-950">
+      <div className={`absolute inset-0 bg-gradient-to-br ${project.previewTone}`} />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.95),transparent_40%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.08),transparent_40%)]" />
+
+      <div className="relative flex h-full flex-col justify-between p-3 sm:p-4">
+        <div className="flex items-center gap-2">
+          <span className="h-2.5 w-2.5 rounded-full bg-rose-300 dark:bg-rose-400/80" />
+          <span className="h-2.5 w-2.5 rounded-full bg-amber-300 dark:bg-amber-400/80" />
+          <span className="h-2.5 w-2.5 rounded-full bg-emerald-300 dark:bg-emerald-400/80" />
+        </div>
+
+        <div className="overflow-hidden rounded-[16px] border border-black/5 bg-white/80 p-3 shadow-[0_18px_35px_rgba(255,255,255,0.45)] backdrop-blur sm:p-4 dark:border-white/10 dark:bg-slate-950/75 dark:shadow-[0_18px_35px_rgba(15,23,42,0.35)]">
+          <p className="text-[10px] font-mono uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
+            {project.previewTitle}
+          </p>
+          <h3 className="mt-2 text-base font-semibold tracking-tight text-slate-900 sm:text-lg dark:text-white">
+            {project.title}
+          </h3>
+          <p className="mt-2 text-xs leading-6 text-slate-600 dark:text-slate-300">
+            {project.previewSubtitle}
+          </p>
+          <div className="mt-4 flex items-center gap-2">
+            <div className={`h-2.5 w-20 rounded-full ${project.previewAccent}`} />
+            <div className="h-2.5 w-12 rounded-full bg-black/10 dark:bg-white/10" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
   const [expanded, setExpanded] = useState(false);
@@ -107,105 +147,101 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
     <motion.article
       ref={ref}
       layout
-      initial={{ opacity: 0, y: 26 }}
+      initial={{ opacity: 0, y: 24 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.65, delay: index * 0.08, ease: [0.23, 1, 0.32, 1] }}
-      className={`group relative overflow-hidden rounded-[28px] border border-border/80 bg-card/70 p-7 shadow-[0_18px_50px_hsl(var(--background)/0.35)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_24px_70px_hsl(var(--primary)/0.12)] ${
-        project.featured ? 'md:col-span-2' : ''
-      }`}
+      transition={{ duration: 0.5, delay: index * 0.05 }}
+      className="group relative overflow-hidden rounded-[22px] border border-border/80 bg-card/85 p-3 shadow-[0_16px_40px_hsl(var(--foreground)/0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:shadow-[0_24px_60px_hsl(var(--foreground)/0.10)] sm:rounded-[26px] sm:p-4 md:p-5"
     >
-      <div className="absolute inset-0 bg-grid-pattern opacity-[0.08]" />
-      <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-60 transition-opacity duration-300 group-hover:opacity-90`} />
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-br from-white/65 via-transparent to-transparent dark:from-white/[0.03]" />
 
-      <div className="relative flex h-full flex-col">
-        <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
-          <div className="max-w-2xl">
-            <div className="mb-3 flex flex-wrap gap-2">
-              {project.categories.map((category) => (
-                <span
-                  key={`${project.id}-${category}`}
-                  className={`inline-flex rounded-full border border-current/20 bg-background/60 px-3 py-1 text-[11px] font-mono uppercase tracking-[0.22em] ${project.accentColor}`}
-                >
-                  {category}
-                </span>
-              ))}
-            </div>
-            <h3 className="text-2xl font-display font-bold uppercase tracking-wide text-foreground transition-colors duration-300 group-hover:text-primary">
-              {project.title}
-            </h3>
-          </div>
-          <span className="rounded-full border border-border bg-background/70 px-3 py-1 text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
-            {project.metrics}
-          </span>
-        </div>
+      <div className="relative grid gap-4 sm:gap-5 lg:grid-cols-[290px_minmax(0,1fr)]">
+        <ProjectPreview project={project} />
 
-        <p className="max-w-2xl text-sm leading-7 text-muted-foreground">
-          {project.description}
-        </p>
-
-        <AnimatePresence initial={false}>
-          {expanded && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.35 }}
-              className="overflow-hidden"
-            >
-              <p className="mt-5 border-t border-border/70 pt-5 text-sm leading-7 text-foreground/80">
-                {project.longDescription}
+        <div className="flex min-w-0 flex-col">
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <div className="min-w-0 max-w-2xl">
+              <h3 className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl md:text-[2rem]">
+                {project.title}
+              </h3>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground sm:mt-4 sm:leading-7 md:text-base">
+                {project.description}
               </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            </div>
 
-        <div className="mt-6 flex flex-wrap gap-2">
-          {project.tech.map((tech) => (
-            <span
-              key={tech}
-              className="rounded-full border border-primary/15 bg-background/60 px-3 py-1 text-[11px] font-mono uppercase tracking-[0.18em] text-primary"
-            >
-              {tech}
+            <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
+              {project.live && (
+                <a
+                  href={project.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-border bg-background/90 px-4 py-2 text-sm text-foreground transition-all duration-300 hover:border-accent/30 hover:text-accent sm:flex-none"
+                >
+                  <ExternalLink className="h-4 w-4" />
+                  Live
+                </a>
+              )}
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-border bg-background/90 px-4 py-2 text-sm text-foreground transition-all duration-300 hover:border-accent/30 hover:text-accent sm:flex-none"
+              >
+                <Github className="h-4 w-4" />
+                Github
+              </a>
+            </div>
+          </div>
+
+          <div className="mt-4 flex flex-wrap gap-2 sm:mt-5">
+            {project.tech.map((tech) => (
+              <span
+                key={tech}
+                className="rounded-full border border-border bg-background/85 px-3 py-1.5 text-[11px] font-medium text-foreground/80 sm:text-[12px]"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          <AnimatePresence initial={false}>
+            {expanded && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                className="overflow-hidden"
+              >
+                <p className="mt-5 border-t border-border/80 pt-5 text-sm leading-7 text-foreground/80">
+                  {project.longDescription}
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {project.categories.map((category) => (
+                    <span
+                      key={`${project.id}-category-${category}`}
+                      className="rounded-full bg-secondary px-3 py-1 text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground"
+                    >
+                      {category}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <div className="mt-5 flex flex-wrap items-center justify-between gap-4 border-t border-border/80 pt-4 sm:mt-6 sm:pt-5">
+            <span className="rounded-full bg-rose-100 px-3 py-1.5 text-[11px] font-medium text-rose-500 sm:text-[12px] dark:bg-rose-500/10 dark:text-rose-300">
+              {project.status}
             </span>
-          ))}
-        </div>
 
-        <div className="mt-7 flex flex-wrap items-center gap-4 border-t border-border/70 pt-5 text-xs font-mono uppercase tracking-[0.18em]">
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-primary"
-          >
-            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-            </svg>
-            Source
-          </a>
-
-          {project.live ? (
-            <a
-              href={project.live}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`inline-flex items-center gap-2 font-semibold transition-opacity hover:opacity-80 ${project.accentColor}`}
+            <button
+              onClick={() => setExpanded((current) => !current)}
+              className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-all duration-300 hover:gap-3 hover:text-foreground"
             >
-              Live Demo
-              <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
-          ) : (
-            <span className="text-muted-foreground/70">Private build</span>
-          )}
-
-          <button
-            onClick={() => setExpanded((current) => !current)}
-            className="ml-auto inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-primary"
-          >
-            {expanded ? 'Less detail' : 'More detail'}
-          </button>
+              {expanded ? 'Hide details' : 'View Details'}
+              <ArrowRight className={`h-4 w-4 transition-transform duration-300 ${expanded ? 'rotate-90' : ''}`} />
+            </button>
+          </div>
         </div>
       </div>
     </motion.article>
@@ -224,46 +260,39 @@ const Projects = () => {
 
   return (
     <section id="projects" className="section-padding relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,hsl(var(--accent)/0.12),transparent_30%),radial-gradient(circle_at_bottom_left,hsl(var(--primary)/0.1),transparent_28%)]" />
+      <div className="hero-orb absolute right-0 top-16 h-80 w-80 rounded-full bg-accent/10" />
 
-      <div className="relative mx-auto max-w-7xl" ref={ref}>
+      <div ref={ref} className="relative mx-auto max-w-7xl">
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5 }}
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="section-shell-strong"
         >
-          <div className="mb-6 flex items-center gap-4">
-            <div className="h-[2px] w-12 bg-primary glow-primary" />
-            <span className="text-xs font-mono uppercase tracking-[0.3em] text-primary">02 // Selected work</span>
-          </div>
-
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+          <div className="section-kicker">Projects</div>
+          <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
             <div>
-              <h2 className="text-4xl font-display font-bold uppercase tracking-tight md:text-5xl">
-                Projects with real
-                <span className="block text-gradient-primary">product intent</span>
+              <h2 className="text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
+                Selected work in a cleaner showcase layout
               </h2>
-              <p className="mt-4 max-w-2xl text-sm leading-7 text-muted-foreground md:text-base">
-                A tighter set of case studies covering web apps, payments, AI, e-commerce, and Web3. Each card is easier to scan now, and multi-tag filtering reflects how these products actually overlap.
+              <p className="mt-4 max-w-3xl text-base leading-8 text-muted-foreground">
+                I redesigned this section to follow the structure in your reference: image-style preview on the left, project details on the right, cleaner pills, and stronger action buttons.
               </p>
             </div>
-
-            <div className="rounded-[24px] border border-border/80 bg-background/55 px-5 py-4 backdrop-blur">
-              <p className="text-[11px] font-mono uppercase tracking-[0.24em] text-primary">
-                {filteredProjects.length} visible projects
-              </p>
+            <div className="rounded-full border border-border bg-background/70 px-4 py-2 text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground">
+              {filteredProjects.length} visible projects
             </div>
           </div>
 
-          <div className="mt-10 flex flex-wrap gap-3">
+          <div className="mt-8 flex flex-wrap gap-3 sm:mt-10">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setFilter(category)}
-                className={`rounded-full border px-5 py-2 text-xs font-mono uppercase tracking-[0.2em] transition-all duration-300 ${
+                className={`rounded-full px-4 py-2 text-xs font-medium transition-all duration-300 sm:px-5 sm:py-2.5 ${
                   filter === category
-                    ? 'border-primary bg-primary text-primary-foreground shadow-[0_10px_30px_hsl(var(--primary)/0.2)]'
-                    : 'border-border bg-background/60 text-muted-foreground hover:border-primary/40 hover:text-primary'
+                    ? 'bg-foreground text-background shadow-[0_14px_35px_hsl(var(--foreground)/0.16)]'
+                    : 'border border-border bg-background/70 text-muted-foreground hover:border-accent/30 hover:text-foreground'
                 }`}
               >
                 {category}
@@ -271,32 +300,12 @@ const Projects = () => {
             ))}
           </div>
 
-          <motion.div layout className="mt-10 grid gap-6 md:grid-cols-2">
+          <motion.div layout className="mt-10 grid gap-6">
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((project, index) => (
                 <ProjectCard key={project.id} project={project} index={index} />
               ))}
             </AnimatePresence>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.4, duration: 0.65 }}
-            className="mt-12"
-          >
-            <a
-              href="https://github.com/anuraggdubey"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 rounded-full border border-border bg-background/70 px-6 py-3 text-sm text-muted-foreground transition-all duration-300 hover:border-primary/40 hover:text-primary"
-            >
-              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-              </svg>
-              Explore more on GitHub
-              <span className="transition-transform hover:translate-x-1">&gt;</span>
-            </a>
           </motion.div>
         </motion.div>
       </div>

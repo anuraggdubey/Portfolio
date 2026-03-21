@@ -8,7 +8,6 @@ import Projects from '@/components/sections/Projects';
 import Experience from '@/components/sections/Experience';
 import Contact from '@/components/sections/Contact';
 import Footer from '@/components/sections/Footer';
-import CustomCursor from '@/components/CustomCursor';
 import LoadingScreen from '@/components/LoadingScreen';
 import ScrollProgress from '@/components/ScrollProgress';
 
@@ -43,7 +42,6 @@ const Index = () => {
       {!loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
       {loaded && (
         <>
-          <CustomCursor />
           <ScrollProgress />
           <Navbar />
           <main>

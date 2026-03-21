@@ -3,7 +3,7 @@ import { motion, useSpring } from 'framer-motion';
 
 const ScrollProgress = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
-  const scaleX = useSpring(scrollProgress, { stiffness: 200, damping: 30 });
+  const scaleX = useSpring(scrollProgress, { stiffness: 170, damping: 26 });
 
   useEffect(() => {
     const updateProgress = () => {
@@ -19,11 +19,8 @@ const ScrollProgress = () => {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 right-0 h-[2px] z-[9990] origin-left"
-      style={{
-        scaleX,
-        background: 'linear-gradient(90deg, hsl(195 100% 55%), hsl(260 80% 65%))',
-      }}
+      className="fixed inset-x-0 top-0 z-[9990] h-px origin-left bg-accent"
+      style={{ scaleX }}
     />
   );
 };
