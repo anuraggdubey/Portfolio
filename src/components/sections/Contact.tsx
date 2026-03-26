@@ -36,34 +36,26 @@ const Contact = () => {
 
   const validate = () => {
     const nextErrors: Record<string, string> = {};
-
     if (!formData.name.trim()) nextErrors.name = 'Name is required';
     if (!formData.email.trim()) nextErrors.email = 'Email is required';
     else if (!/\S+@\S+\.\S+/.test(formData.email)) nextErrors.email = 'Please enter a valid email';
     if (!formData.message.trim()) nextErrors.message = 'Message is required';
-
     return nextErrors;
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const validationErrors = validate();
-
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
-
     setErrors({});
     setStatus('sending');
-
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
           access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
           name: formData.name,
@@ -72,9 +64,7 @@ const Contact = () => {
           message: formData.message,
         }),
       });
-
       const result = await response.json();
-
       if (result.success) {
         setStatus('sent');
         setFormData({ name: '', email: '', subject: '', message: '' });
@@ -85,9 +75,11 @@ const Contact = () => {
       console.error(error);
       setStatus('error');
     }
-
     setTimeout(() => setStatus('idle'), 4000);
   };
+
+  const inputCls =
+    'w-full rounded-xl border bg-background/75 px-3.5 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-accent sm:rounded-xl sm:px-3.5 sm:py-2.5';
 
   return (
     <section id="contact" className="section-padding relative overflow-hidden">
@@ -98,175 +90,189 @@ const Contact = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="section-shell-strong"
+          className="sm:section-shell-strong"
         >
-          <div className="section-kicker">Contact</div>
-          <h2 className="mt-6 text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
-            Let&apos;s build something useful together
+          <div className="section-kicker">Say hello</div>
+          <h2 className="mt-4 text-xl font-semibold tracking-tight text-foreground sm:mt-4 sm:text-3xl md:text-4xl lg:text-5xl">
+            <span className="sm:hidden">Meet Anurag ☕</span>
+            <span className="hidden sm:inline">Let&apos;s grab a virtual coffee ☕</span>
           </h2>
-          <p className="mt-4 max-w-2xl text-base leading-8 text-muted-foreground">
-            If you&apos;re hiring, collaborating, or discussing a project idea, send a message and I&apos;ll get back to you.
+          <p className="hidden mt-2 max-w-2xl text-sm leading-7 text-muted-foreground sm:block">
+            Got an idea, a role, or just want to say hey? I&apos;m always up for a good conversation.
           </p>
 
-          <div className="mt-12 grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)]">
+          {/* ─── Mobile: quick links row ─── */}
+          <div className="mt-4 flex gap-2 overflow-x-auto pb-1 hide-scrollbar sm:hidden">
+            {contactLinks.filter((l) => l.href).map((link) => (
+              <a
+                key={link.label}
+                href={link.href!}
+                target={link.href!.startsWith('http') ? '_blank' : undefined}
+                rel={link.href!.startsWith('http') ? 'noopener noreferrer' : undefined}
+                className="flex-shrink-0 rounded-full border border-border bg-background/70 px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:border-accent/30"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+
+          {/* ─── 2-column layout ─── */}
+          <div className="mt-5 grid gap-6 sm:mt-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-6">
+
+            {/* ─── Left: Form ─── */}
             <motion.div
-              initial={{ opacity: 0, x: -18 }}
+              initial={{ opacity: 0, x: -14 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="section-shell"
+              className="sm:self-start sm:rounded-2xl sm:border sm:border-border/60 sm:bg-card/50 sm:p-5 sm:backdrop-blur"
             >
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid gap-5 sm:grid-cols-2">
+              <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-3.5">
+                <div className="grid gap-3 sm:grid-cols-2 sm:gap-3.5">
                   <div>
-                    <label className="mb-2 block text-sm font-medium text-foreground">Name</label>
+                    <label className="mb-1.5 block text-xs font-medium text-foreground">Name</label>
                     <input
                       type="text"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="Your name"
-                      className={`w-full rounded-2xl border bg-background/75 px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent ${
-                        errors.name ? 'border-destructive' : 'border-border'
-                      }`}
+                      className={`${inputCls} ${errors.name ? 'border-destructive' : 'border-border'}`}
                     />
-                    {errors.name && <p className="mt-2 text-xs text-destructive">{errors.name}</p>}
+                    {errors.name && <p className="mt-1 text-[11px] text-destructive">{errors.name}</p>}
                   </div>
-
                   <div>
-                    <label className="mb-2 block text-sm font-medium text-foreground">Email</label>
+                    <label className="mb-1.5 block text-xs font-medium text-foreground">Email</label>
                     <input
                       type="email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="you@example.com"
-                      className={`w-full rounded-2xl border bg-background/75 px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent ${
-                        errors.email ? 'border-destructive' : 'border-border'
-                      }`}
+                      className={`${inputCls} ${errors.email ? 'border-destructive' : 'border-border'}`}
                     />
-                    {errors.email && <p className="mt-2 text-xs text-destructive">{errors.email}</p>}
+                    {errors.email && <p className="mt-1 text-[11px] text-destructive">{errors.email}</p>}
                   </div>
                 </div>
 
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-foreground">Subject</label>
+                  <label className="mb-1.5 block text-xs font-medium text-foreground">Subject</label>
                   <input
                     type="text"
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    placeholder="What would you like to discuss?"
-                    className="w-full rounded-2xl border border-border bg-background/75 px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent"
+                    placeholder="Topic of discussion"
+                    className={`${inputCls} border-border`}
                   />
                 </div>
 
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-foreground">Message</label>
+                  <label className="mb-1.5 block text-xs font-medium text-foreground">Message</label>
                   <textarea
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Tell me about the project, role, or collaboration."
-                    rows={6}
-                    className={`w-full resize-none rounded-2xl border bg-background/75 px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent ${
-                      errors.message ? 'border-destructive' : 'border-border'
-                    }`}
+                    placeholder="Tell me about your project."
+                    rows={4}
+                    className={`${inputCls} resize-none ${errors.message ? 'border-destructive' : 'border-border'}`}
                   />
-                  {errors.message && <p className="mt-2 text-xs text-destructive">{errors.message}</p>}
+                  {errors.message && <p className="mt-1 text-[11px] text-destructive">{errors.message}</p>}
                 </div>
 
                 <button
                   type="submit"
                   disabled={status === 'sending' || status === 'sent'}
-                  className="inline-flex w-full items-center justify-center rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-all duration-300 hover:-translate-y-0.5 hover:opacity-95 disabled:opacity-60"
+                  className="inline-flex w-full items-center justify-center rounded-full bg-foreground px-5 py-2.5 text-xs font-medium text-background transition-all duration-300 hover:-translate-y-0.5 hover:opacity-95 disabled:opacity-60 sm:text-sm"
                 >
                   {status === 'idle' && 'Send message'}
                   {status === 'sending' && 'Sending...'}
-                  {status === 'sent' && 'Message sent'}
+                  {status === 'sent' && 'Message sent ✓'}
                   {status === 'error' && 'Try again'}
                 </button>
               </form>
             </motion.div>
 
+            {/* ─── Right: Sidebar ─── */}
             <motion.div
-              initial={{ opacity: 0, x: 18 }}
+              initial={{ opacity: 0, x: 14 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.15 }}
-              className="space-y-6"
+              className="space-y-4 sm:space-y-4"
             >
-              <div className="section-shell">
-                <p className="text-[11px] font-mono uppercase tracking-[0.22em] text-muted-foreground">
+              {/* Contact links — hidden mobile, compact table on sm+ */}
+              <div className="hidden sm:block sm:rounded-2xl sm:border sm:border-border/60 sm:bg-card/50 sm:p-4 sm:backdrop-blur">
+                <p className="text-[11px] font-mono uppercase tracking-[0.22em] text-muted-foreground mb-3">
                   Reach out
                 </p>
-                <div className="mt-5 space-y-4">
+                <div className="space-y-0 divide-y divide-border/50">
                   {contactLinks.map((item) => (
-                    <div key={item.label} className="section-panel !rounded-[22px] !p-4">
-                      <div className="text-sm font-medium text-foreground">{item.label}</div>
+                    <div key={item.label} className="flex items-center justify-between gap-3 py-2.5 first:pt-0 last:pb-0">
+                      <span className="text-xs font-medium text-foreground">{item.label}</span>
                       {item.href ? (
                         <a
                           href={item.href}
                           target={item.href.startsWith('http') ? '_blank' : undefined}
                           rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                          className="mt-1 inline-flex text-sm text-muted-foreground transition-colors hover:text-foreground"
+                          className="truncate text-xs text-muted-foreground transition-colors hover:text-foreground"
                         >
                           {item.value}
                         </a>
                       ) : (
-                        <div className="mt-1 text-sm text-muted-foreground">{item.value}</div>
+                        <span className="text-xs text-muted-foreground">{item.value}</span>
                       )}
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="section-shell">
-                <div className="flex items-center justify-between gap-4">
+              {/* GitHub snapshot — compact */}
+              <div className="rounded-[18px] border border-border/80 bg-card/70 p-4 backdrop-blur sm:rounded-2xl sm:border-border/60 sm:bg-card/50 sm:p-4">
+                <div className="flex items-center justify-between gap-3">
                   <div>
-                    <p className="text-[11px] font-mono uppercase tracking-[0.22em] text-muted-foreground">
-                      GitHub snapshot
+                    <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground sm:text-[11px]">
+                      GitHub
                     </p>
-                    <h3 className="mt-2 text-xl font-semibold text-foreground">@{githubStats.username}</h3>
+                    <h3 className="mt-0.5 text-sm font-semibold text-foreground sm:text-base">@{githubStats.username}</h3>
                   </div>
                   <a
                     href={`https://github.com/${githubStats.username}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-medium text-accent transition-all duration-300 hover:gap-3 hover:opacity-85"
+                    className="inline-flex items-center gap-1.5 text-xs font-medium text-accent transition-all duration-300 hover:gap-2"
                   >
-                    View profile
-                    <ArrowRight className="h-4 w-4" />
+                    <span className="sm:hidden">Profile</span>
+                    <span className="hidden sm:inline">View</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
                   </a>
                 </div>
 
-                <div className="mt-6 grid grid-cols-2 gap-4">
+                {/* Stats — 4-col inline */}
+                <div className="mt-3 grid grid-cols-4 gap-2">
                   {[
-                    { label: 'Contributions', value: githubStats.contributions.toLocaleString() },
-                    { label: 'Repositories', value: githubStats.repos },
-                    { label: 'Stars', value: githubStats.stars.toLocaleString() },
+                    { label: 'Contribs', value: githubStats.contributions },
+                    { label: 'Repos', value: githubStats.repos },
+                    { label: 'Stars', value: githubStats.stars },
                     { label: 'Followers', value: githubStats.followers },
                   ].map((stat) => (
-                    <div key={stat.label} className="section-panel !rounded-[22px] !p-4">
-                      <div className="text-2xl font-semibold text-foreground">{stat.value}</div>
-                      <div className="mt-1 text-sm text-muted-foreground">{stat.label}</div>
+                    <div key={stat.label} className="rounded-lg border border-border/50 bg-background/60 p-2 text-center">
+                      <div className="text-sm font-semibold text-foreground sm:text-base">{stat.value}</div>
+                      <div className="text-[9px] text-muted-foreground sm:text-[10px]">{stat.label}</div>
                     </div>
                   ))}
                 </div>
 
-                <div className="mt-6">
-                  <div className="mb-3 flex justify-between text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
-                    <span>Language mix</span>
-                    <span>Overview</span>
-                  </div>
-                  <div className="flex h-2.5 overflow-hidden rounded-full bg-secondary">
-                    {githubStats.languages.map((language) => (
+                {/* Language bar */}
+                <div className="mt-3">
+                  <div className="flex h-1.5 overflow-hidden rounded-full bg-secondary">
+                    {githubStats.languages.map((lang) => (
                       <div
-                        key={language.name}
-                        style={{ width: `${language.percent}%`, backgroundColor: language.color }}
-                        title={`${language.name}: ${language.percent}%`}
+                        key={lang.name}
+                        style={{ width: `${lang.percent}%`, backgroundColor: lang.color }}
+                        title={`${lang.name}: ${lang.percent}%`}
                       />
                     ))}
                   </div>
-                  <div className="mt-4 flex flex-wrap gap-3">
-                    {githubStats.languages.map((language) => (
-                      <div key={language.name} className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: language.color }} />
-                        {language.name}
+                  <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
+                    {githubStats.languages.map((lang) => (
+                      <div key={lang.name} className="flex items-center gap-1.5 text-[10px] text-muted-foreground sm:text-[11px]">
+                        <span className="h-1.5 w-1.5 rounded-full sm:h-2 sm:w-2" style={{ backgroundColor: lang.color }} />
+                        {lang.name}
                       </div>
                     ))}
                   </div>

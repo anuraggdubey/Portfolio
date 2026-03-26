@@ -89,67 +89,130 @@ const Experience = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="section-shell"
         >
           <div className="section-kicker">Experience</div>
-          <h2 className="mt-6 text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
-            Education, internships, and competitive work
+          <h2 className="mt-4 text-xl font-semibold tracking-tight text-foreground sm:mt-6 sm:text-3xl md:text-4xl lg:text-5xl">
+            Education & work
           </h2>
-          <p className="mt-4 max-w-2xl text-base leading-8 text-muted-foreground">
-            A cleaner view of the experiences shaping how I build, communicate, and contribute.
-          </p>
 
-          <div className="mt-12 grid gap-6 lg:grid-cols-2">
-            {timelineItems.map((item, index) => (
-              <motion.article
-                key={`${item.year}-${item.role}`}
-                initial={{ opacity: 0, y: 18 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.45, delay: index * 0.08 }}
-                className="section-panel"
-              >
-                <p className="text-[11px] font-mono uppercase tracking-[0.22em] text-muted-foreground">
-                  {item.year}
-                </p>
-                <div className="mt-3 flex flex-wrap items-center gap-3">
-                  <h3 className="text-xl font-semibold text-foreground">{item.role}</h3>
-                  <span className="rounded-full bg-secondary px-3 py-1 text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
-                    {item.company}
-                  </span>
-                </div>
-                <p className="mt-4 text-sm leading-7 text-muted-foreground">{item.description}</p>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {item.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full border border-border bg-background/75 px-3 py-1 text-[11px] text-foreground/75"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </motion.article>
-            ))}
-          </div>
+          {/* Timeline — compact list on mobile, grid cards on lg */}
+          <div className="mt-5 sm:mt-10">
+            {/* Mobile: minimal timeline list */}
+            <div className="space-y-0 lg:hidden">
+              {timelineItems.map((item, index) => (
+                <motion.div
+                  key={`${item.year}-${item.role}`}
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.4, delay: index * 0.06 }}
+                  className="relative border-l-2 border-border py-4 pl-4 first:pt-0 last:pb-0"
+                >
+                  {/* Timeline dot */}
+                  <div className="absolute -left-[5px] top-5 h-2 w-2 rounded-full bg-accent first:top-1" />
 
-          <div className="mt-16 border-t border-border/80 pt-12">
-            <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_260px] lg:items-end">
-              <div>
-                <h3 className="text-3xl font-semibold tracking-tight text-foreground">
-                  Hackathons and competitions
-                </h3>
-                <p className="mt-3 max-w-2xl text-base leading-8 text-muted-foreground">
-                  Fast-paced environments where I practiced collaboration, iteration, and shipping under pressure.
-                </p>
-              </div>
-              <div className="section-panel">
-                <p className="text-sm leading-7 text-foreground/85">
-                  These events helped strengthen product thinking, teamwork, and delivery speed.
-                </p>
-              </div>
+                  <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground">
+                    {item.year}
+                  </p>
+                  <h3 className="mt-1 text-sm font-semibold text-foreground">{item.role}</h3>
+                  <span className="mt-0.5 inline-block text-xs text-muted-foreground">{item.company}</span>
+                  <div className="mt-2 flex flex-wrap gap-1.5">
+                    {item.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full bg-secondary px-2 py-0.5 text-[10px] font-medium text-foreground/70"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
             </div>
 
-            <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {/* Desktop: card grid */}
+            <div className="hidden gap-6 lg:grid lg:grid-cols-2">
+              {timelineItems.map((item, index) => (
+                <motion.article
+                  key={`${item.year}-${item.role}`}
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.45, delay: index * 0.08 }}
+                  className="section-panel"
+                >
+                  <p className="text-[11px] font-mono uppercase tracking-[0.22em] text-muted-foreground">
+                    {item.year}
+                  </p>
+                  <div className="mt-3 flex flex-wrap items-center gap-3">
+                    <h3 className="text-xl font-semibold text-foreground">{item.role}</h3>
+                    <span className="rounded-full bg-secondary px-3 py-1 text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
+                      {item.company}
+                    </span>
+                  </div>
+                  <p className="mt-4 text-sm leading-7 text-muted-foreground">{item.description}</p>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {item.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-border bg-background/75 px-3 py-1 text-[11px] text-foreground/75"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </motion.article>
+              ))}
+            </div>
+          </div>
+
+          {/* Hackathons */}
+          <div className="mt-8 border-t border-border/80 pt-6 sm:mt-16 sm:pt-12">
+            <h3 className="text-lg font-semibold tracking-tight text-foreground sm:text-2xl md:text-3xl">
+              Hackathons
+            </h3>
+
+            {/* Mobile: horizontal scroll cards */}
+            <div className="mt-4 flex gap-3 overflow-x-auto pb-2 hide-scrollbar sm:hidden">
+              {hackathons.map((hackathon, index) => (
+                <motion.div
+                  key={hackathon.title}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.4, delay: 0.15 + index * 0.06 }}
+                  className="flex w-[240px] flex-shrink-0 flex-col rounded-[16px] border border-border/80 bg-background/75 p-3.5"
+                >
+                  <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground">
+                    {hackathon.date}
+                  </p>
+                  <h4 className="mt-1.5 text-sm font-semibold leading-snug text-foreground">{hackathon.title}</h4>
+                  <p className="mt-1 text-[11px] text-muted-foreground">{hackathon.organizer}</p>
+                  <div className="mt-auto pt-3 flex items-center justify-between">
+                    <div className="flex gap-1">
+                      {hackathon.tags.slice(0, 2).map((tag) => (
+                        <span
+                          key={tag}
+                          className="rounded-full bg-secondary px-2 py-0.5 text-[9px] font-medium text-foreground/70"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <a
+                      href={hackathon.certificate}
+                      download
+                      className="text-[11px] font-medium text-accent"
+                    >
+                      Cert →
+                    </a>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Desktop: grid cards */}
+            <p className="mt-3 hidden max-w-2xl text-base leading-8 text-muted-foreground sm:block">
+              Fast-paced environments where I practiced collaboration, iteration, and shipping under pressure.
+            </p>
+            <div className="mt-8 hidden gap-6 sm:grid sm:grid-cols-2 xl:grid-cols-4">
               {hackathons.map((hackathon, index) => (
                 <motion.article
                   key={hackathon.title}

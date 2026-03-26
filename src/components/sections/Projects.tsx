@@ -61,28 +61,30 @@ const projects: Project[] = [
       'Sweet Bites supports customer ordering and business-side operations in one place, covering browsing, custom requests, and basic management workflows.',
     tech: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'MongoDB'],
     categories: ['Web App'],
-    status: 'Case study',
+    status: 'Live project',
     previewTitle: 'Dessert storefront',
     previewSubtitle: 'Shopping and ordering experience',
     previewTone: 'from-amber-200 via-orange-100 to-rose-200 dark:from-amber-500/35 dark:via-orange-500/20 dark:to-rose-500/35',
     previewAccent: 'bg-orange-500/85',
     github: 'https://github.com/anuraggdubey/Sweet-Bites',
+    live: 'https://sweet-bites-ashy.vercel.app/'
   },
   {
     id: 4,
     title: 'Blockchain Asset Registry',
     description:
-      'A Stellar-based asset registry prototype for decentralized ownership records and transfer flows.',
+      'A Stellar-based asset registry for decentralized ownership records and transfer flows.',
     longDescription:
       'This project explores blockchain-backed ownership tracking with a focus on issuance, transfer flows, and verifiable records on Stellar.',
     tech: ['Stellar', 'JavaScript', 'Node.js', 'Blockchain APIs'],
     categories: ['Web App', 'Web3'],
-    status: 'Prototype',
+    status: 'Live project',
     previewTitle: 'Asset ledger',
     previewSubtitle: 'Ownership records on Stellar',
     previewTone: 'from-sky-200 via-blue-100 to-indigo-200 dark:from-sky-500/35 dark:via-blue-500/20 dark:to-indigo-500/35',
     previewAccent: 'bg-sky-500/85',
     github: 'https://github.com/anuraggdubey/asset-registry',
+    live: 'https://register-asset.vercel.app/'
   },
   {
     id: 5,
@@ -101,13 +103,36 @@ const projects: Project[] = [
     github: 'https://github.com/anuraggdubey/Agentro',
     live: 'https://agentro-ai.vercel.app/',
   },
+  {
+    id: 6,
+    title: 'WorkingGent',
+    description:
+      'An AI-powered multi-agent platform that automates development, research, and workflow tasks using intelligent agents.',
+    longDescription:
+      'WorkingGent is a collaborative AI agent system designed to handle real-world productivity tasks. It includes specialized agents like a GitHub agent for repo management, a coding agent for generating and refining code, and a document agent for structured content creation. The platform focuses on automating workflows, reducing manual effort, and enabling developers to operate at higher efficiency through intelligent task delegation.',
+    tech: ['TypeScript', 'Node.js', 'AI Agents', 'OpenAI', 'API Integration'],
+    categories: ['Web App', 'AI', 'Automation'],
+    status: 'Active development',
+    previewTitle: 'AI agents at work',
+    previewSubtitle: 'Automate. Delegate. Build faster.',
+    previewTone: 'from-purple-200 via-slate-100 to-indigo-200 dark:from-purple-500/35 dark:via-slate-500/20 dark:to-indigo-500/35',
+    previewAccent: 'bg-purple-500/85',
+    github: 'https://github.com/anuraggdubey/WorkingGent',
+    live: 'https://workinggent.vercel.app/',
+  }
 ];
 
 const categories = ['All', 'Web App', 'AI', 'Web3', 'FinTech'];
 
 const ProjectPreview = ({ project }: { project: Project }) => {
+  const link = project.live || project.github;
   return (
-    <div className="relative h-[175px] overflow-hidden rounded-[18px] bg-white shadow-[0_10px_30px_rgba(15,23,42,0.08)] sm:h-[195px] dark:bg-slate-950">
+    <a
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group/preview relative block h-[150px] overflow-hidden rounded-[14px] bg-white shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-transform duration-300 hover:-translate-y-1 sm:h-[175px] sm:rounded-[18px] dark:bg-slate-950"
+    >
       <div className={`absolute inset-0 bg-gradient-to-br ${project.previewTone}`} />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.95),transparent_40%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.08),transparent_40%)]" />
 
@@ -134,7 +159,7 @@ const ProjectPreview = ({ project }: { project: Project }) => {
           </div>
         </div>
       </div>
-    </div>
+    </a>
   );
 };
 
@@ -150,20 +175,20 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
       initial={{ opacity: 0, y: 24 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.05 }}
-      className="group relative overflow-hidden rounded-[22px] border border-border/80 bg-card/85 p-3 shadow-[0_16px_40px_hsl(var(--foreground)/0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:shadow-[0_24px_60px_hsl(var(--foreground)/0.10)] sm:rounded-[26px] sm:p-4 md:p-5"
+      className="group relative overflow-hidden rounded-[18px] border border-border/80 bg-card/85 p-3 shadow-[0_16px_40px_hsl(var(--foreground)/0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:shadow-[0_24px_60px_hsl(var(--foreground)/0.10)] sm:rounded-[22px] md:rounded-[26px] md:p-5"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-white/65 via-transparent to-transparent dark:from-white/[0.03]" />
 
-      <div className="relative grid gap-4 sm:gap-5 lg:grid-cols-[290px_minmax(0,1fr)]">
+      <div className="relative grid gap-3 sm:gap-4 lg:grid-cols-[290px_minmax(0,1fr)] lg:gap-5">
         <ProjectPreview project={project} />
 
         <div className="flex min-w-0 flex-col">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div className="min-w-0 max-w-2xl">
-              <h3 className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl md:text-[2rem]">
+              <h3 className="text-lg font-semibold tracking-tight text-foreground sm:text-xl md:text-2xl lg:text-[2rem]">
                 {project.title}
               </h3>
-              <p className="mt-3 text-sm leading-6 text-muted-foreground sm:mt-4 sm:leading-7 md:text-base">
+              <p className="mt-2 text-[13px] leading-6 text-muted-foreground sm:mt-3 sm:text-sm sm:leading-6 md:mt-4 md:text-base md:leading-7">
                 {project.description}
               </p>
             </div>
@@ -272,10 +297,10 @@ const Projects = () => {
           <div className="section-kicker">Projects</div>
           <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
             <div>
-              <h2 className="text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
+              <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl md:text-4xl lg:text-5xl">
                 Selected work in a cleaner showcase layout
               </h2>
-              <p className="mt-4 max-w-3xl text-base leading-8 text-muted-foreground">
+              <p className="mt-3 max-w-3xl text-[13px] leading-7 text-muted-foreground sm:mt-4 sm:text-base sm:leading-8">
                 I redesigned this section to follow the structure in your reference: image-style preview on the left, project details on the right, cleaner pills, and stronger action buttons.
               </p>
             </div>
@@ -284,16 +309,15 @@ const Projects = () => {
             </div>
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-3 sm:mt-10">
+          <div className="mt-6 flex flex-wrap gap-2 sm:mt-8 sm:gap-3 md:mt-10">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setFilter(category)}
-                className={`rounded-full px-4 py-2 text-xs font-medium transition-all duration-300 sm:px-5 sm:py-2.5 ${
-                  filter === category
-                    ? 'bg-foreground text-background shadow-[0_14px_35px_hsl(var(--foreground)/0.16)]'
-                    : 'border border-border bg-background/70 text-muted-foreground hover:border-accent/30 hover:text-foreground'
-                }`}
+                className={`rounded-full px-4 py-2 text-xs font-medium transition-all duration-300 sm:px-5 sm:py-2.5 ${filter === category
+                  ? 'bg-foreground text-background shadow-[0_14px_35px_hsl(var(--foreground)/0.16)]'
+                  : 'border border-border bg-background/70 text-muted-foreground hover:border-accent/30 hover:text-foreground'
+                  }`}
               >
                 {category}
               </button>
@@ -307,6 +331,20 @@ const Projects = () => {
               ))}
             </AnimatePresence>
           </motion.div>
+
+          {/* GitHub profile link */}
+          <div className="mt-8 text-center">
+            <a
+              href="https://github.com/anuraggdubey"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-5 py-2.5 text-xs font-medium text-muted-foreground backdrop-blur transition-colors hover:border-accent/30 hover:text-foreground sm:px-6 sm:py-3 sm:text-sm"
+            >
+              <Github className="h-4 w-4" />
+              All projects on GitHub
+              <ArrowRight className="h-3.5 w-3.5" />
+            </a>
+          </div>
         </motion.div>
       </div>
     </section>

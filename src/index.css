@@ -128,10 +128,6 @@
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-image:
-      radial-gradient(circle at top left, hsl(var(--accent) / 0.08), transparent 28%),
-      radial-gradient(circle at top right, hsl(var(--accent2) / 0.08), transparent 22%),
-      linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--background)) 100%);
     cursor: auto;
   }
 
@@ -205,7 +201,7 @@
   }
 
   .section-padding {
-    @apply px-6 py-20 md:px-12 md:py-24 lg:px-20;
+    @apply mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10 md:px-8 md:py-14 lg:px-12;
   }
 
   .section-kicker {
@@ -244,15 +240,15 @@
   }
 
   .section-shell {
-    @apply rounded-[36px] border border-border/80 bg-card/70 p-6 shadow-[0_18px_50px_hsl(var(--foreground)/0.06)] backdrop-blur md:p-8;
+    @apply rounded-[24px] border border-border/80 bg-card/70 p-4 shadow-[0_18px_50px_hsl(var(--foreground)/0.06)] backdrop-blur sm:rounded-[30px] sm:p-5 md:rounded-[36px] md:p-8;
   }
 
   .section-shell-strong {
-    @apply rounded-[40px] border border-border/80 bg-card/80 p-6 shadow-[0_28px_80px_hsl(var(--foreground)/0.08)] backdrop-blur md:p-8;
+    @apply rounded-[24px] border border-border/80 bg-card/80 p-4 shadow-[0_28px_80px_hsl(var(--foreground)/0.08)] backdrop-blur sm:rounded-[32px] sm:p-5 md:rounded-[40px] md:p-8;
   }
 
   .section-panel {
-    @apply rounded-[28px] border border-border/80 bg-background/75 p-5 transition-all duration-300;
+    @apply rounded-[18px] border border-border/80 bg-background/75 p-4 transition-all duration-300 sm:rounded-[22px] md:rounded-[28px] md:p-5;
   }
 
   .section-panel:hover {
@@ -298,6 +294,15 @@
     transform: translateY(0);
     transition: opacity 0.75s ease, transform 0.75s ease;
   }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @keyframes float {
@@ -330,6 +335,66 @@
   .animate-pulse-soft {
     animation: pulse-soft 2.4s ease-in-out infinite;
   }
+}
+
+/* ─── Top-right light ray / beam effect ─── */
+.light-ray {
+  position: fixed;
+  top: -30%;
+  right: -15%;
+  width: 90vw;
+  height: 120vh;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  background:
+    /* Main cone beam — conic gradient from top-right */
+    conic-gradient(
+      from 200deg at 80% 10%,
+      transparent 0deg,
+      rgba(255, 255, 255, 0.03) 15deg,
+      rgba(255, 255, 255, 0.06) 28deg,
+      rgba(255, 255, 255, 0.03) 42deg,
+      transparent 55deg
+    ),
+    /* Soft diffused glow around the source */
+    radial-gradient(
+      ellipse 55% 70% at 85% 8%,
+      rgba(255, 255, 255, 0.05),
+      transparent 60%
+    ),
+    /* Secondary warm accent bleed */
+    radial-gradient(
+      ellipse 40% 50% at 75% 15%,
+      hsl(210 72% 63% / 0.03),
+      transparent 50%
+    );
+  filter: blur(30px);
+}
+
+.dark .light-ray {
+  opacity: 1;
+}
+
+/* Optional: faint secondary ray for richness */
+.light-ray::after {
+  content: '';
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  width: 70%;
+  height: 80%;
+  background: conic-gradient(
+    from 210deg at 90% 5%,
+    transparent 0deg,
+    rgba(255, 255, 255, 0.018) 12deg,
+    rgba(255, 255, 255, 0.035) 22deg,
+    rgba(255, 255, 255, 0.018) 34deg,
+    transparent 45deg
+  );
+  filter: blur(50px);
+  opacity: 0.7;
 }
 
 @media (prefers-reduced-motion: reduce) {

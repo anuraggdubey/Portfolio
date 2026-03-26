@@ -2,17 +2,22 @@ import { useState, useEffect } from 'react';
 import Lenis from 'lenis';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/sections/Hero';
-import About from '@/components/sections/About';
-import Skills from '@/components/sections/Skills';
-import Projects from '@/components/sections/Projects';
-import Experience from '@/components/sections/Experience';
-import Contact from '@/components/sections/Contact';
+import AboutPreview from '@/components/previews/AboutPreview';
+import SkillsPreview from '@/components/previews/SkillsPreview';
+import ProjectsPreview from '@/components/previews/ProjectsPreview';
+import ContactPreview from '@/components/previews/ContactPreview';
 import Footer from '@/components/sections/Footer';
 import LoadingScreen from '@/components/LoadingScreen';
 import ScrollProgress from '@/components/ScrollProgress';
 
 const Index = () => {
-  const [loaded, setLoaded] = useState(false);
+  const hasLoaded = sessionStorage.getItem('portfolio-loaded');
+  const [loaded, setLoaded] = useState(!!hasLoaded);
+
+  const handleLoadComplete = () => {
+    sessionStorage.setItem('portfolio-loaded', 'true');
+    setLoaded(true);
+  };
 
   useEffect(() => {
     if (!loaded) return;
@@ -39,18 +44,17 @@ const Index = () => {
 
   return (
     <>
-      {!loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
+      {!loaded && <LoadingScreen onComplete={handleLoadComplete} />}
       {loaded && (
         <>
           <ScrollProgress />
           <Navbar />
           <main>
             <Hero />
-            <About />
-            <Skills />
-            <Projects />
-            <Experience />
-            <Contact />
+            <AboutPreview />
+            <SkillsPreview />
+            <ProjectsPreview />
+            <ContactPreview />
           </main>
           <Footer />
         </>
