@@ -1,6 +1,10 @@
-import { useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { ArrowRight, ExternalLink, Github } from 'lucide-react';
+import assetRegistryPreview from '../../../ss/assetregistry.png';
+import merchantMitraPreview from '../../../ss/merchantmitra.png';
+import sweetBitesPreview from '../../../ss/sweetbites.png';
+import voiceForgePreview from '../../../ss/voiceforge.png';
 
 type Project = {
   id: number;
@@ -16,7 +20,11 @@ type Project = {
   previewAccent: string;
   github: string;
   live?: string;
+  embedPreview?: boolean;
 };
+
+const PREVIEW_SCALE = 0.45;
+const PREVIEW_TIMEOUT_MS = 8000;
 
 const projects: Project[] = [
   {
@@ -35,6 +43,7 @@ const projects: Project[] = [
     previewAccent: 'bg-emerald-500/85',
     github: 'https://github.com/anuraggdubey/Merchant-Mitra',
     live: 'https://merchant-mitra.vercel.app/',
+    embedPreview: true,
   },
   {
     id: 2,
@@ -51,6 +60,7 @@ const projects: Project[] = [
     previewTone: 'from-violet-200 via-fuchsia-100 to-purple-200 dark:from-violet-500/35 dark:via-fuchsia-500/20 dark:to-purple-500/35',
     previewAccent: 'bg-violet-500/85',
     github: 'https://github.com/anuraggdubey/voice-forge',
+    embedPreview: false,
   },
   {
     id: 3,
@@ -67,7 +77,8 @@ const projects: Project[] = [
     previewTone: 'from-amber-200 via-orange-100 to-rose-200 dark:from-amber-500/35 dark:via-orange-500/20 dark:to-rose-500/35',
     previewAccent: 'bg-orange-500/85',
     github: 'https://github.com/anuraggdubey/Sweet-Bites',
-    live: 'https://sweet-bites-ashy.vercel.app/'
+    live: 'https://sweet-bites-ashy.vercel.app/',
+    embedPreview: true,
   },
   {
     id: 4,
@@ -84,7 +95,8 @@ const projects: Project[] = [
     previewTone: 'from-sky-200 via-blue-100 to-indigo-200 dark:from-sky-500/35 dark:via-blue-500/20 dark:to-indigo-500/35',
     previewAccent: 'bg-sky-500/85',
     github: 'https://github.com/anuraggdubey/asset-registry',
-    live: 'https://register-asset.vercel.app/'
+    live: 'https://register-asset.vercel.app/',
+    embedPreview: true,
   },
   {
     id: 5,
@@ -102,6 +114,7 @@ const projects: Project[] = [
     previewAccent: 'bg-cyan-500/85',
     github: 'https://github.com/anuraggdubey/Agentro',
     live: 'https://agentro-ai.vercel.app/',
+    embedPreview: true,
   },
   {
     id: 6,
@@ -119,43 +132,153 @@ const projects: Project[] = [
     previewAccent: 'bg-purple-500/85',
     github: 'https://github.com/anuraggdubey/WorkingGent',
     live: 'https://workinggent.vercel.app/',
+    embedPreview: true,
   }
 ];
 
 const categories = ['All', 'Web App', 'AI', 'Web3', 'FinTech'];
 
+const buildFallbackPreview = (project: Project) => {
+  if (project.title === 'Merchant Mitra') {
+    return merchantMitraPreview;
+  }
+
+  if (project.title === 'Blockchain Asset Registry') {
+    return assetRegistryPreview;
+  }
+
+  if (project.title === 'Sweet Bites') {
+    return sweetBitesPreview;
+  }
+
+  if (project.title === 'Voice Forge') {
+    return voiceForgePreview;
+  }
+
+  const title = encodeURIComponent(project.title);
+  const subtitle = encodeURIComponent(project.previewSubtitle);
+  const status = encodeURIComponent(project.status);
+
+  return `data:image/svg+xml;charset=UTF-8,${`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020617"/>
+      <stop offset="55%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="20%" cy="15%" r="60%">
+      <stop offset="0%" stop-color="rgba(34,197,94,0.65)"/>
+      <stop offset="100%" stop-color="rgba(34,197,94,0)"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="82%" cy="18%" r="55%">
+      <stop offset="0%" stop-color="rgba(59,130,246,0.5)"/>
+      <stop offset="100%" stop-color="rgba(59,130,246,0)"/>
+    </radialGradient>
+    <linearGradient id="panel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.12)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.04)"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="760" rx="48" fill="url(#bg)"/>
+  <rect width="1200" height="760" rx="48" fill="url(#glowA)"/>
+  <rect width="1200" height="760" rx="48" fill="url(#glowB)"/>
+  <rect x="64" y="56" width="1072" height="648" rx="34" fill="rgba(15,23,42,0.88)" stroke="rgba(255,255,255,0.09)"/>
+  <rect x="64" y="56" width="1072" height="72" rx="34" fill="rgba(255,255,255,0.04)"/>
+  <circle cx="112" cy="92" r="10" fill="#fb7185"/>
+  <circle cx="144" cy="92" r="10" fill="#fbbf24"/>
+  <circle cx="176" cy="92" r="10" fill="#4ade80"/>
+  <rect x="234" y="76" width="516" height="32" rx="16" fill="rgba(255,255,255,0.08)"/>
+  <rect x="98" y="164" width="320" height="500" rx="28" fill="url(#panel)" stroke="rgba(255,255,255,0.08)"/>
+  <rect x="456" y="164" width="582" height="126" rx="28" fill="url(#panel)" stroke="rgba(255,255,255,0.08)"/>
+  <rect x="456" y="320" width="278" height="164" rx="24" fill="url(#panel)" stroke="rgba(255,255,255,0.08)"/>
+  <rect x="760" y="320" width="278" height="164" rx="24" fill="url(#panel)" stroke="rgba(255,255,255,0.08)"/>
+  <rect x="456" y="514" width="582" height="150" rx="24" fill="url(#panel)" stroke="rgba(255,255,255,0.08)"/>
+  <text x="120" y="234" fill="rgba(255,255,255,0.72)" font-family="Inter, Arial, sans-serif" font-size="26" letter-spacing="6">LIVE PREVIEW</text>
+  <text x="120" y="304" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="52" font-weight="700">${title}</text>
+  <text x="120" y="364" fill="rgba(226,232,240,0.82)" font-family="Inter, Arial, sans-serif" font-size="28">${subtitle}</text>
+  <rect x="120" y="420" width="180" height="18" rx="9" fill="rgba(16,185,129,0.88)"/>
+  <rect x="120" y="474" width="240" height="16" rx="8" fill="rgba(255,255,255,0.18)"/>
+  <rect x="120" y="508" width="188" height="16" rx="8" fill="rgba(255,255,255,0.12)"/>
+  <text x="480" y="226" fill="rgba(255,255,255,0.88)" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700">Deployed project</text>
+  <text x="480" y="262" fill="rgba(226,232,240,0.74)" font-family="Inter, Arial, sans-serif" font-size="22">${status}</text>
+  <rect x="480" y="560" width="220" height="18" rx="9" fill="rgba(255,255,255,0.16)"/>
+  <rect x="480" y="596" width="390" height="18" rx="9" fill="rgba(255,255,255,0.11)"/>
+  <rect x="480" y="632" width="310" height="18" rx="9" fill="rgba(255,255,255,0.11)"/>
+</svg>`}`;
+};
+
 const ProjectPreview = ({ project }: { project: Project }) => {
   const link = project.live || project.github;
+  const canEmbedLive = Boolean(project.live && project.embedPreview !== false);
+  const [showFallback, setShowFallback] = useState(!canEmbedLive);
+  const fallbackImage = useMemo(() => buildFallbackPreview(project), [project]);
+  const fallbackTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (fallbackTimerRef.current) {
+      window.clearTimeout(fallbackTimerRef.current);
+      fallbackTimerRef.current = null;
+    }
+
+    if (!canEmbedLive) {
+      setShowFallback(true);
+      return;
+    }
+
+    setShowFallback(false);
+
+    fallbackTimerRef.current = window.setTimeout(() => {
+      setShowFallback(true);
+    }, PREVIEW_TIMEOUT_MS);
+
+    return () => {
+      if (fallbackTimerRef.current) {
+        window.clearTimeout(fallbackTimerRef.current);
+        fallbackTimerRef.current = null;
+      }
+    };
+  }, [canEmbedLive]);
+
   return (
     <a
       href={link}
       target="_blank"
       rel="noopener noreferrer"
-      className="group/preview relative block h-[150px] overflow-hidden rounded-[14px] bg-white shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-transform duration-300 hover:-translate-y-1 sm:h-[175px] sm:rounded-[18px] dark:bg-slate-950"
+      className="group/preview relative block h-[180px] overflow-hidden rounded-[14px] border border-white/10 bg-[#020617] shadow-[0_10px_30px_rgba(15,23,42,0.18)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_45px_rgba(15,23,42,0.28)] sm:h-[210px] sm:rounded-[18px]"
     >
-      <div className={`absolute inset-0 bg-gradient-to-br ${project.previewTone}`} />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.95),transparent_40%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.08),transparent_40%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(148,163,184,0.14),transparent_35%)]" />
 
-      <div className="relative flex h-full flex-col justify-between p-3 sm:p-4">
-        <div className="flex items-center gap-2">
-          <span className="h-2.5 w-2.5 rounded-full bg-rose-300 dark:bg-rose-400/80" />
-          <span className="h-2.5 w-2.5 rounded-full bg-amber-300 dark:bg-amber-400/80" />
-          <span className="h-2.5 w-2.5 rounded-full bg-emerald-300 dark:bg-emerald-400/80" />
-        </div>
-
-        <div className="overflow-hidden rounded-[16px] border border-black/5 bg-white/80 p-3 shadow-[0_18px_35px_rgba(255,255,255,0.45)] backdrop-blur sm:p-4 dark:border-white/10 dark:bg-slate-950/75 dark:shadow-[0_18px_35px_rgba(15,23,42,0.35)]">
-          <p className="text-[10px] font-mono uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
-            {project.previewTitle}
-          </p>
-          <h3 className="mt-2 text-base font-semibold tracking-tight text-slate-900 sm:text-lg dark:text-white">
-            {project.title}
-          </h3>
-          <p className="mt-2 text-xs leading-6 text-slate-600 dark:text-slate-300">
-            {project.previewSubtitle}
-          </p>
-          <div className="mt-4 flex items-center gap-2">
-            <div className={`h-2.5 w-20 rounded-full ${project.previewAccent}`} />
-            <div className="h-2.5 w-12 rounded-full bg-black/10 dark:bg-white/10" />
+      <div className="relative h-full p-2.5 sm:p-3">
+        <div className="relative h-full overflow-hidden rounded-[12px] border border-white/10 bg-slate-950 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
+          <div
+            className="absolute left-0 top-0 h-[227.2728%] w-[227.2728%] origin-top-left [transform:scale(var(--preview-scale))] transition-transform duration-500 ease-out group-hover/preview:[transform:scale(0.46)]"
+            style={{ '--preview-scale': PREVIEW_SCALE } as CSSProperties}
+          >
+            {!showFallback && canEmbedLive && project.live ? (
+              <iframe
+                title={`${project.title} live preview`}
+                src={project.live}
+                loading="lazy"
+                className="h-full w-full border-0 pointer-events-none"
+                onLoad={() => {
+                  if (fallbackTimerRef.current) {
+                    window.clearTimeout(fallbackTimerRef.current);
+                    fallbackTimerRef.current = null;
+                  }
+                  setShowFallback(false);
+                }}
+                onError={() => setShowFallback(true)}
+                tabIndex={-1}
+              />
+            ) : (
+              <img
+                src={fallbackImage}
+                alt={`${project.title} static preview`}
+                className="h-full w-full object-cover"
+                loading="lazy"
+                draggable={false}
+              />
+            )}
           </div>
         </div>
       </div>
