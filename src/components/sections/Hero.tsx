@@ -23,40 +23,40 @@ const Hero = () => {
         transition={{ duration: 0.55 }}
         className="mx-auto w-full max-w-[560px]"
       >
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:gap-8">
+        <div className="flex items-start gap-4 sm:gap-5">
           <img
             src={mainPic}
             alt="Anurag Dubey"
-            className="h-30 w-30 rounded-[16px] object-cover shadow-[0_12px_36px_hsl(var(--foreground)/0.12)] sm:h-30 sm:w-28"
+            className="h-24 w-22 shrink-0 rounded-[16px] object-cover shadow-[0_12px_36px_hsl(var(--foreground)/0.12)] sm:h-32 sm:w-30"
             draggable={false}
           />
 
-          <div className="flex flex-wrap gap-2.5 sm:pb-1">
-            <a
-              href="https://drive.google.com/file/d/1hY62mOxSymGBSMIlieYwpjM5R99_RNgj/view?usp=drive_link"
-              target="_blank"
-              rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-[8px] border border-border bg-secondary/50 px-3 py-1.5 font-sans text-[13px] font-medium text-foreground transition-colors hover:bg-secondary"
-            >
-              Resume
-              <FileText className="h-3.5 w-3.5" />
-            </a>
-            <button
-              onClick={() => navigate('/contact')}
-              className="rounded-[2px] border border-foreground/75 bg-background px-3 py-1.5 font-sans text-[13px] font-medium text-foreground transition-colors hover:bg-foreground hover:text-background"
-            >
-              Say hello
-            </button>
-          </div>
-        </div>
+          <div className="min-w-0 pt-1 sm:pt-2">
+            <h1 className="font-sans text-[17px] font-semibold leading-6 tracking-normal text-foreground sm:text-[18px]">
+              Anurag Dubey
+            </h1>
+            <p className="mt-0.5 font-sans text-[15px] font-normal leading-6 text-muted-foreground">
+              20 y/o Web2 & Web3 Developer
+            </p>
 
-        <div className="mt-4">
-          <h1 className="font-sans text-[17px] font-semibold leading-6 tracking-normal text-foreground sm:text-[18px]">
-            Anurag Dubey
-          </h1>
-          <p className="mt-0.5 font-sans text-[15px] font-normal leading-6 text-muted-foreground">
-            20 y/o Web2 & Web3 Developer
-          </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <a
+                href="https://drive.google.com/file/d/1hY62mOxSymGBSMIlieYwpjM5R99_RNgj/view?usp=drive_link"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-[8px] border border-border bg-secondary/50 px-3 py-1.5 font-sans text-[13px] font-medium text-foreground transition-colors hover:bg-secondary"
+              >
+                Resume
+                <FileText className="h-3.5 w-3.5" />
+              </a>
+              <button
+                onClick={() => navigate('/contact')}
+                className="rounded-[8px] border border-foreground/75 bg-background px-3 py-1.5 font-sans text-[13px] font-medium text-foreground transition-colors hover:bg-foreground hover:text-background"
+              >
+                Say hello
+              </button>
+            </div>
+          </div>
         </div>
 
         <p className="mt-8 max-w-[520px] font-sans text-[15px] font-normal leading-7 tracking-normal text-muted-foreground sm:text-[15px] sm:leading-7">
