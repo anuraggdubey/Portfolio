@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { FileText, FolderGit2, Home, Mail, UserRound } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 
 const navLinks = [
-  { label: 'About', href: '/about' },
-  { label: 'Skills', href: '/skills' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'Say Hello', href: '/contact' },
+  { label: 'About', href: '/about', icon: UserRound },
+  { label: 'Projects', href: '/projects', icon: FolderGit2 },
+  { label: 'Skills', href: '/skills', icon: FileText },
+  { label: 'Reach', href: '/contact', icon: Mail },
 ];
 
 const Navbar = () => {
@@ -46,53 +47,43 @@ const Navbar = () => {
         initial={{ y: -40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="fixed inset-x-0 top-0 z-[900] px-3 pt-3 sm:px-4 sm:pt-4 md:px-6"
+        className="fixed inset-x-0 top-0 z-[900] px-3 pt-3 sm:px-4 sm:pt-5"
       >
         <div
-          className={`mx-auto flex max-w-7xl items-center justify-between rounded-full border px-3 py-2.5 transition-all duration-300 sm:px-4 sm:py-3 md:px-6 ${scrolled
-              ? 'glass-strong border-border/90'
-              : 'border-transparent bg-background/55 backdrop-blur-md'
+          className={`mx-auto flex w-fit items-center justify-center rounded-full border px-2 py-1.5 shadow-[0_18px_70px_hsl(var(--foreground)/0.08)] backdrop-blur-xl transition-all duration-300 sm:px-3 ${scrolled
+              ? 'border-border bg-background/88'
+              : 'border-border/80 bg-background/70'
             }`}
         >
-          <button onClick={goHome} className="flex items-center gap-3 text-left">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-foreground text-xs font-semibold text-background shadow-sm sm:h-10 sm:w-10 sm:text-sm">
-              AD
-            </div>
-            <div className="hidden sm:block">
-              <div className="text-sm font-semibold tracking-tight text-foreground">Anurag Dubey</div>
-              <div className="text-[11px] font-mono uppercase tracking-[0.22em] text-muted-foreground">
-                Web Dev
-              </div>
-            </div>
+          <button
+            onClick={goHome}
+            className={`flex h-9 w-9 items-center justify-center rounded-full text-foreground transition-colors hover:bg-secondary ${location.pathname === '/' ? 'bg-secondary' : ''}`}
+            aria-label="Home"
+          >
+            <Home className="h-4 w-4" />
           </button>
 
           <div className="hidden items-center gap-1 md:flex">
             {navLinks.map((link) => {
               const isActive = location.pathname === link.href;
+              const Icon = link.icon;
               return (
                 <button
                   key={link.label}
                   onClick={() => goTo(link.href)}
-                  className={`rounded-full px-4 py-2 text-sm transition-colors ${isActive
-                      ? 'bg-foreground text-background'
-                      : 'text-muted-foreground hover:text-foreground'
+                  className={`inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${isActive
+                      ? 'bg-secondary text-foreground'
+                      : 'text-muted-foreground hover:bg-secondary/70 hover:text-foreground'
                     }`}
                 >
+                  <Icon className="h-3.5 w-3.5" />
                   {link.label}
                 </button>
               );
             })}
 
-            <div className="mx-2 h-6 w-px bg-border" />
+            <div className="mx-1.5 h-6 w-px bg-border" />
             <ThemeToggle />
-            <a
-              href="https://drive.google.com/file/d/1hY62mOxSymGBSMIlieYwpjM5R99_RNgj/view?usp=drive_link"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ml-2 rounded-full bg-accent px-5 py-2 text-sm font-medium text-accent-foreground transition-transform duration-300 hover:-translate-y-0.5"
-            >
-              Resume
-            </a>
           </div>
 
           <div className="flex items-center gap-2 md:hidden">
@@ -119,7 +110,7 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-3 top-[76px] z-[899] rounded-[22px] border border-border glass-strong p-3 sm:inset-x-4 sm:top-[88px] sm:rounded-[28px] sm:p-4 md:hidden"
+            className="fixed inset-x-3 top-[70px] z-[899] rounded-[18px] border border-border bg-background/92 p-3 shadow-[0_24px_80px_hsl(var(--foreground)/0.14)] backdrop-blur-xl sm:inset-x-4 sm:top-[78px] md:hidden"
           >
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
@@ -131,14 +122,6 @@ const Navbar = () => {
                   {link.label}
                 </button>
               ))}
-              <a
-                href="https://drive.google.com/file/d/1hY62mOxSymGBSMIlieYwpjM5R99_RNgj/view?usp=drive_link"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-2 rounded-2xl bg-accent px-4 py-3 text-center text-sm font-medium text-accent-foreground"
-              >
-                View Resume
-              </a>
             </div>
           </motion.div>
         )}

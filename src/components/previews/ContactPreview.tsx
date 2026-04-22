@@ -16,16 +16,16 @@ const ContactPreview = () => {
   const navigate = useNavigate();
 
   return (
-    <section id="contact" className="section-padding relative overflow-hidden">
+    <section id="contact" className="section-padding relative overflow-hidden !py-6 sm:!py-8 md:!py-10">
       <div ref={ref} className="relative">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <div className="rounded-2xl border border-border/60 bg-card/50 p-5 text-center backdrop-blur sm:rounded-[28px] sm:p-10">
+          <div className="text-center">
             <div className="section-kicker justify-center">Say hello</div>
-            <h2 className="mt-4 text-xl font-semibold tracking-tight text-foreground sm:text-3xl md:text-4xl">
+            <h2 className="mt-3 font-sans text-[19px] font-semibold leading-7 tracking-normal text-foreground">
               Let&apos;s grab a virtual coffee ☕
             </h2>
             <p className="mx-auto mt-3 max-w-lg text-[13px] leading-7 text-muted-foreground sm:text-sm">
@@ -40,7 +40,7 @@ const ContactPreview = () => {
                   href={s.href}
                   target={s.href.startsWith('http') ? '_blank' : undefined}
                   rel={s.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="rounded-full border border-border bg-background/70 px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:border-accent/30"
+                  className="rounded-full border border-border bg-secondary/50 px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:border-accent/30"
                 >
                   {s.label}
                 </a>

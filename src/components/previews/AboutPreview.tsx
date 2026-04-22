@@ -11,13 +11,19 @@ const highlights = [
 
 const tools = ['React', 'Node.js', 'TypeScript', 'MongoDB', 'Firebase', 'Tailwind', 'Web3'];
 
+const stats = [
+  { value: '3+', label: 'Years' },
+  { value: '5+', label: 'Projects' },
+  { value: '5', label: 'Hackathons' },
+];
+
 const AboutPreview = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
   const navigate = useNavigate();
 
   return (
-    <section id="about" className="section-padding relative overflow-hidden">
+    <section id="about" className="section-padding relative overflow-hidden !py-6 sm:!py-8 md:!py-10">
       <div ref={ref} className="relative">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -26,19 +32,15 @@ const AboutPreview = () => {
         >
           <div className="section-kicker">About</div>
 
-          <div className="mt-5 grid gap-6 lg:grid-cols-[1fr_300px] lg:gap-8">
+          <div className="mt-5 grid gap-6 lg:grid-cols-[1fr_220px] lg:gap-8">
             <div>
-              <h2 className="text-xl font-semibold tracking-tight text-foreground sm:text-3xl md:text-4xl">
+              <h2 className="font-sans text-[19px] font-semibold leading-7 tracking-normal text-foreground">
                 Thoughtful execution, not just flashy visuals.
               </h2>
               <p className="mt-3 text-[13px] leading-7 text-muted-foreground sm:mt-4 sm:text-sm sm:leading-7">
-                I am Anurag Dubey — a full-stack developer building sharp, readable,
-                and dependable interfaces across payments, e-commerce, AI, and blockchain.
-                With 3+ years of learning and 5+ projects shipped, I focus on clean architecture
-                and polished product delivery.
+                I am Anurag Dubey, a 20 y/o Web2 & Web3 Dev 
               </p>
 
-              {/* Highlights */}
               <div className="mt-4 space-y-1.5">
                 {highlights.map((item) => (
                   <div key={item} className="flex items-start gap-2">
@@ -48,12 +50,11 @@ const AboutPreview = () => {
                 ))}
               </div>
 
-              {/* Tool tags */}
               <div className="mt-4 flex flex-wrap gap-1.5">
                 {tools.map((tool) => (
                   <span
                     key={tool}
-                    className="rounded-full border border-border bg-background/75 px-2.5 py-1 text-[10px] font-medium text-foreground/80 sm:text-[11px]"
+                    className="rounded-full border border-border bg-secondary/50 px-2.5 py-1 text-[10px] font-medium text-foreground/80 sm:text-[11px]"
                   >
                     {tool}
                   </span>
@@ -68,35 +69,17 @@ const AboutPreview = () => {
               </button>
             </div>
 
-            {/* Snapshot card */}
-            <div className="rounded-2xl border border-border/60 bg-card/50 p-4 backdrop-blur sm:self-start">
-              <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-foreground text-xs font-semibold text-background">
-                  AD
+            <div className="grid grid-cols-3 gap-3 py-2 lg:grid-cols-1 lg:py-0 lg:pl-4">
+              {stats.map((stat) => (
+                <div key={stat.label}>
+                  <p className="text-2xl font-semibold leading-none text-foreground">{stat.value}</p>
+                  <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{stat.label}</p>
                 </div>
-                <div>
-                  <h3 className="text-sm font-semibold text-foreground">Anurag Dubey</h3>
-                  <p className="text-[11px] text-muted-foreground">Full-stack · Frontend focus</p>
-                </div>
-              </div>
-              <div className="mt-3 flex gap-4 border-t border-border/50 pt-3">
-                <div className="text-center">
-                  <p className="text-sm font-semibold text-foreground">3+</p>
-                  <p className="text-[9px] text-muted-foreground">Years</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-sm font-semibold text-foreground">5+</p>
-                  <p className="text-[9px] text-muted-foreground">Projects</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-sm font-semibold text-foreground">5</p>
-                  <p className="text-[9px] text-muted-foreground">Hackathons</p>
-                </div>
-              </div>
+              ))}
               <a
                 href="https://drive.google.com/file/d/1hY62mOxSymGBSMIlieYwpjM5R99_RNgj/view?usp=drive_link"
                 download
-                className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-medium text-accent transition-all hover:gap-2.5 sm:text-xs"
+                className="col-span-3 inline-flex items-center gap-1.5 text-[11px] font-medium text-accent transition-all hover:gap-2.5 sm:text-xs lg:col-span-1"
               >
                 Download resume <ArrowRight className="h-3.5 w-3.5" />
               </a>

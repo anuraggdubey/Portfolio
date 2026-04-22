@@ -298,7 +298,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
       initial={{ opacity: 0, y: 24 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.05 }}
-      className="group relative overflow-hidden rounded-[18px] border border-border/80 bg-card/85 p-3 shadow-[0_16px_40px_hsl(var(--foreground)/0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:shadow-[0_24px_60px_hsl(var(--foreground)/0.10)] sm:rounded-[22px] md:rounded-[26px] md:p-5"
+      className="group relative overflow-hidden rounded-[8px] border border-dashed border-border/90 bg-card/85 p-3 shadow-[0_16px_40px_hsl(var(--foreground)/0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-[0_24px_60px_hsl(var(--foreground)/0.10)] md:p-5"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-white/65 via-transparent to-transparent dark:from-white/[0.03]" />
 
@@ -415,7 +415,6 @@ const Projects = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="section-shell-strong"
         >
           <div className="section-kicker">Projects</div>
           <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">

@@ -27,6 +27,14 @@ const topProjects = [
     tone: 'from-violet-200 via-fuchsia-100 to-purple-200 dark:from-violet-500/35 dark:via-fuchsia-500/20 dark:to-purple-500/35',
     github: 'https://github.com/anuraggdubey/voice-forge',
   },
+  {
+    title: 'WorkingGent',
+    description: 'Multi-agent AI workspace for automating development and research tasks.',
+    tech: ['TypeScript', 'AI Agents', 'OpenAI'],
+    tone: 'from-slate-200 via-zinc-100 to-emerald-100 dark:from-slate-500/30 dark:via-zinc-500/15 dark:to-emerald-500/25',
+    github: 'https://github.com/anuraggdubey/WorkingGent',
+    live: 'https://workinggent.vercel.app/',
+  },
 ];
 
 const ProjectsPreview = () => {
@@ -35,7 +43,7 @@ const ProjectsPreview = () => {
   const navigate = useNavigate();
 
   return (
-    <section id="projects" className="section-padding relative overflow-hidden">
+    <section id="projects" className="section-padding relative overflow-hidden !py-6 sm:!py-8 md:!py-10">
       <div ref={ref} className="relative">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -43,18 +51,15 @@ const ProjectsPreview = () => {
           transition={{ duration: 0.6 }}
         >
           <div className="section-kicker">Projects</div>
-          <h2 className="mt-4 text-xl font-semibold tracking-tight text-foreground sm:text-3xl md:text-4xl">
+          <h2 className="mt-3 font-sans text-[19px] font-semibold leading-7 tracking-normal text-foreground">
             Selected work
           </h2>
 
-          <div className="mt-5 grid gap-4 sm:mt-6 lg:grid-cols-3">
+          <div className="mt-5 grid gap-4 sm:mt-6 sm:grid-cols-2">
             {topProjects.map((project) => (
-              <a
+              <article
                 key={project.title}
-                href={project.live || project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group rounded-2xl border border-border/60 bg-card/50 backdrop-blur overflow-hidden transition-transform duration-300 hover:-translate-y-1"
+                className="group overflow-hidden rounded-[8px] border border-dashed border-border/90 bg-card/50 backdrop-blur transition-transform duration-300 hover:-translate-y-1 hover:border-accent/50"
               >
                 {/* Gradient preview */}
                 <div className={`relative h-[100px] bg-gradient-to-br ${project.tone} sm:h-[120px]`}>
@@ -68,7 +73,7 @@ const ProjectsPreview = () => {
                   </p>
                   <div className="mt-2.5 flex flex-wrap gap-1.5">
                     {project.tech.map((t) => (
-                      <span key={t} className="rounded-full bg-secondary px-2 py-0.5 text-[10px] text-muted-foreground">
+                      <span key={t} className="rounded-full border border-border/70 bg-secondary px-2 py-0.5 text-[10px] text-muted-foreground">
                         {t}
                       </span>
                     ))}
@@ -84,7 +89,7 @@ const ProjectsPreview = () => {
                     )}
                   </div>
                 </div>
-              </a>
+              </article>
             ))}
           </div>
 

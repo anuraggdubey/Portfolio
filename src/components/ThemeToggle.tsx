@@ -25,7 +25,7 @@ const ThemeToggle = () => {
   return (
     <button
       onClick={() => setTheme((current) => (current === 'dark' ? 'light' : 'dark'))}
-      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background/70 text-muted-foreground transition-colors hover:text-foreground"
+      className="inline-flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-secondary/70 hover:text-foreground"
       aria-label="Toggle theme"
     >
       {theme === 'dark' ? <SunMedium className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
