@@ -21,6 +21,7 @@ const AboutPreview = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
   const navigate = useNavigate();
+  const displayStyle = { fontFamily: "'Space Grotesk', var(--font-display)" };
 
   return (
     <section id="about" className="section-padding relative overflow-hidden !py-6 sm:!py-8 md:!py-10">
@@ -34,11 +35,15 @@ const AboutPreview = () => {
 
           <div className="mt-5 grid gap-6 lg:grid-cols-[1fr_220px] lg:gap-8">
             <div>
-              <h2 className="font-sans text-[19px] font-semibold leading-7 tracking-normal text-foreground">
-                Thoughtful execution, not just flashy visuals.
+              <h2
+                className="text-[18px] font-semibold leading-6 tracking-[-0.03em] text-foreground sm:text-[20px]"
+                style={displayStyle}
+              >
+                Hey, Anurag here.
               </h2>
               <p className="mt-3 text-[13px] leading-7 text-muted-foreground sm:mt-4 sm:text-sm sm:leading-7">
-                I am Anurag Dubey, a 20 y/o Web2 & Web3 Dev 
+                I am a Web2 & Web3 developer building sharp, readable,
+                and dependable interfaces spanning payments, AI, and blockchain.
               </p>
 
               <div className="mt-4 space-y-1.5">

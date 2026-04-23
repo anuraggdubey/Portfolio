@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { FileText, FolderGit2, Home, Mail, UserRound } from 'lucide-react';
+import { FolderGit2, Home, Mail, UserRound } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 
 const navLinks = [
   { label: 'About', href: '/about', icon: UserRound },
   { label: 'Projects', href: '/projects', icon: FolderGit2 },
-  { label: 'Skills', href: '/skills', icon: FileText },
   { label: 'Reach', href: '/contact', icon: Mail },
 ];
 

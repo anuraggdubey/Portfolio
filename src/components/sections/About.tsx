@@ -1,46 +1,40 @@
 import { useRef } from 'react';
-import CountUp from 'react-countup';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, BriefcaseBusiness, GraduationCap, Trophy } from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
-import { useInView as useCounterInView } from 'react-intersection-observer';
 
-const stats = [
-  { value: 3, suffix: '+', label: 'Years of learning' },
-  { value: 5, suffix: '+', label: 'Projects shipped' },
-  { value: 2, suffix: '+', label: 'Internships' },
-  { value: 10, suffix: '+', label: 'Technologies' },
-];
-
-const tools = [
-  'TypeScript', 'React', 'Node.js', 'Express', 'MongoDB',
-  'Firebase', 'Tailwind CSS', 'GitHub', 'Postman', 'Python',
-  'Supabase', 'AI tools',
-];
-
-const timeline = [
+const education = [
   {
-    year: '2023 – 2026',
-    role: 'B.Sc. Computer Science',
-    org: 'University Program',
-    desc: 'Studying CS fundamentals — programming, web development, networking, data structures, and emerging technologies.',
+    year: '2021 – 2023',
+    College: 'Thakur College of Arts, Science & Commerce',
+    Degree: 'PCM CS',
+    org: 'University Program 72%',
   },
   {
-    year: '2025',
+    year: '2023 – 2026',
+    College: 'Rizvi College of Arts, Science & Commerce',
+    Degree: 'Bachelors in Computer Science',
+    org: 'Mumbai University GPA: 9.1/10',
+  },
+];
+
+const experience = [
+  {
+    year: 'May 2025 - July 2025',
     role: 'Documentation Intern',
-    org: 'RumiCare Event',
-    desc: 'Supported documentation, event coordination, and digital materials for workshops and operational planning.',
+    org: 'RumiCare International Conference',
+    desc: 'Worked on research paper and Magzine documentation for the RumiCare International Conference, issued certificates to the contributor, writers and creators.',
+  },
+  {
+    year: 'Feb 2026 – April 2026',
+    role: 'Open Source Blockchain Contributor',
+    org: 'Risein web3 Stellar org',
+    desc: 'Contributed on stellar ecosystem by building a web3 project and open source contribution to the stellar ecosystem.Earned more than 15k.',
   },
   {
     year: '2025 – Present',
     role: 'Full-stack & Blockchain Dev',
     org: 'Personal Development',
     desc: 'Building project-based experience across payments, e-commerce, AI experiments, and blockchain prototypes.',
-  },
-  {
-    year: 'Feb 2026 – Apr 2026',
-    role: 'Blockchain Contributor',
-    org: 'Rise In',
-    desc: 'Stellar Journey to Mastery program — building practical familiarity with asset issuance, trustlines, and secure transfer flows.',
   },
 ];
 
@@ -79,150 +73,267 @@ const hackathons = [
   },
   {
     title: 'Starknet Blitz',
-    venue: 'Online · Web3',
+    venue: 'Mumbai · Web3',
     duration: 'Web3 Hackathon',
     result: 'Participant',
     desc: 'Web3-focused hackathon exploring blockchain development on the Starknet ecosystem.',
     cert: null,
   },
+  {
+    title: 'OpenAi Codex Hackathon',
+    venue: 'Mumbai · Web3',
+    duration: '12hrs OpenAI Hackathon',
+    result: 'Participant',
+    desc: 'Built an Ai agent marketplace where user can create thier own agent and earn on the usage of the agents',
+    cert: null,
+  },
+  {
+    title: 'Unthink Hackathon',
+    venue: 'MH Saboo Siddik College Mumbai',
+    duration: '12 Hrs',
+    result: 'Participant',
+    desc: 'Participated in a 12-hour hackathon built an Desktop application NelAi solevs the context switching problem by running two things simultaneously on the desktop and providing a seamless experience to the user.',
+    cert: null,
+  },
 ];
+
+type EducationEntry = {
+  year: string;
+  College: string;
+  Degree: string;
+  org: string;
+};
+
+type ExperienceEntry = {
+  year: string;
+  role: string;
+  org: string;
+  desc: string;
+};
+
+type HackathonEntry = {
+  title: string;
+  venue: string;
+  duration: string;
+  result: string;
+  desc: string;
+  cert: string | null;
+};
+
+const itemMotion = {
+  initial: { opacity: 0, y: 12 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: '-40px' },
+  transition: { duration: 0.35 },
+};
+
+const displayStyle = { fontFamily: "'Space Grotesk', var(--font-display)" };
+
+const SectionTitle = ({
+  icon: Icon,
+  title,
+}: {
+  icon: typeof GraduationCap;
+  title: string;
+}) => (
+  <div className="flex items-center gap-1.5">
+    <h3
+      className="text-[19px] font-semibold leading-6 tracking-[-0.04em] text-foreground sm:text-[21px]"
+      style={displayStyle}
+    >
+      {title}
+    </h3>
+    <Icon className="h-4 w-4 text-foreground/72" />
+  </div>
+);
+
+const Marker = ({
+  label,
+  tone,
+}: {
+  label: string;
+  tone: 'education' | 'experience' | 'hackathon';
+}) => {
+  const toneClasses =
+    tone === 'education'
+      ? 'bg-[linear-gradient(135deg,hsl(var(--accent)/0.22),hsl(var(--accent2)/0.14))]'
+      : tone === 'experience'
+        ? 'bg-[linear-gradient(135deg,hsl(var(--accent2)/0.18),hsl(var(--accent)/0.12))]'
+        : 'bg-[linear-gradient(135deg,hsl(var(--accent)/0.30),hsl(var(--accent2)/0.18))]';
+
+  return (
+    <div className={`mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border/80 text-[10px] font-semibold text-foreground shadow-[0_6px_18px_hsl(var(--foreground)/0.08)] ${toneClasses}`}>
+      {label}
+    </div>
+  );
+};
+
+const EducationSection = ({ items }: { items: EducationEntry[] }) => (
+  <motion.section
+    initial={{ opacity: 0, y: 14 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: '-60px' }}
+    transition={{ duration: 0.4 }}
+    className="mt-12"
+  >
+    <SectionTitle icon={GraduationCap} title="Education" />
+    <div className="mt-5 space-y-5">
+      {items.map((item, index) => (
+        <motion.div
+          key={`${item.College}-${item.year}`}
+          {...itemMotion}
+          transition={{ duration: 0.35, delay: index * 0.04 }}
+          className="grid grid-cols-[40px_minmax(0,1fr)] gap-x-3"
+        >
+          <Marker label={index === 0 ? 'TC' : 'RC'} tone="education" />
+          <div className="min-w-0">
+            <div className="flex min-w-0 flex-col gap-0.5 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+              <div className="min-w-0">
+                <p
+                  className="text-[16px] font-semibold leading-6 tracking-[-0.03em] text-foreground"
+                  style={displayStyle}
+                >
+                  {item.College}
+                </p>
+                <p className="text-[14px] leading-6 text-muted-foreground">{item.Degree}</p>
+                <p className="text-[14px] leading-6 text-foreground/86">{item.org}</p>
+              </div>
+              <p className="shrink-0 pt-0.5 text-[14px] leading-6 text-muted-foreground sm:text-right">{item.year}</p>
+            </div>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  </motion.section>
+);
+
+const ExperienceSection = ({ items }: { items: ExperienceEntry[] }) => (
+  <motion.section
+    initial={{ opacity: 0, y: 14 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: '-60px' }}
+    transition={{ duration: 0.4 }}
+    className="mt-14"
+  >
+    <SectionTitle icon={BriefcaseBusiness} title="Experience" />
+    <div className="mt-5 space-y-6">
+      {items.map((item, index) => (
+        <motion.div
+          key={`${item.role}-${item.year}`}
+          {...itemMotion}
+          transition={{ duration: 0.35, delay: index * 0.04 }}
+          className="grid grid-cols-[40px_minmax(0,1fr)] gap-x-3"
+        >
+          <Marker label={item.role.slice(0, 2).toUpperCase()} tone="experience" />
+          <div className="min-w-0">
+            <div className="flex min-w-0 flex-col gap-0.5 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+              <div className="min-w-0">
+                <p
+                  className="text-[16px] font-semibold leading-6 tracking-[-0.03em] text-foreground"
+                  style={displayStyle}
+                >
+                  {item.role}
+                </p>
+                <p className="text-[14px] leading-6 text-muted-foreground">{item.org}</p>
+              </div>
+              <p className="shrink-0 pt-0.5 text-[14px] leading-6 text-muted-foreground sm:text-right">{item.year}</p>
+            </div>
+            <p className="mt-0.5 max-w-[58ch] text-[14px] leading-6 text-foreground/86">{item.desc}</p>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  </motion.section>
+);
+
+const HackathonsSection = ({ items }: { items: HackathonEntry[] }) => (
+  <motion.section
+    initial={{ opacity: 0, y: 14 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: '-60px' }}
+    transition={{ duration: 0.4 }}
+    className="mt-14"
+  >
+    <SectionTitle icon={Trophy} title="Hackathons" />
+    <div className="mt-5 space-y-6">
+      {items.map((item, index) => (
+        <motion.div
+          key={item.title}
+          {...itemMotion}
+          transition={{ duration: 0.35, delay: index * 0.04 }}
+          className="grid grid-cols-[40px_minmax(0,1fr)] gap-x-3"
+        >
+          <Marker label={item.title.slice(0, 2).toUpperCase()} tone="hackathon" />
+          <div className="min-w-0">
+            <div className="flex min-w-0 flex-col gap-0.5 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+              <div className="min-w-0">
+                <p
+                  className="text-[16px] font-semibold leading-6 tracking-[-0.03em] text-foreground"
+                  style={displayStyle}
+                >
+                  {item.title}
+                </p>
+                <p className="text-[14px] leading-6 text-muted-foreground">{item.venue}</p>
+              </div>
+              <p className="shrink-0 pt-0.5 text-[14px] leading-6 text-muted-foreground sm:text-right">{item.duration}</p>
+            </div>
+            <p className="mt-0.5 text-[14px] font-medium leading-6 text-foreground/92">{item.result}</p>
+            <p className="max-w-[60ch] text-[14px] leading-6 text-foreground/86">{item.desc}</p>
+            {item.cert && (
+              <a
+                href={item.cert}
+                download
+                className="group mt-1.5 inline-flex items-center gap-1.5 text-[13px] font-medium text-accent transition-all duration-300 hover:gap-2"
+              >
+                View certificate <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+              </a>
+            )}
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  </motion.section>
+);
 
 const About = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
-  const [counterRef, counterInView] = useCounterInView({ triggerOnce: true, threshold: 0.35 });
 
   return (
-    <section id="about" className="section-padding relative overflow-hidden">
-      <div className="hero-orb absolute right-0 top-0 h-72 w-72 rounded-full bg-accent/10" />
+    <section id="about" className="section-padding relative !max-w-[700px] !py-8 sm:!py-10 md:!py-12">
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 18 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.45 }}
+        className="relative"
+      >
+        <div className="section-kicker">About</div>
 
-      <div ref={ref} className="relative">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="section-kicker">About</div>
+        <div className="mt-4">
+          <h2
+            className="text-[18px] font-semibold leading-6 tracking-[-0.03em] text-foreground sm:text-[20px]"
+            style={displayStyle}
+          >
+            Hey, Anurag here.
+          </h2>
+          <p className="mt-2 max-w-[56ch] text-[15px] leading-7 text-muted-foreground">
+            I am a Web2 & Web3 developer building sharp, readable,
+            and dependable interfaces — spanning payments, AI, and blockchain. And making ideas into real, usable products is what I love doing.
+          </p>
+          <a
+            href="https://drive.google.com/file/d/1hY62mOxSymGBSMIlieYwpjM5R99_RNgj/view?usp=drive_link"
+            download
+            className="group mt-3 inline-flex items-center gap-1.5 text-[13px] font-medium text-accent transition-all duration-300 hover:gap-2"
+          >
+            Download resume <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+          </a>
+        </div>
 
-          {/* ─── Top: intro + snapshot ─── */}
-          <div className="mt-5 grid gap-6 sm:mt-6 lg:grid-cols-[1fr_320px] lg:gap-8">
-            <div>
-              <h2 className="text-xl font-semibold tracking-tight text-foreground sm:text-3xl md:text-4xl">
-                Thoughtful execution, not just flashy visuals.
-              </h2>
-              <p className="mt-3 text-[13px] leading-7 text-muted-foreground sm:mt-4 sm:text-sm sm:leading-7">
-                I am Anurag Dubey, a full-stack developer building sharp, readable,
-                and dependable interfaces — spanning payments, e-commerce, AI, and blockchain.
-              </p>
-
-              {/* Tool tags */}
-              <div className="mt-4 flex flex-wrap gap-1.5 sm:mt-5 sm:gap-2">
-                {tools.map((tool) => (
-                  <span
-                    key={tool}
-                    className="rounded-full border border-border bg-background/75 px-2.5 py-1 text-[10px] font-medium text-foreground/80 sm:px-3 sm:py-1.5 sm:text-[11px]"
-                  >
-                    {tool}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Snapshot card */}
-            <div className="rounded-2xl border border-border/60 bg-card/50 p-4 backdrop-blur sm:p-5">
-              <p className="text-[10px] font-mono uppercase tracking-[0.24em] text-muted-foreground sm:text-[11px]">
-                Snapshot
-              </p>
-              <div className="mt-3 flex items-center gap-3 sm:mt-4 sm:gap-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-foreground text-xs font-semibold text-background sm:h-12 sm:w-12 sm:text-sm">
-                  AD
-                </div>
-                <div>
-                  <h3 className="text-sm font-semibold text-foreground sm:text-base">Anurag Dubey</h3>
-                  <p className="text-[11px] text-muted-foreground sm:text-xs">Full-stack · Frontend focus</p>
-                </div>
-              </div>
-              <a
-                href="https://drive.google.com/file/d/1hY62mOxSymGBSMIlieYwpjM5R99_RNgj/view?usp=drive_link"
-                download
-                className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-medium text-accent transition-all hover:gap-2.5 sm:mt-4 sm:text-xs"
-              >
-                Download resume <ArrowRight className="h-3.5 w-3.5" />
-              </a>
-            </div>
-          </div>
-
-          {/* ─── Stats row ─── */}
-          <div ref={counterRef} className="mt-5 grid grid-cols-4 gap-2 sm:mt-6 sm:gap-3">
-            {stats.map((stat, index) => (
-              <div key={stat.label} className="rounded-xl border border-border/60 bg-card/50 p-3 text-center backdrop-blur sm:rounded-2xl sm:p-4 sm:text-left">
-                <div className="text-lg font-semibold text-foreground sm:text-2xl">
-                  {counterInView ? (
-                    <CountUp end={stat.value} duration={1.5} delay={index * 0.08} suffix={stat.suffix} />
-                  ) : (
-                    `0${stat.suffix}`
-                  )}
-                </div>
-                <div className="text-[9px] text-muted-foreground sm:mt-1 sm:text-xs">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* ─── Experience Timeline ─── */}
-          <div className="mt-6 sm:mt-8">
-            <p className="text-[10px] font-mono uppercase tracking-[0.24em] text-muted-foreground sm:text-[11px]">
-              Experience & Education
-            </p>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {timeline.map((item) => (
-                <div key={item.role} className="rounded-2xl border border-border/60 bg-card/50 p-4 backdrop-blur">
-                  <p className="text-[10px] font-mono text-accent sm:text-[11px]">{item.year}</p>
-                  <p className="mt-1 text-sm font-semibold text-foreground">{item.role}</p>
-                  <p className="text-[11px] text-muted-foreground">{item.org}</p>
-                  <p className="mt-2 text-[11px] leading-relaxed text-muted-foreground/80 sm:text-xs sm:leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* ─── Hackathons ─── */}
-          <div className="mt-6 sm:mt-8">
-            <p className="text-[10px] font-mono uppercase tracking-[0.24em] text-muted-foreground sm:text-[11px]">
-              Hackathons
-            </p>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {hackathons.map((h) => (
-                <div key={h.title} className="rounded-2xl border border-border/60 bg-card/50 p-4 backdrop-blur">
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
-                      <p className="text-sm font-semibold text-foreground">{h.title}</p>
-                      <p className="mt-0.5 text-[11px] text-muted-foreground">{h.venue}</p>
-                    </div>
-                    <span className="flex-shrink-0 rounded-full bg-accent/10 px-2 py-0.5 text-[10px] font-medium text-accent">
-                      {h.duration}
-                    </span>
-                  </div>
-                  <p className="mt-1.5 text-[10px] font-semibold text-foreground/80 sm:text-[11px]">{h.result}</p>
-                  <p className="mt-1.5 text-[11px] leading-relaxed text-muted-foreground/80 sm:text-xs sm:leading-relaxed">
-                    {h.desc}
-                  </p>
-                  {h.cert && (
-                    <a
-                      href={h.cert}
-                      download
-                      className="mt-2.5 inline-flex items-center gap-1.5 text-[10px] font-medium text-accent transition-all hover:gap-2 sm:text-[11px]"
-                    >
-                      View certificate <ArrowRight className="h-3 w-3" />
-                    </a>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-      </div>
+        <EducationSection items={education} />
+        <ExperienceSection items={experience} />
+        <HackathonsSection items={hackathons} />
+      </motion.div>
     </section>
   );
 };

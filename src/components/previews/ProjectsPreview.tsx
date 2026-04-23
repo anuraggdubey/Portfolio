@@ -2,38 +2,46 @@ import { useRef } from 'react';
 import { ArrowRight, Github, ExternalLink } from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import merchantMitraPreview from '../../../ss/merchantmitra.png';
+import workinggentPreview from '../../../ss/workinggent.png';
+import voiceForgePreview from '../../../ss/voiceforge.png';
+import sweetBitesPreview from '../../../ss/sweetbites.png';
 
 const topProjects = [
   {
+    title: 'WorkingGent',
+    description:
+      'AI-powered multi-agent platform for automating development, research, and workflow tasks.',
+    tech: ['TypeScript', 'AI Agents', 'OpenAI'],
+    image: workinggentPreview,
+    github: 'https://github.com/anuraggdubey/WorkingGent',
+    live: 'https://workinggent.vercel.app/',
+  },
+  {
     title: 'Merchant Mitra',
-    description: 'Smart merchant dashboard for tracking UPI payments and daily activity.',
+    description:
+      'Smart merchant dashboard for tracking UPI payments, daily activity, and financial insights.',
     tech: ['React', 'Node.js', 'Firebase'],
-    tone: 'from-emerald-200 via-teal-100 to-cyan-200 dark:from-emerald-500/35 dark:via-teal-500/20 dark:to-cyan-500/35',
+    image: merchantMitraPreview,
     github: 'https://github.com/anuraggdubey/Merchant-Mitra',
     live: 'https://merchant-mitra.vercel.app/',
   },
   {
-    title: 'Agentro',
-    description: 'Trend analytics platform combining AI summaries with live signals.',
-    tech: ['Node.js', 'OpenAI', 'Google Trends'],
-    tone: 'from-cyan-200 via-slate-100 to-blue-200 dark:from-cyan-500/35 dark:via-slate-500/20 dark:to-blue-500/35',
-    github: 'https://github.com/anuraggdubey/Agentro',
-    live: 'https://agentro-ai.vercel.app/',
-  },
-  {
     title: 'Voice Forge',
-    description: 'AI voice cloning and synthetic audio detection experiments.',
+    description:
+      'AI voice cloning and synthetic audio detection research project.',
     tech: ['Python', 'TensorFlow', 'Flask'],
-    tone: 'from-violet-200 via-fuchsia-100 to-purple-200 dark:from-violet-500/35 dark:via-fuchsia-500/20 dark:to-purple-500/35',
+    image: voiceForgePreview,
     github: 'https://github.com/anuraggdubey/voice-forge',
   },
   {
-    title: 'WorkingGent',
-    description: 'Multi-agent AI workspace for automating development and research tasks.',
-    tech: ['TypeScript', 'AI Agents', 'OpenAI'],
-    tone: 'from-slate-200 via-zinc-100 to-emerald-100 dark:from-slate-500/30 dark:via-zinc-500/15 dark:to-emerald-500/25',
-    github: 'https://github.com/anuraggdubey/WorkingGent',
-    live: 'https://workinggent.vercel.app/',
+    title: 'Sweet Bites',
+    description:
+      'E-commerce platform for a dessert brand with catalog browsing and order management.',
+    tech: ['HTML', 'CSS', 'JavaScript', 'Node.js'],
+    image: sweetBitesPreview,
+    github: 'https://github.com/anuraggdubey/Sweet-Bites',
+    live: 'https://sweet-bites-ashy.vercel.app/',
   },
 ];
 
@@ -41,9 +49,15 @@ const ProjectsPreview = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
   const navigate = useNavigate();
+  const displayStyle = {
+    fontFamily: "'Space Grotesk', var(--font-display)",
+  };
 
   return (
-    <section id="projects" className="section-padding relative overflow-hidden !py-6 sm:!py-8 md:!py-10">
+    <section
+      id="projects"
+      className="section-padding relative overflow-hidden !py-6 sm:!py-8 md:!py-10"
+    >
       <div ref={ref} className="relative">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -51,45 +65,90 @@ const ProjectsPreview = () => {
           transition={{ duration: 0.6 }}
         >
           <div className="section-kicker">Projects</div>
-          <h2 className="mt-3 font-sans text-[19px] font-semibold leading-7 tracking-normal text-foreground">
-            Selected work
+          <h2
+            className="mt-3 text-[18px] font-semibold leading-6 tracking-[-0.03em] text-foreground sm:text-[20px]"
+            style={displayStyle}
+          >
+            Featured Projects
           </h2>
 
           <div className="mt-5 grid gap-4 sm:mt-6 sm:grid-cols-2">
-            {topProjects.map((project) => (
-              <article
+            {topProjects.map((project, i) => (
+              <motion.article
                 key={project.title}
-                className="group overflow-hidden rounded-[8px] border border-dashed border-border/90 bg-card/50 backdrop-blur transition-transform duration-300 hover:-translate-y-1 hover:border-accent/50"
+                initial={{ opacity: 0, y: 24 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="project-card group flex flex-col overflow-hidden rounded-2xl border border-border/70 bg-card/80 shadow-sm backdrop-blur-sm transition-all duration-400"
               >
-                {/* Gradient preview */}
-                <div className={`relative h-[100px] bg-gradient-to-br ${project.tone} sm:h-[120px]`}>
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.95),transparent_40%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.08),transparent_40%)]" />
-                </div>
+                {/* Image preview */}
+                <a
+                  href={project.live || project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative block aspect-[16/10] overflow-hidden bg-muted/30"
+                >
+                  {project.image ? (
+                    <img
+                      src={project.image}
+                      alt={`${project.title} preview`}
+                      className="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                      loading="lazy"
+                      draggable={false}
+                    />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-muted/50 via-secondary/30 to-muted/50">
+                      <Github className="h-10 w-10 text-muted-foreground/50" />
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                </a>
 
-                <div className="p-4">
-                  <h3 className="text-sm font-semibold text-foreground sm:text-base">{project.title}</h3>
-                  <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground sm:text-xs">
+                {/* Card body */}
+                <div className="flex flex-1 flex-col gap-2 p-4">
+                  <h3
+                    className="text-[15px] font-bold leading-snug tracking-tight text-foreground"
+                    style={displayStyle}
+                  >
+                    {project.title}
+                  </h3>
+                  <p className="text-[11px] leading-relaxed text-muted-foreground sm:text-xs">
                     {project.description}
                   </p>
-                  <div className="mt-2.5 flex flex-wrap gap-1.5">
+                  <div className="mt-auto flex flex-wrap gap-1.5 pt-1">
                     {project.tech.map((t) => (
-                      <span key={t} className="rounded-full border border-border/70 bg-secondary px-2 py-0.5 text-[10px] text-muted-foreground">
+                      <span
+                        key={t}
+                        className="rounded-full border border-border/60 bg-secondary/60 px-2 py-0.5 text-[10px] font-medium text-foreground/70"
+                      >
                         {t}
                       </span>
                     ))}
                   </div>
-                  <div className="mt-3 flex items-center gap-3">
-                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-muted-foreground transition-colors hover:text-foreground">
+                  <div className="mt-1 flex items-center gap-2 border-t border-border/50 pt-2.5">
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+                    >
                       <Github className="h-3.5 w-3.5" />
+                      Github
                     </a>
                     {project.live && (
-                      <a href={project.live} target="_blank" rel="noopener noreferrer" className="text-muted-foreground transition-colors hover:text-foreground">
-                        <ExternalLink className="h-3.5 w-3.5" />
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+                      >
+                        <ExternalLink className="h-3 w-3" />
+                        View
                       </a>
                     )}
                   </div>
                 </div>
-              </article>
+              </motion.article>
             ))}
           </div>
 
