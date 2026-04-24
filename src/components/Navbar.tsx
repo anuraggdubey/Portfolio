@@ -46,7 +46,7 @@ const Navbar = () => {
         initial={{ y: -40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="fixed inset-x-0 top-0 z-[900] px-3 pt-3 sm:px-4 sm:pt-5"
+        className="fixed inset-x-0 top-0 z-[900] flex justify-center px-3 pt-3 sm:px-4 sm:pt-4"
       >
         <div
           className={`mx-auto flex w-fit items-center justify-center rounded-full border px-2 py-1.5 shadow-[0_18px_70px_hsl(var(--foreground)/0.08)] backdrop-blur-xl transition-all duration-300 sm:px-3 ${scrolled
@@ -56,10 +56,10 @@ const Navbar = () => {
         >
           <button
             onClick={goHome}
-            className={`flex h-9 w-9 items-center justify-center rounded-full text-foreground transition-colors hover:bg-secondary ${location.pathname === '/' ? 'bg-secondary' : ''}`}
+            className={`flex h-8 w-8 items-center justify-center rounded-full text-foreground transition-colors hover:bg-secondary ${location.pathname === '/' ? 'bg-secondary' : ''}`}
             aria-label="Home"
           >
-            <Home className="h-4 w-4" />
+            <Home className="h-3.5 w-3.5" />
           </button>
 
           <div className="hidden items-center gap-1 md:flex">
@@ -70,12 +70,12 @@ const Navbar = () => {
                 <button
                   key={link.label}
                   onClick={() => goTo(link.href)}
-                  className={`inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${isActive
+                  className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${isActive
                       ? 'bg-secondary text-foreground'
                       : 'text-muted-foreground hover:bg-secondary/70 hover:text-foreground'
                     }`}
                 >
-                  <Icon className="h-3.5 w-3.5" />
+                  <Icon className="h-3 w-3" />
                   {link.label}
                 </button>
               );
@@ -116,7 +116,7 @@ const Navbar = () => {
                 <button
                   key={link.label}
                   onClick={() => goTo(link.href)}
-                  className={`rounded-xl px-4 py-3 text-left text-sm transition-colors ${location.pathname === link.href ? 'bg-secondary font-medium text-foreground' : 'text-foreground/75 hover:bg-secondary'}`}
+                  className={`rounded-xl px-3 py-2.5 text-left text-xs transition-colors ${location.pathname === link.href ? 'bg-secondary font-medium text-foreground' : 'text-foreground/75 hover:bg-secondary'}`}
                 >
                   {link.label}
                 </button>

@@ -7,7 +7,7 @@ const socials = [
   { icon: Linkedin, href: 'https://in.linkedin.com/in/anurag-dubey-407435349', label: 'LinkedIn', color: 'hover:text-[#0A66C2]' },
   { icon: Twitter, href: 'https://x.com/anuraggdubeyy', label: 'X / Twitter', color: 'hover:text-foreground' },
   { icon: Instagram, href: 'https://instagram.com/anuragdubeyyyy', label: 'Instagram', color: 'hover:text-[#E4405F]' },
-  { icon: Mail, href: 'mailto:dubeyanurag3925@gmail.com', label: 'Email', color: 'hover:text-accent' },
+  { icon: Mail, href: 'mailto:dubeyanurag3925@gmail.com', label: 'Email', color: 'hover:text-foreground' },
 ];
 
 const Contact = () => {
@@ -52,12 +52,12 @@ const Contact = () => {
   };
 
   const fieldBase =
-    'w-full rounded-xl border border-transparent bg-foreground/[0.04] px-3.5 py-2.5 text-[13px] text-foreground placeholder:text-muted-foreground/50 outline-none ring-1 ring-foreground/[0.06] transition-all duration-300 focus:bg-foreground/[0.06] focus:ring-accent/40 dark:bg-white/[0.04] dark:ring-white/[0.06] dark:focus:bg-white/[0.06] dark:focus:ring-accent/30';
+    'w-full rounded-xl border border-transparent bg-foreground/[0.04] px-3 py-2 text-[12px] text-foreground placeholder:text-muted-foreground/50 outline-none ring-1 ring-foreground/[0.06] transition-all duration-300 focus:bg-foreground/[0.06] focus:ring-foreground/20 dark:bg-white/[0.04] dark:ring-white/[0.06] dark:focus:bg-white/[0.06] dark:focus:ring-white/20';
 
   return (
-    <section id="contact" className="section-padding relative overflow-hidden !max-w-[680px]">
+    <section id="contact" className="section-padding relative overflow-hidden">
       {/* Subtle radial glow */}
-      <div className="pointer-events-none absolute -bottom-32 left-1/2 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-accent/8 blur-[100px]" />
+      <div className="pointer-events-none absolute -bottom-32 left-1/2 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-foreground/4 blur-[100px]" />
 
       <div ref={ref} className="relative">
         <motion.div
@@ -68,12 +68,12 @@ const Contact = () => {
           {/* Header */}
           <div className="section-kicker">Say hello</div>
           <h2
-            className="mt-3 text-[20px] font-bold leading-7 tracking-[-0.03em] text-foreground sm:text-[24px] sm:leading-8"
+            className="mt-2 text-[15px] font-bold leading-5 tracking-[-0.03em] text-foreground sm:text-[16px]"
             style={displayStyle}
           >
             Let's build something meaningful
           </h2>
-          <p className="mt-2 max-w-md text-[12px] leading-relaxed text-muted-foreground sm:text-[13px]">
+          <p className="mt-1.5 max-w-md text-[11px] leading-relaxed text-muted-foreground sm:text-[12px]">
             Got an idea, a collaboration, or just want to say hey — I'm all ears.
           </p>
         </motion.div>
@@ -127,7 +127,7 @@ const Contact = () => {
             <button
               type="submit"
               disabled={status === 'sending' || status === 'sent'}
-              className="group inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-2.5 text-[12px] font-semibold text-background shadow-[0_8px_24px_hsl(var(--foreground)/0.12)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_hsl(var(--foreground)/0.18)] disabled:opacity-50 sm:text-[13px]"
+              className="group inline-flex items-center gap-1.5 rounded-full bg-foreground px-5 py-2 text-[10px] font-semibold text-background shadow-[0_8px_24px_hsl(var(--foreground)/0.12)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_hsl(var(--foreground)/0.18)] disabled:opacity-50 sm:text-[11px]"
             >
               {status === 'idle' && (
                 <>
@@ -160,9 +160,9 @@ const Contact = () => {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={inView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ duration: 0.35, delay: 0.25 + i * 0.06 }}
-                  className={`group flex h-10 w-10 items-center justify-center rounded-xl bg-foreground/[0.04] ring-1 ring-foreground/[0.06] text-muted-foreground transition-all duration-300 hover:-translate-y-1 hover:bg-foreground/[0.08] hover:shadow-[0_6px_20px_hsl(var(--foreground)/0.08)] hover:ring-accent/25 dark:bg-white/[0.04] dark:ring-white/[0.06] dark:hover:bg-white/[0.08] ${s.color}`}
+                  className={`group flex h-8 w-8 items-center justify-center rounded-xl bg-foreground/[0.04] ring-1 ring-foreground/[0.06] text-muted-foreground transition-all duration-300 hover:-translate-y-1 hover:bg-foreground/[0.08] hover:shadow-[0_6px_20px_hsl(var(--foreground)/0.08)] hover:ring-accent/25 dark:bg-white/[0.04] dark:ring-white/[0.06] dark:hover:bg-white/[0.08] ${s.color}`}
                 >
-                  <Icon className="h-[18px] w-[18px] transition-transform duration-300 group-hover:scale-110" />
+                  <Icon className="h-[14px] w-[14px] transition-transform duration-300 group-hover:scale-110" />
                 </motion.a>
               );
             })}

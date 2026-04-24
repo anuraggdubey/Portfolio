@@ -138,12 +138,12 @@ const SectionTitle = ({
 }) => (
   <div className="flex items-center gap-1.5">
     <h3
-      className="text-[19px] font-semibold leading-6 tracking-[-0.04em] text-foreground sm:text-[21px]"
+      className="text-[15px] font-semibold leading-5 tracking-[-0.04em] text-foreground sm:text-[16px]"
       style={displayStyle}
     >
       {title}
     </h3>
-    <Icon className="h-4 w-4 text-foreground/72" />
+    <Icon className="h-3.5 w-3.5 text-foreground/72" />
   </div>
 );
 
@@ -162,7 +162,7 @@ const Marker = ({
         : 'bg-[linear-gradient(135deg,hsl(var(--accent)/0.30),hsl(var(--accent2)/0.18))]';
 
   return (
-    <div className={`mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border/80 text-[10px] font-semibold text-foreground shadow-[0_6px_18px_hsl(var(--foreground)/0.08)] ${toneClasses}`}>
+    <div className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border/80 text-[9px] font-semibold text-foreground shadow-[0_4px_12px_hsl(var(--foreground)/0.06)] ${toneClasses}`}>
       {label}
     </div>
   );
@@ -183,22 +183,22 @@ const EducationSection = ({ items }: { items: EducationEntry[] }) => (
           key={`${item.College}-${item.year}`}
           {...itemMotion}
           transition={{ duration: 0.35, delay: index * 0.04 }}
-          className="grid grid-cols-[40px_minmax(0,1fr)] gap-x-3"
+          className="grid grid-cols-[32px_minmax(0,1fr)] gap-x-2.5"
         >
           <Marker label={index === 0 ? 'TC' : 'RC'} tone="education" />
           <div className="min-w-0">
             <div className="flex min-w-0 flex-col gap-0.5 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
               <div className="min-w-0">
                 <p
-                  className="text-[16px] font-semibold leading-6 tracking-[-0.03em] text-foreground"
+                  className="text-[13px] font-semibold leading-5 tracking-[-0.03em] text-foreground"
                   style={displayStyle}
                 >
                   {item.College}
                 </p>
-                <p className="text-[14px] leading-6 text-muted-foreground">{item.Degree}</p>
-                <p className="text-[14px] leading-6 text-foreground/86">{item.org}</p>
+                <p className="text-[12px] leading-5 text-muted-foreground">{item.Degree}</p>
+                <p className="text-[12px] leading-5 text-foreground/86">{item.org}</p>
               </div>
-              <p className="shrink-0 pt-0.5 text-[14px] leading-6 text-muted-foreground sm:text-right">{item.year}</p>
+              <p className="shrink-0 pt-0.5 text-[12px] leading-5 text-muted-foreground sm:text-right">{item.year}</p>
             </div>
           </div>
         </motion.div>
@@ -222,7 +222,7 @@ const ExperienceSection = ({ items }: { items: ExperienceEntry[] }) => (
           key={`${item.role}-${item.year}`}
           {...itemMotion}
           transition={{ duration: 0.35, delay: index * 0.04 }}
-          className="grid grid-cols-[40px_minmax(0,1fr)] gap-x-3"
+          className="grid grid-cols-[32px_minmax(0,1fr)] gap-x-2.5"
         >
           <Marker label={item.role.slice(0, 2).toUpperCase()} tone="experience" />
           <div className="min-w-0">
@@ -234,11 +234,11 @@ const ExperienceSection = ({ items }: { items: ExperienceEntry[] }) => (
                 >
                   {item.role}
                 </p>
-                <p className="text-[14px] leading-6 text-muted-foreground">{item.org}</p>
+                <p className="text-[12px] leading-5 text-muted-foreground">{item.org}</p>
               </div>
-              <p className="shrink-0 pt-0.5 text-[14px] leading-6 text-muted-foreground sm:text-right">{item.year}</p>
+              <p className="shrink-0 pt-0.5 text-[12px] leading-5 text-muted-foreground sm:text-right">{item.year}</p>
             </div>
-            <p className="mt-0.5 max-w-[58ch] text-[14px] leading-6 text-foreground/86">{item.desc}</p>
+            <p className="mt-0.5 max-w-[58ch] text-justify text-[12px] leading-5 text-foreground/86">{item.desc}</p>
           </div>
         </motion.div>
       ))}
@@ -261,7 +261,7 @@ const HackathonsSection = ({ items }: { items: HackathonEntry[] }) => (
           key={item.title}
           {...itemMotion}
           transition={{ duration: 0.35, delay: index * 0.04 }}
-          className="grid grid-cols-[40px_minmax(0,1fr)] gap-x-3"
+          className="grid grid-cols-[32px_minmax(0,1fr)] gap-x-2.5"
         >
           <Marker label={item.title.slice(0, 2).toUpperCase()} tone="hackathon" />
           <div className="min-w-0">
@@ -273,17 +273,17 @@ const HackathonsSection = ({ items }: { items: HackathonEntry[] }) => (
                 >
                   {item.title}
                 </p>
-                <p className="text-[14px] leading-6 text-muted-foreground">{item.venue}</p>
+                <p className="text-[12px] leading-5 text-muted-foreground">{item.venue}</p>
               </div>
-              <p className="shrink-0 pt-0.5 text-[14px] leading-6 text-muted-foreground sm:text-right">{item.duration}</p>
+              <p className="shrink-0 pt-0.5 text-[12px] leading-5 text-muted-foreground sm:text-right">{item.duration}</p>
             </div>
-            <p className="mt-0.5 text-[14px] font-medium leading-6 text-foreground/92">{item.result}</p>
-            <p className="max-w-[60ch] text-[14px] leading-6 text-foreground/86">{item.desc}</p>
+            <p className="mt-0.5 text-[12px] font-medium leading-5 text-foreground/92">{item.result}</p>
+            <p className="max-w-[60ch] text-justify text-[12px] leading-5 text-foreground/86">{item.desc}</p>
             {item.cert && (
               <a
                 href={item.cert}
                 download
-                className="group mt-1.5 inline-flex items-center gap-1.5 text-[13px] font-medium text-accent transition-all duration-300 hover:gap-2"
+                className="group mt-1.5 inline-flex items-center gap-1 text-[11px] font-medium text-foreground/70 underline decoration-border underline-offset-[3px] transition-all duration-300 hover:gap-1.5 hover:text-foreground"
               >
                 View certificate <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
               </a>
@@ -300,7 +300,7 @@ const About = () => {
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="about" className="section-padding relative !max-w-[700px] !py-8 sm:!py-10 md:!py-12">
+    <section id="about" className="section-padding relative !py-8 sm:!py-10 md:!py-12">
       <motion.div
         ref={ref}
         initial={{ opacity: 0, y: 18 }}
@@ -312,19 +312,20 @@ const About = () => {
 
         <div className="mt-4">
           <h2
-            className="text-[18px] font-semibold leading-6 tracking-[-0.03em] text-foreground sm:text-[20px]"
+            className="text-[15px] font-semibold leading-5 tracking-[-0.03em] text-foreground sm:text-[16px]"
             style={displayStyle}
           >
             Hey, Anurag here.
           </h2>
-          <p className="mt-2 max-w-[56ch] text-[15px] leading-7 text-muted-foreground">
+          <p className="mt-2 text-justify text-[12px] leading-[1.7] text-muted-foreground sm:text-[13px]">
             I am a Web2 & Web3 developer building sharp, readable,
             and dependable interfaces — spanning payments, AI, and blockchain. And making ideas into real, usable products is what I love doing.
+            When I am not building, I am watching stuffs or playing sports. Currently just contributing in tech and open source work. If you wanna talk bout work nd other stuff let's get in touch.
           </p>
           <a
             href="https://drive.google.com/file/d/1hY62mOxSymGBSMIlieYwpjM5R99_RNgj/view?usp=drive_link"
             download
-            className="group mt-3 inline-flex items-center gap-1.5 text-[13px] font-medium text-accent transition-all duration-300 hover:gap-2"
+            className="group mt-3 inline-flex items-center gap-1 text-[11px] font-medium text-foreground/70 underline decoration-border underline-offset-[3px] transition-all duration-300 hover:gap-1.5 hover:text-foreground"
           >
             Download resume <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
           </a>

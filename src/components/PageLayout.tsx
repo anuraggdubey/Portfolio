@@ -43,7 +43,7 @@ const PageLayout = ({ children }: { children: ReactNode }) => {
         <div className="section-padding !py-0 !pt-20 sm:!pt-24">
           <button
             onClick={() => navigate('/')}
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-3.5 py-2 text-xs font-medium text-muted-foreground backdrop-blur transition-colors hover:border-accent/30 hover:text-foreground sm:px-4 sm:text-sm"
+            className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/70 px-3 py-1.5 text-[10px] font-medium text-muted-foreground backdrop-blur transition-colors hover:border-foreground/20 hover:text-foreground sm:text-[11px]"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             Back to home

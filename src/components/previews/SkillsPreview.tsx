@@ -82,7 +82,7 @@ const Tooltip = ({ text, children }: { text: string; children: React.ReactNode }
         <motion.div
           initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
-          className="absolute -top-9 left-1/2 z-50 -translate-x-1/2 whitespace-nowrap rounded-lg bg-foreground px-2.5 py-1 text-[10px] font-medium text-background shadow-lg"
+          className="absolute -top-9 left-1/2 z-50 -translate-x-1/2 whitespace-nowrap rounded-lg bg-foreground px-2 py-0.5 text-[9px] font-medium text-background shadow-lg"
         >
           {text}
           <div className="absolute -bottom-1 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 bg-foreground" />
@@ -101,13 +101,13 @@ const FeaturedCard = ({ tech, i }: { tech: Tech; i: number }) => (
     transition={{ duration: 0.4, delay: i * 0.05 }}
   >
     <Tooltip text={tech.tip}>
-      <div className="group flex items-center gap-2 rounded-lg bg-foreground/[0.04] px-2.5 py-1.5 ring-1 ring-foreground/[0.06] backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-foreground/[0.07] hover:shadow-[0_4px_16px_hsl(var(--foreground)/0.06)] hover:ring-accent/25 dark:bg-white/[0.04] dark:ring-white/[0.06] dark:hover:bg-white/[0.07] dark:hover:ring-accent/20">
+      <div className="group flex items-center gap-1.5 rounded-lg bg-foreground/[0.04] px-2 py-1 ring-1 ring-foreground/[0.06] backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-foreground/[0.07] hover:shadow-[0_4px_16px_hsl(var(--foreground)/0.06)] hover:ring-foreground/15 dark:bg-white/[0.04] dark:ring-white/[0.06] dark:hover:bg-white/[0.07] dark:hover:ring-white/15">
         <div className="transition-transform duration-300 group-hover:scale-110">
           {tech.icon}
         </div>
         <div className="min-w-0">
-          <span className="text-[11px] font-semibold tracking-tight text-foreground">{tech.name}</span>
-          <span className="ml-1.5 hidden text-[8px] font-medium uppercase tracking-widest text-accent/70 sm:inline">core</span>
+          <span className="text-[10px] font-semibold tracking-tight text-foreground">{tech.name}</span>
+          <span className="ml-1 hidden text-[7px] font-medium uppercase tracking-widest text-foreground/40 sm:inline">core</span>
         </div>
       </div>
     </Tooltip>
@@ -123,11 +123,11 @@ const StackItem = ({ tech, i }: { tech: Tech; i: number }) => (
     transition={{ duration: 0.3, delay: i * 0.03 }}
   >
     <Tooltip text={tech.tip}>
-      <div className="group flex items-center gap-1.5 rounded-lg bg-foreground/[0.025] px-2 py-1.5 ring-1 ring-foreground/[0.05] transition-all duration-300 hover:-translate-y-0.5 hover:bg-foreground/[0.05] hover:ring-accent/20 dark:bg-white/[0.025] dark:ring-white/[0.05] dark:hover:bg-white/[0.05] dark:hover:ring-accent/15">
+      <div className="group flex items-center gap-1 rounded-lg bg-foreground/[0.025] px-1.5 py-1 ring-1 ring-foreground/[0.05] transition-all duration-300 hover:-translate-y-0.5 hover:bg-foreground/[0.05] hover:ring-foreground/12 dark:bg-white/[0.025] dark:ring-white/[0.05] dark:hover:bg-white/[0.05] dark:hover:ring-white/12">
         <div className="transition-transform duration-300 group-hover:scale-110">
           {tech.icon}
         </div>
-        <span className="text-[10.5px] font-medium text-foreground/80">{tech.name}</span>
+        <span className="text-[9.5px] font-medium text-foreground/80">{tech.name}</span>
       </div>
     </Tooltip>
   </motion.div>
@@ -140,7 +140,7 @@ const SkillsPreview = () => {
   const displayStyle = { fontFamily: "'Space Grotesk', var(--font-display)" };
 
   return (
-    <section id="skills" className="section-padding relative overflow-hidden !py-6 sm:!py-8 md:!py-10">
+    <section id="skills" className="section-padding relative overflow-hidden !py-3 sm:!py-4 md:!py-5">
       {/* Subtle background texture */}
       <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.35]">
         <div className="absolute inset-0 bg-[radial-gradient(hsl(var(--foreground)/0.03)_1px,transparent_1px)] [background-size:20px_20px]" />
@@ -154,12 +154,12 @@ const SkillsPreview = () => {
         >
           <div className="section-kicker">Technologies</div>
           <h2
-            className="mt-2 text-[16px] font-bold leading-6 tracking-[-0.03em] text-foreground sm:text-[18px]"
+            className="mt-1.5 text-[14px] font-bold leading-5 tracking-[-0.03em] text-foreground sm:text-[15px]"
             style={displayStyle}
           >
             The toolkit
           </h2>
-          <p className="mt-1.5 text-[11px] leading-relaxed text-muted-foreground sm:text-[12px]">
+          <p className="mt-1 text-[10px] leading-relaxed text-muted-foreground sm:text-[11px]">
             Technologies I reach for when building — battle-tested across real projects.
           </p>
         </motion.div>
@@ -179,7 +179,7 @@ const SkillsPreview = () => {
               >
                 {/* Category label */}
                 <div className="mb-2 flex items-center gap-2">
-                  <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-muted-foreground/60">{cat.label}</span>
+                  <span className="text-[8px] font-semibold uppercase tracking-[0.18em] text-muted-foreground/60">{cat.label}</span>
                   <div className="h-px flex-1 bg-border/40" />
                 </div>
 

@@ -56,7 +56,7 @@ const ProjectsPreview = () => {
   return (
     <section
       id="projects"
-      className="section-padding relative overflow-hidden !py-6 sm:!py-8 md:!py-10"
+      className="section-padding relative overflow-hidden !py-3 sm:!py-4 md:!py-5"
     >
       <div ref={ref} className="relative">
         <motion.div
@@ -66,7 +66,7 @@ const ProjectsPreview = () => {
         >
           <div className="section-kicker">Projects</div>
           <h2
-            className="mt-3 text-[18px] font-semibold leading-6 tracking-[-0.03em] text-foreground sm:text-[20px]"
+            className="mt-2 text-[15px] font-semibold leading-5 tracking-[-0.03em] text-foreground sm:text-[16px]"
             style={displayStyle}
           >
             Featured Projects
@@ -107,19 +107,19 @@ const ProjectsPreview = () => {
                 {/* Card body */}
                 <div className="flex flex-1 flex-col gap-2 p-4">
                   <h3
-                    className="text-[15px] font-bold leading-snug tracking-tight text-foreground"
+                    className="text-[13px] font-bold leading-snug tracking-tight text-foreground"
                     style={displayStyle}
                   >
                     {project.title}
                   </h3>
-                  <p className="text-[11px] leading-relaxed text-muted-foreground sm:text-xs">
+                  <p className="text-[10px] leading-relaxed text-muted-foreground sm:text-[11px]">
                     {project.description}
                   </p>
                   <div className="mt-auto flex flex-wrap gap-1.5 pt-1">
                     {project.tech.map((t) => (
                       <span
                         key={t}
-                        className="rounded-full border border-border/60 bg-secondary/60 px-2 py-0.5 text-[10px] font-medium text-foreground/70"
+                        className="rounded-full border border-border/60 bg-secondary/60 px-1.5 py-0.5 text-[9px] font-medium text-foreground/70"
                       >
                         {t}
                       </span>
@@ -130,7 +130,7 @@ const ProjectsPreview = () => {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+                      className="inline-flex items-center gap-1 text-[10px] font-medium text-muted-foreground transition-colors hover:text-foreground"
                     >
                       <Github className="h-3.5 w-3.5" />
                       Github
@@ -140,7 +140,7 @@ const ProjectsPreview = () => {
                         href={project.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+                        className="inline-flex items-center gap-1 text-[10px] font-medium text-muted-foreground transition-colors hover:text-foreground"
                       >
                         <ExternalLink className="h-3 w-3" />
                         View
@@ -154,7 +154,7 @@ const ProjectsPreview = () => {
 
           <button
             onClick={() => navigate('/projects')}
-            className="mt-5 inline-flex items-center gap-2 text-xs font-medium text-accent transition-all hover:gap-3 sm:text-sm"
+            className="mt-4 inline-flex items-center gap-1.5 text-[10px] font-medium text-foreground/70 underline decoration-border underline-offset-[3px] transition-all hover:gap-2 hover:text-foreground sm:text-[11px]"
           >
             See all projects <ArrowRight className="h-4 w-4" />
           </button>

@@ -180,28 +180,28 @@ const ProjectCard = ({
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
         {/* Status badge — top right */}
-        <span className="absolute right-3 top-3 rounded-full bg-background/85 px-2.5 py-1 text-[10px] font-semibold tracking-wide text-foreground/80 shadow-sm backdrop-blur-sm sm:text-[11px]">
+        <span className="absolute right-2 top-2 rounded-full bg-background/85 px-2 py-0.5 text-[9px] font-semibold tracking-wide text-foreground/80 shadow-sm backdrop-blur-sm sm:text-[10px]">
           {project.status}
         </span>
       </a>
 
       {/* ─── Card Body ─── */}
-      <div className="flex flex-1 flex-col gap-3 p-4 sm:p-5">
+      <div className="flex flex-1 flex-col gap-2 p-3 sm:p-4">
         {/* Title row */}
         <div className="flex items-start justify-between gap-3">
           <h3
-            className="text-base font-bold leading-snug tracking-tight text-foreground sm:text-lg"
+            className="text-[13px] font-bold leading-snug tracking-tight text-foreground"
             style={displayStyle}
           >
             {project.title}
           </h3>
-          <span className="mt-0.5 shrink-0 whitespace-nowrap text-[11px] font-medium text-muted-foreground/70 sm:text-xs">
+          <span className="mt-0.5 shrink-0 whitespace-nowrap text-[10px] font-medium text-muted-foreground/70">
             {project.date}
           </span>
         </div>
 
         {/* Description */}
-        <p className="text-[12.5px] leading-relaxed text-muted-foreground sm:text-[13px] sm:leading-[1.7]">
+        <p className="text-[11px] leading-relaxed text-muted-foreground sm:text-[12px] sm:leading-[1.7]">
           {project.description}
         </p>
 
@@ -210,7 +210,7 @@ const ProjectCard = ({
           {project.tech.map((t) => (
             <span
               key={t}
-              className="rounded-full border border-border/60 bg-secondary/60 px-2.5 py-0.5 text-[10px] font-medium text-foreground/70 transition-colors duration-200 hover:border-accent/30 hover:text-foreground sm:text-[11px]"
+              className="rounded-full border border-border/60 bg-secondary/60 px-2 py-0.5 text-[9px] font-medium text-foreground/70 transition-colors duration-200 hover:border-foreground/15 hover:text-foreground sm:text-[10px]"
             >
               {t}
             </span>
@@ -223,7 +223,7 @@ const ProjectCard = ({
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-lg bg-foreground px-3.5 py-2 text-[11px] font-semibold text-background transition-all duration-200 hover:opacity-85 sm:text-xs"
+            className="inline-flex items-center gap-1 rounded-lg bg-foreground px-3 py-1.5 text-[10px] font-semibold text-background transition-all duration-200 hover:opacity-85 sm:text-[11px]"
           >
             <Github className="h-3.5 w-3.5" />
             Source
@@ -233,7 +233,7 @@ const ProjectCard = ({
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-border/70 bg-background/80 px-3.5 py-2 text-[11px] font-semibold text-foreground transition-all duration-200 hover:border-accent/40 hover:text-accent sm:text-xs"
+              className="inline-flex items-center gap-1 rounded-lg border border-border/70 bg-background/80 px-3 py-1.5 text-[10px] font-semibold text-foreground transition-all duration-200 hover:border-foreground/20 sm:text-[11px]"
             >
               <ExternalLink className="h-3.5 w-3.5" />
               Website
@@ -259,8 +259,8 @@ const Projects = () => {
       : projects.filter((p) => p.categories.includes(filter));
 
   return (
-    <section id="projects" className="section-padding relative overflow-hidden !max-w-[780px]">
-      <div className="hero-orb absolute right-0 top-16 h-80 w-80 rounded-full bg-accent/10" />
+    <section id="projects" className="section-padding relative overflow-hidden !max-w-[740px]">
+      <div className="hero-orb absolute right-0 top-16 h-80 w-80 rounded-full bg-foreground/5" />
 
       <div ref={ref} className="relative mx-auto max-w-7xl">
         <motion.div
@@ -273,17 +273,17 @@ const Projects = () => {
           <div className="mt-6 grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
             <div>
               <h2
-                className="text-[22px] font-bold leading-7 tracking-[-0.03em] text-foreground sm:text-[26px] sm:leading-8"
+                className="text-[15px] font-bold leading-5 tracking-[-0.03em] text-foreground sm:text-[16px]"
                 style={displayStyle}
               >
                 Featured Projects
               </h2>
-              <p className="mt-3 max-w-2xl text-[13px] leading-7 text-muted-foreground sm:mt-4 sm:text-sm sm:leading-7">
+              <p className="mt-2 max-w-2xl text-[11px] leading-6 text-muted-foreground sm:text-[12px]">
                 A collection of projects I've built — from AI-powered platforms
                 to blockchain registries and e-commerce experiences.
               </p>
             </div>
-            <div className="rounded-full border border-border bg-background/70 px-4 py-2 text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground">
+            <div className="rounded-full border border-border bg-background/70 px-3 py-1.5 text-[9px] font-mono uppercase tracking-[0.2em] text-muted-foreground">
               {filteredProjects.length} project{filteredProjects.length !== 1 && 's'}
             </div>
           </div>
@@ -294,11 +294,10 @@ const Projects = () => {
               <button
                 key={category}
                 onClick={() => setFilter(category)}
-                className={`rounded-full px-4 py-2 text-xs font-medium transition-all duration-300 sm:px-5 sm:py-2.5 ${
-                  filter === category
-                    ? 'bg-foreground text-background shadow-[0_14px_35px_hsl(var(--foreground)/0.16)]'
-                    : 'border border-border bg-background/70 text-muted-foreground hover:border-accent/30 hover:text-foreground'
-                }`}
+                className={`rounded-full px-3 py-1.5 text-[10px] font-medium transition-all duration-300 sm:px-4 sm:py-2 ${filter === category
+                  ? 'bg-foreground text-background shadow-sm'
+                  : 'border border-border bg-background/70 text-muted-foreground hover:border-foreground/20 hover:text-foreground'
+                  }`}
               >
                 {category}
               </button>
@@ -327,7 +326,7 @@ const Projects = () => {
               href="https://github.com/anuraggdubey"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-5 py-2.5 text-xs font-medium text-muted-foreground backdrop-blur transition-all duration-300 hover:border-accent/30 hover:gap-3 hover:text-foreground sm:px-6 sm:py-3 sm:text-sm"
+              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/70 px-4 py-2 text-[10px] font-medium text-muted-foreground backdrop-blur transition-all duration-300 hover:border-foreground/20 hover:gap-2 hover:text-foreground sm:px-5 sm:py-2.5 sm:text-[11px]"
             >
               <Github className="h-4 w-4" />
               All projects on GitHub

@@ -14,12 +14,12 @@ const Footer = () => {
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <div>
-              <p className="text-sm font-semibold text-foreground">Anurag Dubey</p>
-              <p className="mt-1 text-xs text-muted-foreground">
+              <p className="text-xs font-semibold text-foreground">Anurag Dubey</p>
+              <p className="mt-1 text-[10px] text-muted-foreground">
                 20y/o Web2 & Web3 Dev
               </p>
             </div>
-            <p className="mt-3 max-w-sm text-sm leading-6 text-muted-foreground">
+            <p className="mt-3 max-w-sm text-xs leading-5 text-muted-foreground">
             </p>
           </div>
 
@@ -31,13 +31,13 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full bg-secondary/60 px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+                  className="rounded-full bg-secondary/60 px-2.5 py-1 text-[10px] font-medium text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {social.label}
                 </a>
               ))}
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-[10px] text-muted-foreground">
               &copy; {currentYear} Anurag Dubey. All rights reserved.
             </p>
           </div>

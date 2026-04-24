@@ -82,7 +82,7 @@ const Experience = () => {
 
   return (
     <section id="experience" className="section-padding relative overflow-hidden">
-      <div className="hero-orb absolute left-[-4rem] top-20 h-72 w-72 rounded-full bg-accent/10" />
+      <div className="hero-orb absolute left-[-4rem] top-20 h-72 w-72 rounded-full bg-foreground/5" />
 
       <div ref={ref} className="relative mx-auto max-w-7xl">
         <motion.div
@@ -91,12 +91,12 @@ const Experience = () => {
           transition={{ duration: 0.6 }}
         >
           <div className="section-kicker">Experience</div>
-          <h2 className="mt-4 text-xl font-semibold tracking-tight text-foreground sm:mt-6 sm:text-3xl md:text-4xl lg:text-5xl">
+          <h2 className="mt-3 text-[15px] font-semibold tracking-tight text-foreground sm:text-[16px]">
             Education & work
           </h2>
 
           {/* Timeline — compact list on mobile, grid cards on lg */}
-          <div className="mt-5 sm:mt-10">
+          <div className="mt-4 sm:mt-6">
             {/* Mobile: minimal timeline list */}
             <div className="space-y-0 lg:hidden">
               {timelineItems.map((item, index) => (
@@ -108,18 +108,18 @@ const Experience = () => {
                   className="relative border-l-2 border-border py-4 pl-4 first:pt-0 last:pb-0"
                 >
                   {/* Timeline dot */}
-                  <div className="absolute -left-[5px] top-5 h-2 w-2 rounded-full bg-accent first:top-1" />
+                  <div className="absolute -left-[5px] top-5 h-2 w-2 rounded-full bg-foreground/40 first:top-1" />
 
                   <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground">
                     {item.year}
                   </p>
-                  <h3 className="mt-1 text-sm font-semibold text-foreground">{item.role}</h3>
-                  <span className="mt-0.5 inline-block text-xs text-muted-foreground">{item.company}</span>
+                  <h3 className="mt-1 text-[12px] font-semibold text-foreground">{item.role}</h3>
+                  <span className="mt-0.5 inline-block text-[11px] text-muted-foreground">{item.company}</span>
                   <div className="mt-2 flex flex-wrap gap-1.5">
                     {item.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-full bg-secondary px-2 py-0.5 text-[10px] font-medium text-foreground/70"
+                        className="rounded-full bg-secondary px-1.5 py-0.5 text-[9px] font-medium text-foreground/70"
                       >
                         {tag}
                       </span>
@@ -143,17 +143,17 @@ const Experience = () => {
                     {item.year}
                   </p>
                   <div className="mt-3 flex flex-wrap items-center gap-3">
-                    <h3 className="text-xl font-semibold text-foreground">{item.role}</h3>
-                    <span className="rounded-full bg-secondary px-3 py-1 text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
+                    <h3 className="text-[13px] font-semibold text-foreground">{item.role}</h3>
+                  <span className="rounded-full bg-secondary px-2.5 py-0.5 text-[9px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
                       {item.company}
                     </span>
                   </div>
-                  <p className="mt-4 text-sm leading-7 text-muted-foreground">{item.description}</p>
+                  <p className="mt-3 text-[12px] leading-6 text-muted-foreground">{item.description}</p>
                   <div className="mt-5 flex flex-wrap gap-2">
                     {item.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-full border border-border bg-background/75 px-3 py-1 text-[11px] text-foreground/75"
+                        className="rounded-full border border-border bg-background/75 px-2.5 py-0.5 text-[9px] text-foreground/75"
                       >
                         {tag}
                       </span>
@@ -166,7 +166,7 @@ const Experience = () => {
 
           {/* Hackathons */}
           <div className="mt-8 border-t border-border/80 pt-6 sm:mt-16 sm:pt-12">
-            <h3 className="text-lg font-semibold tracking-tight text-foreground sm:text-2xl md:text-3xl">
+            <h3 className="text-[14px] font-semibold tracking-tight text-foreground sm:text-[15px]">
               Hackathons
             </h3>
 
@@ -183,8 +183,8 @@ const Experience = () => {
                   <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground">
                     {hackathon.date}
                   </p>
-                  <h4 className="mt-1.5 text-sm font-semibold leading-snug text-foreground">{hackathon.title}</h4>
-                  <p className="mt-1 text-[11px] text-muted-foreground">{hackathon.organizer}</p>
+                  <h4 className="mt-1.5 text-[12px] font-semibold leading-snug text-foreground">{hackathon.title}</h4>
+                  <p className="mt-1 text-[10px] text-muted-foreground">{hackathon.organizer}</p>
                   <div className="mt-auto pt-3 flex items-center justify-between">
                     <div className="flex gap-1">
                       {hackathon.tags.slice(0, 2).map((tag) => (
@@ -199,7 +199,7 @@ const Experience = () => {
                     <a
                       href={hackathon.certificate}
                       download
-                      className="text-[11px] font-medium text-accent"
+                      className="text-[10px] font-medium text-foreground/60 underline decoration-border underline-offset-2"
                     >
                       Cert →
                     </a>
@@ -209,7 +209,7 @@ const Experience = () => {
             </div>
 
             {/* Desktop: grid cards */}
-            <p className="mt-3 hidden max-w-2xl text-base leading-8 text-muted-foreground sm:block">
+            <p className="mt-2 hidden max-w-2xl text-[12px] leading-6 text-muted-foreground sm:block">
               Fast-paced environments where I practiced collaboration, iteration, and shipping under pressure.
             </p>
             <div className="mt-8 hidden gap-6 sm:grid sm:grid-cols-2 xl:grid-cols-4">
@@ -224,8 +224,8 @@ const Experience = () => {
                   <p className="text-[11px] font-mono uppercase tracking-[0.22em] text-muted-foreground">
                     {hackathon.organizer} • {hackathon.date}
                   </p>
-                  <h4 className="mt-3 text-lg font-semibold text-foreground">{hackathon.title}</h4>
-                  <p className="mt-4 flex-grow text-sm leading-7 text-muted-foreground">{hackathon.description}</p>
+                  <h4 className="mt-2 text-[13px] font-semibold text-foreground">{hackathon.title}</h4>
+                  <p className="mt-3 flex-grow text-[12px] leading-6 text-muted-foreground">{hackathon.description}</p>
                   <div className="mt-5 flex flex-wrap gap-2">
                     {hackathon.tags.map((tag) => (
                       <span
@@ -239,7 +239,7 @@ const Experience = () => {
                   <a
                     href={hackathon.certificate}
                     download
-                    className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-accent transition-all duration-300 hover:gap-3 hover:opacity-85"
+                    className="mt-4 inline-flex items-center gap-1.5 text-[11px] font-medium text-foreground/70 underline decoration-border underline-offset-[3px] transition-all duration-300 hover:gap-2 hover:text-foreground"
                   >
                     View certificate
                     <ArrowRight className="h-4 w-4" />

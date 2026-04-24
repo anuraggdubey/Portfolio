@@ -53,7 +53,7 @@ const Skills = () => {
 
   return (
     <section id="skills" className="section-padding relative overflow-hidden">
-      <div className="hero-orb absolute bottom-0 left-0 h-72 w-72 rounded-full bg-accent2/10" />
+      <div className="hero-orb absolute bottom-0 left-0 h-72 w-72 rounded-full bg-foreground/5" />
 
       <div ref={ref} className="relative mx-auto max-w-7xl">
         <motion.div
