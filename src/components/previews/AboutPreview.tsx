@@ -60,7 +60,7 @@ const AboutPreview = () => {
             <span className="hidden h-4 w-px bg-border sm:block" />
 
             <a
-              href="https://drive.google.com/file/d/1hY62mOxSymGBSMIlieYwpjM5R99_RNgj/view?usp=drive_link"
+              href="https://drive.google.com/file/d/15vw1VwvLz4AZ2GKhmnv885zM9AQvhjRn/view?usp=drive_link"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 text-[11px] font-medium text-foreground/70 underline decoration-border underline-offset-[3px] transition-all hover:gap-1.5 hover:text-foreground sm:text-[12px]"

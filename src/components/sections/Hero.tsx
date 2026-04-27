@@ -42,7 +42,7 @@ const Hero = () => {
 
             <div className="mt-3 flex flex-wrap gap-2">
               <a
-                href="https://drive.google.com/file/d/1hY62mOxSymGBSMIlieYwpjM5R99_RNgj/view?usp=drive_link"
+                href="https://drive.google.com/file/d/15vw1VwvLz4AZ2GKhmnv885zM9AQvhjRn/view?usp=drive_link"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 rounded-[6px] border border-border bg-secondary/50 px-2.5 py-1 font-sans text-[11px] font-medium text-foreground transition-colors hover:bg-secondary"
