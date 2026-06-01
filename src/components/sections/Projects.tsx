@@ -6,7 +6,7 @@ import merchantMitraPreview from '../../../ss/merchantmitra.png';
 import sweetBitesPreview from '../../../ss/sweetbites.png';
 import voiceForgePreview from '../../../ss/voiceforge.png';
 import workinggentPreview from '../../../ss/workinggent.png';
-import agentroPreview from '../../../ss/agentro.png';
+import agentroPreview from '../../../ss/Agentro.png';
 import execraPreview from '../../../ss/execra.png';
 
 type Project = {
