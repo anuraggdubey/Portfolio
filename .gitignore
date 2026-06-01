@@ -1,0 +1,59 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+build/
+out/
+.next/
+.vercel/
+.netlify/
+
+# Coverage and test artifacts
+coverage/
+playwright-report/
+test-results/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Environment files and secrets
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.local
+
+# Lock files (keep only package-lock.json)
+bun.lock
+bun.lockb
+
+# Cache / temp files
+.cache/
+.parcel-cache/
+.turbo/
+.vite/
+tmp/
+temp/
+
+# Editor / OS files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Gemini
+.gemini/
