@@ -7,6 +7,7 @@ import Index from "./pages/Index.tsx";
 import AboutPage from "./pages/AboutPage.tsx";
 
 import ProjectsPage from "./pages/ProjectsPage.tsx";
+import ClicksPage from "./pages/ClicksPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/about" element={<AboutPage />} />
 
           <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/clicks" element={<ClicksPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

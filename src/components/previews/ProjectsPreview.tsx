@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { ArrowRight, Github, ExternalLink } from 'lucide-react';
+import { ArrowRight, FolderGit2, Github, ExternalLink } from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import merchantMitraPreview from '../../../ss/merchantmitra.png';
@@ -155,9 +155,11 @@ const ProjectsPreview = () => {
 
           <button
             onClick={() => navigate('/projects')}
-            className="mt-4 inline-flex items-center gap-1.5 text-[10px] font-medium text-foreground/70 underline decoration-border underline-offset-[3px] transition-all hover:gap-2 hover:text-foreground sm:text-[11px]"
+            className="group mt-6 inline-flex items-center gap-2 rounded-full border border-border/80 bg-card/80 px-4 py-2 text-[11px] font-medium text-foreground/80 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-foreground/20 hover:bg-foreground/[0.04] hover:text-foreground hover:shadow-md sm:px-5 sm:py-2.5 sm:text-[12px]"
           >
-            See all projects <ArrowRight className="h-4 w-4" />
+            <FolderGit2 className="h-3.5 w-3.5" />
+            See all projects
+            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
           </button>
         </motion.div>
       </div>

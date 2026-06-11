@@ -5,6 +5,7 @@ import Hero from '@/components/sections/Hero';
 import AboutPreview from '@/components/previews/AboutPreview';
 import SkillsPreview from '@/components/previews/SkillsPreview';
 import ProjectsPreview from '@/components/previews/ProjectsPreview';
+import ClicksPreview from '@/components/previews/ClicksPreview';
 import ContactPreview from '@/components/previews/ContactPreview';
 import Footer from '@/components/sections/Footer';
 import ScrollProgress from '@/components/ScrollProgress';
@@ -46,6 +47,7 @@ const Index = () => {
         <AboutPreview />
         <SkillsPreview />
         <ProjectsPreview />
+        <ClicksPreview />
         <ContactPreview />
       </main>
       <Footer />

@@ -14,6 +14,7 @@ out/
 coverage/
 playwright-report/
 test-results/
+blob-report/
 
 # Logs
 logs/
@@ -34,6 +35,8 @@ lerna-debug.log*
 # Lock files (keep only package-lock.json)
 bun.lock
 bun.lockb
+yarn.lock
+pnpm-lock.yaml
 
 # Cache / temp files
 .cache/
@@ -57,3 +60,4 @@ Thumbs.db
 
 # Gemini
 .gemini/
+

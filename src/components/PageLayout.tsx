@@ -40,7 +40,7 @@ const PageLayout = ({ children }: { children: ReactNode }) => {
       <Navbar />
       <main className="pt-4">
         {/* Back button */}
-        <div className="section-padding !py-0 !pt-20 sm:!pt-24">
+        <div className="section-padding !py-0 !pt-6 md:!pt-24">
           <button
             onClick={() => navigate('/')}
             className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/70 px-3 py-1.5 text-[10px] font-medium text-muted-foreground backdrop-blur transition-colors hover:border-foreground/20 hover:text-foreground sm:text-[11px]"

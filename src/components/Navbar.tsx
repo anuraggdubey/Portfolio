@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { FolderGit2, Home, Mail, UserRound } from 'lucide-react';
+import { FolderGit2, Home, Mail, UserRound, Camera } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 
 const navLinks = [
   { label: 'About', href: '/about', icon: UserRound },
   { label: 'Projects', href: '/projects', icon: FolderGit2 },
+  { label: 'Clicks', href: '/clicks', icon: Camera },
   { label: 'Reach', href: '/contact', icon: Mail },
 ];
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -22,14 +22,8 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [location.pathname]);
-
   const goTo = (href: string) => {
     navigate(href);
-    setMenuOpen(false);
   };
 
   const goHome = () => {
@@ -42,14 +36,17 @@ const Navbar = () => {
 
   return (
     <>
+      {/* ═══════════════════════════════════════════════════════
+          DESKTOP — top floating pill (visible md and above)
+         ═══════════════════════════════════════════════════════ */}
       <motion.nav
         initial={{ y: -40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="fixed inset-x-0 top-0 z-[900] flex justify-center px-3 pt-3 sm:px-4 sm:pt-4"
+        className="fixed inset-x-0 top-0 z-[900] hidden justify-center px-4 pt-4 md:flex"
       >
         <div
-          className={`mx-auto flex w-fit items-center justify-center rounded-full border px-2 py-1.5 shadow-[0_18px_70px_hsl(var(--foreground)/0.08)] backdrop-blur-xl transition-all duration-300 sm:px-3 ${scrolled
+          className={`mx-auto flex w-fit items-center justify-center rounded-full border px-3 py-1.5 shadow-[0_18px_70px_hsl(var(--foreground)/0.08)] backdrop-blur-xl transition-all duration-300 ${scrolled
               ? 'border-border bg-background/88'
               : 'border-border/80 bg-background/70'
             }`}
@@ -62,7 +59,7 @@ const Navbar = () => {
             <Home className="h-3.5 w-3.5" />
           </button>
 
-          <div className="hidden items-center gap-1 md:flex">
+          <div className="flex items-center gap-1">
             {navLinks.map((link) => {
               const isActive = location.pathname === link.href;
               const Icon = link.icon;
@@ -84,47 +81,64 @@ const Navbar = () => {
             <div className="mx-1.5 h-6 w-px bg-border" />
             <ThemeToggle />
           </div>
-
-          <div className="flex items-center gap-2 md:hidden">
-            <ThemeToggle />
-            <button
-              onClick={() => setMenuOpen((current) => !current)}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background/70"
-              aria-label="Toggle menu"
-            >
-              <div className="flex flex-col gap-1.5">
-                <span className={`h-px w-5 bg-foreground transition-transform ${menuOpen ? 'translate-y-[7px] rotate-45' : ''}`} />
-                <span className={`h-px w-5 bg-foreground transition-opacity ${menuOpen ? 'opacity-0' : 'opacity-100'}`} />
-                <span className={`h-px w-5 bg-foreground transition-transform ${menuOpen ? '-translate-y-[7px] -rotate-45' : ''}`} />
-              </div>
-            </button>
-          </div>
         </div>
       </motion.nav>
 
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-x-3 top-[70px] z-[899] rounded-[18px] border border-border bg-background/92 p-3 shadow-[0_24px_80px_hsl(var(--foreground)/0.14)] backdrop-blur-xl sm:inset-x-4 sm:top-[78px] md:hidden"
+      {/* ═══════════════════════════════════════════════════════
+          MOBILE — fixed bottom bar (visible below md)
+         ═══════════════════════════════════════════════════════ */}
+      <motion.nav
+        initial={{ y: 60, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="fixed inset-x-0 bottom-0 z-[900] flex justify-center px-3 pb-3 md:hidden"
+      >
+        <div
+          className={`mx-auto flex w-fit items-center gap-1 rounded-full border px-2 py-1.5 shadow-[0_-8px_40px_hsl(var(--foreground)/0.08)] backdrop-blur-xl transition-all duration-300 ${scrolled
+              ? 'border-border bg-background/92'
+              : 'border-border/80 bg-background/80'
+            }`}
+        >
+          {/* Home */}
+          <button
+            onClick={goHome}
+            className={`flex h-10 w-10 items-center justify-center rounded-full transition-all duration-200 ${
+              location.pathname === '/'
+                ? 'bg-foreground text-background shadow-sm'
+                : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
+            }`}
+            aria-label="Home"
           >
-            <div className="flex flex-col gap-2">
-              {navLinks.map((link) => (
-                <button
-                  key={link.label}
-                  onClick={() => goTo(link.href)}
-                  className={`rounded-xl px-3 py-2.5 text-left text-xs transition-colors ${location.pathname === link.href ? 'bg-secondary font-medium text-foreground' : 'text-foreground/75 hover:bg-secondary'}`}
-                >
-                  {link.label}
-                </button>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <Home className="h-[18px] w-[18px]" />
+          </button>
+
+          {/* Nav links */}
+          {navLinks.map((link) => {
+            const isActive = location.pathname === link.href;
+            const Icon = link.icon;
+            return (
+              <button
+                key={link.label}
+                onClick={() => goTo(link.href)}
+                className={`flex h-10 w-10 items-center justify-center rounded-full transition-all duration-200 ${
+                  isActive
+                    ? 'bg-foreground text-background shadow-sm'
+                    : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
+                }`}
+                aria-label={link.label}
+              >
+                <Icon className="h-[18px] w-[18px]" />
+              </button>
+            );
+          })}
+
+          {/* Divider */}
+          <div className="mx-0.5 h-6 w-px bg-border/60" />
+
+          {/* Theme toggle */}
+          <ThemeToggle />
+        </div>
+      </motion.nav>
     </>
   );
 };

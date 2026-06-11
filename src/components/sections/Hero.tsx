@@ -16,13 +16,13 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="section-padding relative overflow-hidden !pb-2 !pt-24 sm:!pb-3 sm:!pt-28"
+      className="section-padding relative overflow-hidden !pb-2 !pt-8 sm:!pb-3 md:!pt-28"
     >
       <motion.div
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.55 }}
-        className="mx-auto w-full max-w-[560px]"
+        className="mx-auto w-full"
       >
         <div className="flex items-start gap-4 sm:gap-5">
           <img
@@ -33,11 +33,11 @@ const Hero = () => {
           />
 
           <div className="min-w-0 pt-1 sm:pt-2">
-            <h1 className="font-sans text-[15px] font-semibold leading-5 tracking-normal text-foreground sm:text-[16px]">
+            <h1 className="font-sans text-[16px] font-semibold leading-5 tracking-normal text-foreground sm:text-[20px]">
               Anurag Dubey
             </h1>
-            <p className="mt-0.5 font-sans text-[13px] font-normal leading-5 text-muted-foreground">
-              20 y/o Web2 & Web3 Developer
+            <p className="mt-0.5 font-sans text-[16px] font-normal leading-5 text-muted-foreground">
+              20 y/o Full-stack Developer (Web2 & Web3)
             </p>
 
             <div className="mt-3 flex flex-wrap gap-2">
@@ -60,15 +60,14 @@ const Hero = () => {
           </div>
         </div>
 
-        <p className="mt-5 max-w-[520px] font-sans text-[13px] font-normal leading-6 tracking-normal text-muted-foreground">
-          Turning Web2 and Web3 ideas into products people
-          can actually use.
+        <p className="mt-5 font-sans text-[16px] font-normal leading-6 tracking-normal text-muted-foreground">
+          A guy into code & sports. Turning Web2 and Web3 ideas into products people can actually use.
         </p>
 
-        <div className="mt-2 flex items-center gap-1.5 font-sans text-[12px] text-muted-foreground">
+        <div className="mt-2 flex items-center gap-1.5 font-sans text-[16px] text-muted-foreground">
           <MapPin className="h-3.5 w-3.5" />
           Mumbai, India
-          <p className="px-2 py-1 font-sans text-[11px] font-medium text-muted-foreground">
+          <p className="px-2 py-1 font-sans text-[16px] font-medium text-muted-foreground">
             !! Open to work
           </p>
         </div>

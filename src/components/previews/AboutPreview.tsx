@@ -28,7 +28,7 @@ const AboutPreview = () => {
             Hey, Anurag here.
           </h2>
 
-          <p className="mt-2 max-w-[52ch] text-justify text-[12px] leading-[1.7] text-muted-foreground sm:text-[13px]">
+          <p className="mt-2 text-justify text-[16px] leading-[1.7] text-muted-foreground sm:text-[16px]">
             I am a Web2 & Web3 developer building sharp, readable,
             and dependable interfaces spanning payments, AI, and blockchain.
             When I am not building, I am watching stuffs or playing sports.
@@ -49,24 +49,24 @@ const AboutPreview = () => {
           </div>
 
           {/* Actions row */}
-          <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2">
+          <div className="mt-5 flex flex-wrap items-center gap-2.5">
             <button
               onClick={() => navigate('/about')}
-              className="inline-flex items-center gap-1.5 text-[11px] font-medium text-foreground/70 underline decoration-border underline-offset-[3px] transition-all hover:gap-2 hover:text-foreground sm:text-[12px]"
+              className="group inline-flex items-center gap-2 rounded-full border border-border/80 bg-card/80 px-4 py-2 text-[11px] font-medium text-foreground/80 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-foreground/20 hover:bg-foreground/[0.04] hover:text-foreground hover:shadow-md sm:px-5 sm:py-2.5 sm:text-[12px]"
             >
-              Full story & experience <ArrowRight className="h-3 w-3" />
+              Full story & experience
+              <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
             </button>
-
-            <span className="hidden h-4 w-px bg-border sm:block" />
 
             <a
               href="https://drive.google.com/file/d/12emRXwZbez4zWzC1H8bOGSAstlQ0TSyl/view?usp=drive_link"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-[11px] font-medium text-foreground/70 underline decoration-border underline-offset-[3px] transition-all hover:gap-1.5 hover:text-foreground sm:text-[12px]"
+              className="group inline-flex items-center gap-2 rounded-full border border-border/80 bg-card/80 px-4 py-2 text-[11px] font-medium text-foreground/80 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-foreground/20 hover:bg-foreground/[0.04] hover:text-foreground hover:shadow-md sm:px-5 sm:py-2.5 sm:text-[12px]"
             >
-              <FileText className="h-3 w-3" />
+              <FileText className="h-3.5 w-3.5" />
               Resume
+              <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
           </div>
         </motion.div>
