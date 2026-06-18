@@ -2,40 +2,46 @@ import { useRef } from 'react';
 import { ArrowRight, BriefcaseBusiness, GraduationCap, Trophy } from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
 
+import mumbaiUniImg from '../../../ss/mumbai uni.png';
+import rumiImg from '../../../ss/rumi.png';
+import stellarImg from '../../../ss/stellar.png';
+import codexImg from '../../../ss/codex.png';
+import starknetImg from '../../../ss/starknet.png';
+import gdgImg from '../../../ss/gdg.png';
+
+
 const education = [
   {
     year: '2021 – 2023',
     College: 'Thakur College of Arts, Science & Commerce',
     Degree: 'PCM CS',
     org: 'University Program 72%',
+    image: mumbaiUniImg,
   },
   {
     year: '2023 – 2026',
     College: 'Rizvi College of Arts, Science & Commerce',
     Degree: 'Bachelors in Computer Science',
     org: 'Mumbai University GPA: 9.1/10',
+    image: mumbaiUniImg,
   },
 ];
 
 const experience = [
   {
+    year: 'Feb 2026 – Present',
+    role: 'Open Source Contributor & Ambassador',
+    org: 'Stellar',
+    desc: 'Working on projects and contributing to the Stellar open source community.',
+    image: stellarImg,
+  },
+  {
     year: 'May 2025 - July 2025',
     role: 'Documentation Intern',
     org: 'RumiCare International Conference',
-    desc: 'Worked on research paper and Magzine documentation for the RumiCare International Conference, issued certificates to the contributor, writers and creators.',
-  },
-  {
-    year: 'Feb 2026 – April 2026',
-    role: 'Open Source Blockchain Contributor',
-    org: 'Risein web3 Stellar org',
-    desc: 'Contributed on stellar ecosystem by building a web3 project and open source contribution to the stellar ecosystem.Earned more than 15k.',
-  },
-  {
-    year: '2025 – Present',
-    role: 'Full-stack & Blockchain Dev',
-    org: 'Personal Development',
-    desc: 'Building project-based experience across payments, e-commerce, AI experiments, and blockchain prototypes.',
-  },
+    desc: 'Documentation for the RumiCare International Conference.',
+    image: rumiImg,
+  }
 ];
 
 const hackathons = [
@@ -62,6 +68,7 @@ const hackathons = [
     result: '🔥 Top 20 Finalist',
     desc: 'Reached top 20 out of hundreds of teams in a Google GDG-sponsored 24-hour AI hackathon.',
     cert: '/certificate/GDG Certificate.pdf',
+    image: gdgImg,
   },
   {
     title: 'HackFusion Hackathon',
@@ -78,6 +85,7 @@ const hackathons = [
     result: 'Participant',
     desc: 'Web3-focused hackathon exploring blockchain development on the Starknet ecosystem.',
     cert: null,
+    image: starknetImg,
   },
   {
     title: 'OpenAi Codex Hackathon',
@@ -86,6 +94,7 @@ const hackathons = [
     result: 'Participant',
     desc: 'Built an Ai agent marketplace where user can create thier own agent and earn on the usage of the agents',
     cert: null,
+    image: codexImg,
   },
   {
     title: 'Unthink Hackathon',
@@ -102,6 +111,7 @@ type EducationEntry = {
   College: string;
   Degree: string;
   org: string;
+  image?: string;
 };
 
 type ExperienceEntry = {
@@ -109,6 +119,7 @@ type ExperienceEntry = {
   role: string;
   org: string;
   desc: string;
+  image?: string;
 };
 
 type HackathonEntry = {
@@ -118,6 +129,7 @@ type HackathonEntry = {
   result: string;
   desc: string;
   cert: string | null;
+  image?: string;
 };
 
 const itemMotion = {
@@ -150,9 +162,11 @@ const SectionTitle = ({
 const Marker = ({
   label,
   tone,
+  image,
 }: {
   label: string;
   tone: 'education' | 'experience' | 'hackathon';
+  image?: string;
 }) => {
   const toneClasses =
     tone === 'education'
@@ -160,6 +174,14 @@ const Marker = ({
       : tone === 'experience'
         ? 'bg-[linear-gradient(135deg,hsl(var(--accent2)/0.18),hsl(var(--accent)/0.12))]'
         : 'bg-[linear-gradient(135deg,hsl(var(--accent)/0.30),hsl(var(--accent2)/0.18))]';
+
+  if (image) {
+    return (
+      <div className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border/80 bg-card p-[3px] shadow-[0_4px_12px_hsl(var(--foreground)/0.06)]`}>
+        <img src={image} alt={label} className="h-full w-full rounded-full object-contain" />
+      </div>
+    );
+  }
 
   return (
     <div className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border/80 text-[9px] font-semibold text-foreground shadow-[0_4px_12px_hsl(var(--foreground)/0.06)] ${toneClasses}`}>
@@ -185,7 +207,7 @@ const EducationSection = ({ items }: { items: EducationEntry[] }) => (
           transition={{ duration: 0.35, delay: index * 0.04 }}
           className="grid grid-cols-[32px_minmax(0,1fr)] gap-x-2.5"
         >
-          <Marker label={index === 0 ? 'TC' : 'RC'} tone="education" />
+          <Marker label={index === 0 ? 'TC' : 'RC'} tone="education" image={item.image} />
           <div className="min-w-0">
             <div className="flex min-w-0 flex-col gap-0.5 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
               <div className="min-w-0">
@@ -224,7 +246,7 @@ const ExperienceSection = ({ items }: { items: ExperienceEntry[] }) => (
           transition={{ duration: 0.35, delay: index * 0.04 }}
           className="grid grid-cols-[32px_minmax(0,1fr)] gap-x-2.5"
         >
-          <Marker label={item.role.slice(0, 2).toUpperCase()} tone="experience" />
+          <Marker label={item.role.slice(0, 2).toUpperCase()} tone="experience" image={item.image} />
           <div className="min-w-0">
             <div className="flex min-w-0 flex-col gap-0.5 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
               <div className="min-w-0">
@@ -263,7 +285,7 @@ const HackathonsSection = ({ items }: { items: HackathonEntry[] }) => (
           transition={{ duration: 0.35, delay: index * 0.04 }}
           className="grid grid-cols-[32px_minmax(0,1fr)] gap-x-2.5"
         >
-          <Marker label={item.title.slice(0, 2).toUpperCase()} tone="hackathon" />
+          <Marker label={item.title.slice(0, 2).toUpperCase()} tone="hackathon" image={item.image} />
           <div className="min-w-0">
             <div className="flex min-w-0 flex-col gap-0.5 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
               <div className="min-w-0">

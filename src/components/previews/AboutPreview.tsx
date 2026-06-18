@@ -1,14 +1,27 @@
 import { useRef } from 'react';
-import { ArrowRight, FileText } from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
 
-const tools = ['React', 'Node.js', 'TypeScript', 'MongoDB', 'Firebase', 'Tailwind', 'Web3'];
+import stellarImg from '../../../ss/stellar.png';
+import rumiImg from '../../../ss/rumi.png';
+
+const workExperience = [
+  {
+    company: 'Stellar Open Source',
+    role: 'Open Source Developer',
+    duration: 'Feb 2026 - Current',
+    logo: stellarImg,
+  },
+  {
+    company: 'RUMI Care',
+    role: 'Documentation Intern',
+    duration: '3 Months',
+    logo: rumiImg,
+  }
+];
 
 const AboutPreview = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
-  const navigate = useNavigate();
   const displayStyle = { fontFamily: "'Space Grotesk', var(--font-display)" };
 
   return (
@@ -19,55 +32,56 @@ const AboutPreview = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <div className="section-kicker">About</div>
-
+          {/* About Section */}
           <h2
-            className="mt-3 text-[15px] font-semibold leading-5 tracking-[-0.03em] text-foreground sm:text-[16px]"
+            className="text-[20px] font-bold text-foreground sm:text-[24px]"
             style={displayStyle}
           >
-            Hey, Anurag here.
+            About
           </h2>
 
-          <p className="mt-2 text-justify text-[16px] leading-[1.7] text-muted-foreground sm:text-[16px]">
-            I am a Web2 & Web3 developer building sharp, readable,
-            and dependable interfaces spanning payments, AI, and blockchain.
-            When I am not building, I am watching stuffs or playing sports.
-            Currently just contributing in tech and open source work.
-            if you wanna talk bout work nd other stuff let's get in touch.
+          <p className="mt-2 text-left text-[15px] leading-[1.6] text-muted-foreground sm:text-[16px]">
+            Building AI and Web3 products that solve real-world problems. Open-source contributor to Stellar, Stellar Brand Ambassador, and recipient of ₹20K+ in ecosystem rewards. Passionate about fintech, automation, and turning ideas into scalable products.
           </p>
 
-          {/* Tech pills */}
-          <div className="mt-3 flex flex-wrap gap-1">
-            {tools.map((tool) => (
-              <span
-                key={tool}
-                className="rounded-full border border-border bg-secondary/50 px-2 py-0.5 text-[9px] font-medium text-foreground/80 sm:text-[10px]"
-              >
-                {tool}
-              </span>
+          {/* Work Experience Section */}
+          <h2
+            className="mt-8 text-[20px] font-bold text-foreground sm:text-[24px]"
+            style={displayStyle}
+          >
+            Work Experience
+          </h2>
+
+          <div className="mt-4 flex flex-col gap-5">
+            {workExperience.map((exp, index) => (
+              <div key={index} className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-border bg-card p-1 sm:h-14 sm:w-14">
+                    <img 
+                      src={exp.logo} 
+                      alt={exp.company} 
+                      className="h-full w-full rounded-full object-contain"
+                      onError={(e) => {
+                        e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(exp.company)}&background=random`;
+                      }}
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <h3 className="text-[15px] font-semibold text-foreground sm:text-[16px]">
+                      {exp.company}
+                    </h3>
+                    <p className="text-[13px] text-foreground/80 sm:text-[14px]">
+                      {exp.role}
+                    </p>
+                  </div>
+                </div>
+                <div className="shrink-0 text-right">
+                  <span className="text-[13px] text-muted-foreground sm:text-[14px]">
+                    {exp.duration}
+                  </span>
+                </div>
+              </div>
             ))}
-          </div>
-
-          {/* Actions row */}
-          <div className="mt-5 flex flex-wrap items-center gap-2.5">
-            <button
-              onClick={() => navigate('/about')}
-              className="group inline-flex items-center gap-2 rounded-full border border-border/80 bg-card/80 px-4 py-2 text-[11px] font-medium text-foreground/80 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-foreground/20 hover:bg-foreground/[0.04] hover:text-foreground hover:shadow-md sm:px-5 sm:py-2.5 sm:text-[12px]"
-            >
-              Full story & experience
-              <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-            </button>
-
-            <a
-              href="https://drive.google.com/file/d/12emRXwZbez4zWzC1H8bOGSAstlQ0TSyl/view?usp=drive_link"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 rounded-full border border-border/80 bg-card/80 px-4 py-2 text-[11px] font-medium text-foreground/80 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-foreground/20 hover:bg-foreground/[0.04] hover:text-foreground hover:shadow-md sm:px-5 sm:py-2.5 sm:text-[12px]"
-            >
-              <FileText className="h-3.5 w-3.5" />
-              Resume
-              <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-            </a>
           </div>
         </motion.div>
       </div>

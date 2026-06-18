@@ -64,12 +64,12 @@ const Hero = () => {
           A guy into code & sports. Turning Web2 and Web3 ideas into products people can actually use.
         </p>
 
-        <div className="mt-2 flex items-center gap-1.5 font-sans text-[16px] text-muted-foreground">
+        <div className="mt-2 flex flex-wrap items-center gap-1.5 font-sans text-[16px] text-muted-foreground">
           <MapPin className="h-3.5 w-3.5" />
           Mumbai, India
-          <p className="px-2 py-1 font-sans text-[16px] font-medium text-muted-foreground">
-            !! Open to work
-          </p>
+          <span className="text-muted-foreground/50 text-[10px] mx-1">•</span>
+          Stellar Ambassador India
+
         </div>
 
         <div className="mt-5 flex items-center gap-2">

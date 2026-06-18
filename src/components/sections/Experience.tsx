@@ -4,11 +4,11 @@ import { motion, useInView } from 'framer-motion';
 
 const timelineItems = [
   {
-    year: 'Feb 2026 - Apr 2026',
-    role: 'Blockchain Contributor',
-    company: 'Rise In',
+    year: 'Feb 2026 - Present',
+    role: 'Open SOurce Contributon & Ambassador',
+    company: 'Stellar Open Source',
     description:
-      'Participating in the Stellar Journey to Mastery program and building practical familiarity with asset issuance, trustlines, and secure transfer flows on Stellar.',
+      'Working on projects and contributing to the Stellar open source community.',
     tags: ['Stellar', 'Web3', 'JavaScript'],
   },
   {
@@ -18,14 +18,6 @@ const timelineItems = [
     description:
       'Supported documentation, event coordination, and digital materials for workshops and operational planning.',
     tags: ['Documentation', 'Coordination', 'Technical Writing'],
-  },
-  {
-    year: '2025 - Present',
-    role: 'Full-stack and Blockchain Projects',
-    company: 'Personal Development',
-    description:
-      'Building project-based experience across payments, e-commerce, AI experiments, and blockchain prototypes while improving product and engineering depth.',
-    tags: ['React', 'Node.js', 'MongoDB', 'Blockchain'],
   },
   {
     year: '2023 - 2026',
@@ -144,7 +136,7 @@ const Experience = () => {
                   </p>
                   <div className="mt-3 flex flex-wrap items-center gap-3">
                     <h3 className="text-[13px] font-semibold text-foreground">{item.role}</h3>
-                  <span className="rounded-full bg-secondary px-2.5 py-0.5 text-[9px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
+                    <span className="rounded-full bg-secondary px-2.5 py-0.5 text-[9px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
                       {item.company}
                     </span>
                   </div>
