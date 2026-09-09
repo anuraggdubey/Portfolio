@@ -4,10 +4,46 @@ import { motion, useInView } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import merchantMitraPreview from '../../../ss/merchantmitra.png';
 import workinggentPreview from '../../../ss/workinggent.png';
-import sweetBitesPreview from '../../../ss/sweetbites.png';
 import assetRegistryPreview from '../../../ss/assetregistry.png';
+import novaDexPreview from '../../../ss/novadex.png';
+import covenantPreview from '../../../ss/covenant.png';
 
-const topProjects = [
+type ProjectPreviewItem = {
+  title: string;
+  description: string;
+  tech: string[];
+  image?: string;
+  github: string;
+  live?: string;
+};
+
+const topProjects: ProjectPreviewItem[] = [
+  {
+    title: 'NovaDEX',
+    description:
+      "NovaDEX finds the optimal swap route across Stellar's liquidity sources (SDEX, Aquarius AMM pools) and executes it through a single atomic transaction — Soroban router attestation, path-payment liquidity, and on-chain savings proof.",
+    tech: ['Stellar', 'Soroban', 'React', 'TypeScript', 'DEX', 'AMM'],
+    image: novaDexPreview,
+    github: 'https://github.com/anuraggdubey/NovaDex',
+    live: 'https://novaxdex.vercel.app/',
+  },
+  {
+    title: 'Covenant',
+    description:
+      'Defined-risk vertical spreads on SPY and QQQ. Autonomous options trading agent that buys and sells short-dated vertical spreads with mathematically known maximum loss.',
+    tech: ['Next.js', 'TypeScript', 'AI Agents', 'Alpaca API', 'FinTech'],
+    image: covenantPreview,
+    github: 'https://github.com/anuraggdubey/Covenant',
+    live: 'https://alpaca-covenant.vercel.app/',
+  },
+  {
+    title: 'UrPilot',
+    description:
+      'The ultimate hands-free, voice-controlled browser assistant on Chrome & Edge. Speak natural commands, auto-navigate, summarize pages, and listen to results.',
+    tech: ['TypeScript', 'Speech API', 'TTS', 'Browser Extension', 'AI'],
+    github: 'https://github.com/anuraggdubey/UrPilot',
+    live: 'https://microsoftedge.microsoft.com/addons/detail/urpilot/dckoojfpocofcagpgeppkkmgbkjielaa',
+  },
   {
     title: 'WorkingGent',
     description:
@@ -27,16 +63,7 @@ const topProjects = [
     live: 'https://merchant-mitra.vercel.app/',
   },
   {
-    title: 'Sweet Bites',
-    description:
-      'E-commerce platform for a dessert brand with catalog browsing and order management.',
-    tech: ['HTML', 'CSS', 'JavaScript', 'Node.js'],
-    image: sweetBitesPreview,
-    github: 'https://github.com/anuraggdubey/Sweet-Bites',
-    live: 'https://sweet-bites-ashy.vercel.app/',
-  },
-  {
-    title: 'Stellar Assest Registry',
+    title: 'Stellar Asset Registry',
     description:
       'A Stellar-based asset registry for decentralized ownership records and transfer flows. Focuses on issuance, transfer, and verifiable records on Stellar.',
     tech: ['Stellar', 'JavaScript', 'Node.js', 'Blockchain APIs'],

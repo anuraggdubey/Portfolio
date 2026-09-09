@@ -24,11 +24,11 @@ const Hero = () => {
         transition={{ duration: 0.55 }}
         className="mx-auto w-full"
       >
-        <div className="flex items-start gap-4 sm:gap-5">
+        <div className="flex items-start gap-6 sm:gap-8">
           <img
             src={mainPic}
             alt="Anurag Dubey"
-            className="h-20 w-18 shrink-0 rounded-[14px] object-cover shadow-[0_8px_24px_hsl(var(--foreground)/0.1)] sm:h-24 sm:w-22"
+            className="aspect-square h-24 w-24 shrink-0 rounded-full object-cover shadow-[0_8px_24px_hsl(var(--foreground)/0.1)] sm:h-28 sm:w-28"
             draggable={false}
           />
 
@@ -42,7 +42,7 @@ const Hero = () => {
 
             <div className="mt-3 flex flex-wrap gap-2">
               <a
-                href="https://drive.google.com/file/d/12emRXwZbez4zWzC1H8bOGSAstlQ0TSyl/view?usp=drive_link"
+                href="https://drive.google.com/file/d/1GAkvR1OZzk90crD6HJBpVWlHEN-CRMXt/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 rounded-[6px] border border-border bg-secondary/50 px-2.5 py-1 font-sans text-[11px] font-medium text-foreground transition-colors hover:bg-secondary"

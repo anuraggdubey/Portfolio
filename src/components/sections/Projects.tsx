@@ -3,7 +3,8 @@ import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { ArrowRight, ExternalLink, Github } from 'lucide-react';
 import assetRegistryPreview from '../../../ss/assetregistry.png';
 import merchantMitraPreview from '../../../ss/merchantmitra.png';
-import sweetBitesPreview from '../../../ss/sweetbites.png';
+import novaDexPreview from '../../../ss/novadex.png';
+import covenantPreview from '../../../ss/covenant.png';
 import voiceForgePreview from '../../../ss/voiceforge.png';
 import workinggentPreview from '../../../ss/workinggent.png';
 import agentroPreview from '../../../ss/Agentro.png';
@@ -25,6 +26,57 @@ type Project = {
 const projects: Project[] = [
   {
     id: 1,
+    title: 'NovaDEX',
+    description:
+      "NovaDEX finds the optimal swap route across Stellar's liquidity sources (SDEX, Aquarius AMM pools) and executes it through a single atomic transaction — Soroban router attestation, path-payment liquidity, and on-chain savings proof.",
+    tech: ['Stellar', 'Soroban', 'React', 'TypeScript', 'DEX', 'AMM'],
+    categories: ['Web App', 'Web3', 'FinTech'],
+    status: 'Live project',
+    date: 'Feb 2026',
+    image: novaDexPreview,
+    github: 'https://github.com/anuraggdubey/NovaDex',
+    live: 'https://novaxdex.vercel.app/',
+  },
+  {
+    id: 2,
+    title: 'Covenant',
+    description:
+      'Defined-risk vertical spreads on SPY and QQQ. Covenant is an autonomous options trading agent that buys and sells short-dated vertical spreads on the most liquid underlyings in the US market, sized so the exact dollar maximum loss on every position is mathematically known before an order is placed.',
+    tech: ['Next.js', 'TypeScript', 'AI Agents', 'Alpaca API', 'Options Trading'],
+    categories: ['Web App', 'AI', 'FinTech', 'Automation'],
+    status: 'Live project',
+    date: '2026',
+    image: covenantPreview,
+    github: 'https://github.com/anuraggdubey/Covenant',
+    live: 'https://alpaca-covenant.vercel.app/',
+  },
+  {
+    id: 3,
+    title: 'UrPilot',
+    description:
+      'The ultimate hands-free, voice-controlled browser assistant — now on Chrome & Microsoft Edge. Speak natural commands, auto-navigate the web, summarize pages instantly, and listen to results — zero clicks required.',
+    tech: ['TypeScript', 'Browser Extension', 'Speech Recognition', 'TTS', 'AI'],
+    categories: ['AI', 'Automation'],
+    status: 'Published',
+    date: '2026',
+    github: 'https://github.com/anuraggdubey/UrPilot',
+    live: 'https://microsoftedge.microsoft.com/addons/detail/urpilot/dckoojfpocofcagpgeppkkmgbkjielaa',
+  },
+  {
+    id: 4,
+    title: 'Execra',
+    description:
+      'A multi-agent AI automation platform that enables users to deploy and manage specialized AI agents from a single workspace. Agents collaborate to handle research, content generation, workflow automation, Web3 operations, data analysis, and business tasks with minimal human intervention. Built to function as an intelligent digital workforce that executes complex workflows autonomously.',
+    tech: ['Next.js', 'TypeScript', 'Node.js', 'OpenAI', 'Web3', 'Firebase', 'Vercel'],
+    categories: ['AI', 'Automation', 'Web3'],
+    status: 'Live project',
+    date: '2025',
+    image: execraPreview,
+    github: 'https://github.com/anuraggdubey/Execra6',
+    live: 'https://execra6.vercel.app/',
+  },
+  {
+    id: 5,
     title: 'WorkingGent',
     description:
       'An AI-powered multi-agent platform that automates development, research, and workflow tasks. Features GitHub agent for repo management, coding agent for code generation, and document agent for structured content creation.',
@@ -37,7 +89,7 @@ const projects: Project[] = [
     live: 'https://workinggent.vercel.app/',
   },
   {
-    id: 2,
+    id: 6,
     title: 'Merchant Mitra',
     description:
       'A smart merchant dashboard for tracking UPI payments, daily activity, and simple financial insights for local businesses. Combines transaction history, reporting, and lightweight analytics.',
@@ -50,7 +102,7 @@ const projects: Project[] = [
     live: 'https://merchant-mitra.vercel.app/',
   },
   {
-    id: 3,
+    id: 7,
     title: 'Voice Forge',
     description:
       'An AI research project for voice cloning workflows and synthetic audio detection experiments. Combines cloning flows with ML-based detection for manipulated audio.',
@@ -62,20 +114,7 @@ const projects: Project[] = [
     github: 'https://github.com/anuraggdubey/voice-forge',
   },
   {
-    id: 4,
-    title: 'Sweet Bites',
-    description:
-      'An e-commerce platform for a dessert brand with catalog browsing, account flows, and order management. Supports customer ordering and business-side operations.',
-    tech: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'MongoDB'],
-    categories: ['Web App'],
-    status: 'Live project',
-    date: 'Nov 2024',
-    image: sweetBitesPreview,
-    github: 'https://github.com/anuraggdubey/Sweet-Bites',
-    live: 'https://sweet-bites-ashy.vercel.app/',
-  },
-  {
-    id: 5,
+    id: 8,
     title: 'Blockchain Asset Registry',
     description:
       'A Stellar-based asset registry for decentralized ownership records and transfer flows. Focuses on issuance, transfer, and verifiable records on Stellar.',
@@ -88,7 +127,7 @@ const projects: Project[] = [
     live: 'https://register-asset.vercel.app/',
   },
   {
-    id: 6,
+    id: 9,
     title: 'Agentro',
     description:
       'A trend analytics platform that combines AI summaries with live signals from web and social sources. Surfaces emerging topics, sentiment direction, and content opportunities.',
@@ -100,20 +139,6 @@ const projects: Project[] = [
     github: 'https://github.com/anuraggdubey/Agentro',
     live: 'https://agentro-ai.vercel.app/',
   },
-  {
-    id: 7,
-    title: 'Execra',
-    description:
-      'A multi-agent AI automation platform that enables users to deploy and manage specialized AI agents from a single workspace. Agents collaborate to handle research, content generation, workflow automation, Web3 operations, data analysis, and business tasks with minimal human intervention. Built to function as an intelligent digital workforce that executes complex workflows autonomously.',
-    tech: ['Next.js', 'TypeScript', 'Node.js', 'OpenAI', 'Web3', 'Firebase', 'Vercel'],
-    categories: ['AI', 'SaaS', 'Web3'],
-    status: 'Live project',
-    date: '2025',
-    image: execraPreview,
-    github: 'https://github.com/anuraggdubey/Execra6',
-    live: 'https://execra6.vercel.app/',
-  },
-
 ];
 
 const categories = ['All', 'Web App', 'AI', 'Web3', 'FinTech', 'Automation'];

@@ -5,14 +5,14 @@ import { motion, useInView } from 'framer-motion';
 const timelineItems = [
   {
     year: 'Feb 2026 - Present',
-    role: 'Open SOurce Contributon & Ambassador',
+    role: 'Ambassador',
     company: 'Stellar Open Source',
     description:
       'Working on projects and contributing to the Stellar open source community.',
     tags: ['Stellar', 'Web3', 'JavaScript'],
   },
   {
-    year: 'May 2025 - Jul 2025',
+    year: 'May 2025 - Oct 2025',
     role: 'Documentation Intern',
     company: 'RumiCare Event',
     description:
