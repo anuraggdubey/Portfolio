@@ -345,7 +345,7 @@ const About = () => {
             When I am not building, I am watching stuffs or playing sports. Currently just contributing in tech and open source work. If you wanna talk bout work nd other stuff let's get in touch.
           </p>
           <a
-            href="https://drive.google.com/file/d/1GAkvR1OZzk90crD6HJBpVWlHEN-CRMXt/view?usp=sharing"
+            href="https://drive.google.com/file/d/1bt9Tsu6Tbvujwo0l1flfq3fJDG0jgrYv/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="group mt-3 inline-flex items-center gap-1 text-[11px] font-medium text-foreground/70 underline decoration-border underline-offset-[3px] transition-all duration-300 hover:gap-1.5 hover:text-foreground"
