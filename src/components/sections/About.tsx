@@ -1,6 +1,7 @@
 import { useRef } from 'react';
-import { ArrowRight, BriefcaseBusiness, GraduationCap, Trophy } from 'lucide-react';
+import { ArrowRight, Award, BriefcaseBusiness, ExternalLink, GraduationCap, Trophy } from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
+import { achievements, type AchievementItem } from '@/data/achievements';
 
 import mumbaiUniImg from '../../../ss/mumbai uni.png';
 import rumiImg from '../../../ss/rumi.png';
@@ -45,6 +46,14 @@ const experience = [
 ];
 
 const hackathons = [
+  {
+    title: 'Syndicate by Maximor',
+    venue: 'Global Hackathon · AO, AI India Grants & Dodo Payments',
+    duration: 'Global Hackathon',
+    result: '🏆 Global 1st Place Winner',
+    desc: 'Won 1st place globally building Verity — an autonomous merge gate and deterministic control environment for AI finance agents.',
+    cert: null,
+  },
   {
     title: 'ZeroDay National Hackathon',
     venue: 'SIES College',
@@ -317,6 +326,75 @@ const HackathonsSection = ({ items }: { items: HackathonEntry[] }) => (
   </motion.section>
 );
 
+const AchievementsSection = ({ items }: { items: AchievementItem[] }) => (
+  <motion.section
+    initial={{ opacity: 0, y: 14 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: '-60px' }}
+    transition={{ duration: 0.4 }}
+    className="mt-14"
+  >
+    <SectionTitle icon={Award} title="Achievements" />
+    <div className="mt-5 flex flex-col gap-5">
+      {items.map((item, index) => {
+        const Icon = item.icon;
+        return (
+          <motion.div
+            key={item.title}
+            {...itemMotion}
+            transition={{ duration: 0.35, delay: index * 0.04 }}
+            className="flex items-start gap-4"
+          >
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-border bg-card p-1 sm:h-14 sm:w-14 mt-0.5">
+              {item.image ? (
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="h-full w-full rounded-full object-contain"
+                  onError={(e) => {
+                    e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(item.title)}&background=random`;
+                  }}
+                />
+              ) : Icon ? (
+                <Icon className="h-5 w-5 text-foreground sm:h-6 sm:w-6" />
+              ) : null}
+            </div>
+            <div className="flex flex-col min-w-0">
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <p
+                  className="text-[15px] font-semibold leading-snug text-foreground sm:text-[16px]"
+                  style={displayStyle}
+                >
+                  {item.title}
+                </p>
+                {item.link && (
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
+                    title={item.linkLabel || 'View link'}
+                  >
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                )}
+              </div>
+              <p className="text-[13px] text-foreground/80 sm:text-[14px]">
+                {item.org}
+              </p>
+              {item.desc && (
+                <p className="mt-1 text-[12px] leading-relaxed text-muted-foreground sm:text-[13px]">
+                  {item.desc}
+                </p>
+              )}
+            </div>
+          </motion.div>
+        );
+      })}
+    </div>
+  </motion.section>
+);
+
 const About = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
@@ -356,6 +434,7 @@ const About = () => {
 
         <EducationSection items={education} />
         <ExperienceSection items={experience} />
+        <AchievementsSection items={achievements} />
         <HackathonsSection items={hackathons} />
       </motion.div>
     </section>

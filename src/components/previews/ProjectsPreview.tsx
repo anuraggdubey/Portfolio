@@ -19,6 +19,15 @@ type ProjectPreviewItem = {
 
 const topProjects: ProjectPreviewItem[] = [
   {
+    title: 'Verity',
+    description:
+      'A merge gate for agent-generated finance work. Built to solve the control environment problem in autonomous finance agents with isolated cases, deterministic controls, and structured repair. Winner of global hackathon Syndicate by Maximor.',
+    tech: ['Next.js', 'TypeScript', 'AI Agents', 'FinTech', 'Automation'],
+    image: 'https://raw.githubusercontent.com/anuraggdubey/verity/main/docs/screenshots/queue.png',
+    github: 'https://github.com/anuraggdubey/verity',
+    live: 'https://verity-merge-control.vercel.app',
+  },
+  {
     title: 'NovaDEX',
     description:
       "NovaDEX finds the optimal swap route across Stellar's liquidity sources (SDEX, Aquarius AMM pools) and executes it through a single atomic transaction — Soroban router attestation, path-payment liquidity, and on-chain savings proof.",

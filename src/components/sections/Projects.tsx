@@ -26,6 +26,19 @@ type Project = {
 const projects: Project[] = [
   {
     id: 1,
+    title: 'Verity',
+    description:
+      'A merge gate for agent-generated finance work. Built to solve the control environment problem in autonomous finance agents by providing isolated cases, deterministic controls, and structured repair before ledger merges. Won global hackathon Syndicate by Maximor (hosted by AO, AI India Grants, Dodo Payments).',
+    tech: ['Next.js', 'TypeScript', 'AI Agents', 'Deterministic Controls', 'FinTech', 'Automation'],
+    categories: ['Web App', 'AI', 'FinTech', 'Automation'],
+    status: '🏆 Hackathon Winner',
+    date: '2026',
+    image: 'https://raw.githubusercontent.com/anuraggdubey/verity/main/docs/screenshots/queue.png',
+    github: 'https://github.com/anuraggdubey/verity',
+    live: 'https://verity-merge-control.vercel.app',
+  },
+  {
+    id: 2,
     title: 'NovaDEX',
     description:
       "NovaDEX finds the optimal swap route across Stellar's liquidity sources (SDEX, Aquarius AMM pools) and executes it through a single atomic transaction — Soroban router attestation, path-payment liquidity, and on-chain savings proof.",
@@ -38,7 +51,7 @@ const projects: Project[] = [
     live: 'https://novaxdex.vercel.app/',
   },
   {
-    id: 2,
+    id: 3,
     title: 'Covenant',
     description:
       'Defined-risk vertical spreads on SPY and QQQ. Covenant is an autonomous options trading agent that buys and sells short-dated vertical spreads on the most liquid underlyings in the US market, sized so the exact dollar maximum loss on every position is mathematically known before an order is placed.',
@@ -51,7 +64,7 @@ const projects: Project[] = [
     live: 'https://alpaca-covenant.vercel.app/',
   },
   {
-    id: 3,
+    id: 4,
     title: 'UrPilot',
     description:
       'The ultimate hands-free, voice-controlled browser assistant — now on Chrome & Microsoft Edge. Speak natural commands, auto-navigate the web, summarize pages instantly, and listen to results — zero clicks required.',
@@ -63,7 +76,7 @@ const projects: Project[] = [
     live: 'https://microsoftedge.microsoft.com/addons/detail/urpilot/dckoojfpocofcagpgeppkkmgbkjielaa',
   },
   {
-    id: 4,
+    id: 5,
     title: 'Execra',
     description:
       'A multi-agent AI automation platform that enables users to deploy and manage specialized AI agents from a single workspace. Agents collaborate to handle research, content generation, workflow automation, Web3 operations, data analysis, and business tasks with minimal human intervention. Built to function as an intelligent digital workforce that executes complex workflows autonomously.',
@@ -76,7 +89,7 @@ const projects: Project[] = [
     live: 'https://execra6.vercel.app/',
   },
   {
-    id: 5,
+    id: 6,
     title: 'WorkingGent',
     description:
       'An AI-powered multi-agent platform that automates development, research, and workflow tasks. Features GitHub agent for repo management, coding agent for code generation, and document agent for structured content creation.',
@@ -89,7 +102,7 @@ const projects: Project[] = [
     live: 'https://workinggent.vercel.app/',
   },
   {
-    id: 6,
+    id: 7,
     title: 'Merchant Mitra',
     description:
       'A smart merchant dashboard for tracking UPI payments, daily activity, and simple financial insights for local businesses. Combines transaction history, reporting, and lightweight analytics.',
@@ -102,7 +115,7 @@ const projects: Project[] = [
     live: 'https://merchant-mitra.vercel.app/',
   },
   {
-    id: 7,
+    id: 8,
     title: 'Voice Forge',
     description:
       'An AI research project for voice cloning workflows and synthetic audio detection experiments. Combines cloning flows with ML-based detection for manipulated audio.',
@@ -114,7 +127,7 @@ const projects: Project[] = [
     github: 'https://github.com/anuraggdubey/voice-forge',
   },
   {
-    id: 8,
+    id: 9,
     title: 'Blockchain Asset Registry',
     description:
       'A Stellar-based asset registry for decentralized ownership records and transfer flows. Focuses on issuance, transfer, and verifiable records on Stellar.',
@@ -127,7 +140,7 @@ const projects: Project[] = [
     live: 'https://register-asset.vercel.app/',
   },
   {
-    id: 9,
+    id: 10,
     title: 'Agentro',
     description:
       'A trend analytics platform that combines AI summaries with live signals from web and social sources. Surfaces emerging topics, sentiment direction, and content opportunities.',

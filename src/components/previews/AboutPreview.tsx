@@ -1,5 +1,7 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { ExternalLink } from 'lucide-react';
+import { achievements } from '@/data/achievements';
 
 import stellarImg from '../../../ss/stellar.png';
 import rumiImg from '../../../ss/rumi.png';
@@ -41,7 +43,7 @@ const AboutPreview = () => {
           </h2>
 
           <p className="mt-2 text-left text-[15px] leading-[1.6] text-muted-foreground sm:text-[16px]">
-            Building AI and Web3 products that solve real-world problems. Open-source contributor to Stellar, Stellar Brand Ambassador, and recipient of ₹20K+ in ecosystem rewards. Passionate about fintech, automation, and turning ideas into scalable products.
+            Building AI and Web3 products that solve real-world problems. Open-source contributor to Stellar, Stellar Brand Ambassador, and recipient of ₹60K+ in ecosystem rewards. Passionate about fintech, automation, and turning ideas into scalable products.
           </p>
 
           {/* Work Experience Section */}
@@ -82,6 +84,64 @@ const AboutPreview = () => {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Achievements Section */}
+          <h2
+            className="mt-8 text-[20px] font-bold text-foreground sm:text-[24px]"
+            style={displayStyle}
+          >
+            Achievements
+          </h2>
+
+          <div className="mt-4 flex flex-col gap-5">
+            {achievements.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <div key={index} className="flex items-start gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-border bg-card p-1 sm:h-14 sm:w-14 mt-0.5">
+                    {item.image ? (
+                      <img 
+                        src={item.image} 
+                        alt={item.title} 
+                        className="h-full w-full rounded-full object-contain"
+                        onError={(e) => {
+                          e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(item.title)}&background=random`;
+                        }}
+                      />
+                    ) : Icon ? (
+                      <Icon className="h-5 w-5 text-foreground sm:h-6 sm:w-6" />
+                    ) : null}
+                  </div>
+                  <div className="flex flex-col min-w-0">
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <h3 className="text-[15px] font-semibold text-foreground sm:text-[16px]">
+                        {item.title}
+                      </h3>
+                      {item.link && (
+                        <a
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
+                          title={item.linkLabel || 'View link'}
+                        >
+                          <ExternalLink className="h-3.5 w-3.5" />
+                        </a>
+                      )}
+                    </div>
+                    <p className="text-[13px] text-foreground/80 sm:text-[14px]">
+                      {item.org}
+                    </p>
+                    {item.desc && (
+                      <p className="mt-1 text-[12px] leading-relaxed text-muted-foreground sm:text-[13px]">
+                        {item.desc}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </motion.div>
       </div>
